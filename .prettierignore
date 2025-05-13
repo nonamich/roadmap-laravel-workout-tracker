@@ -1,0 +1,6 @@
+*.d.ts
+**/coverage
+**/dist
+**/vendor
+**/build
+**/node_modules

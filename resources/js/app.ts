@@ -1,12 +1,17 @@
-import "../css/app.css";
-import { createApp, h, type DefineComponent } from "vue";
-import { createInertiaApp } from "@inertiajs/vue3";
+import '../css/app.css';
+
+import { createInertiaApp } from '@inertiajs/vue3';
+import { createApp, h, type DefineComponent } from 'vue';
+import AppLayout from './Components/AppLayout.vue';
 
 createInertiaApp({
     resolve: (name) => {
-        const pages = import.meta.glob("./Pages/**/*.vue", { eager: true });
+        const pages = import.meta.glob<DefineComponent>('./Pages/**/*.vue', { eager: true });
+        const page = pages[`./Pages/${name}.vue`];
 
-        return pages[`./Pages/${name}.vue`] as DefineComponent;
+        page.default.layout = page.default.layout || AppLayout;
+
+        return page;
     },
     setup({ el, App, props, plugin }) {
         createApp({ render: () => h(App, props) })
