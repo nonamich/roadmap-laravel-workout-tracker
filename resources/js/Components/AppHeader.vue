@@ -37,7 +37,7 @@ const handleLogout = () => {
 </script>
 
 <template>
-    <header class="mb-3">
+    <header>
         <nav class="bg-blue-600 text-white shadow-md">
             <Container>
                 <div class="flex h-16 justify-between">
@@ -52,13 +52,17 @@ const handleLogout = () => {
                                 <button
                                     id="user-menu-button"
                                     type="button"
-                                    class="flex cursor-pointer rounded-full bg-blue-500 text-sm"
+                                    class="flex cursor-pointer items-center text-sm font-bold"
                                     aria-expanded="false"
                                     aria-haspopup="true"
                                     @click="isOpenUserDropdown = !isOpenUserDropdown"
                                 >
-                                    <span class="sr-only">Open user menu</span>
-                                    <img class="h-8 w-8 rounded-full" src="https://api.dicebear.com/6.x/avataaars/svg?seed=John" alt="User Avatar" />
+                                    <img
+                                        class="me-2 h-8 w-8 rounded-full bg-amber-500"
+                                        :src="`https://api.dicebear.com/6.x/avataaars/svg?seed=${user.email}`"
+                                        alt="User Avatar"
+                                    />
+                                    <span>{{ user.name }}</span>
                                 </button>
                             </div>
                             <div
@@ -72,17 +76,23 @@ const handleLogout = () => {
                                 aria-labelledby="user-menu-button"
                                 tabindex="-1"
                             >
-                                <a
-                                    href="#"
+                                <Link
+                                    href="/dashboard"
                                     class="block w-full cursor-pointer px-4 py-2 text-start text-sm text-gray-700 hover:bg-gray-100"
                                     role="menuitem"
-                                    >Profile</a
+                                    >Dashboard</Link
                                 >
-                                <a
-                                    href="#"
+                                <Link
+                                    href="/workouts/create"
                                     class="block w-full cursor-pointer px-4 py-2 text-start text-sm text-gray-700 hover:bg-gray-100"
                                     role="menuitem"
-                                    >Settings</a
+                                    >Add Workout</Link
+                                >
+                                <Link
+                                    href="/workouts"
+                                    class="block w-full cursor-pointer px-4 py-2 text-start text-sm text-gray-700 hover:bg-gray-100"
+                                    role="menuitem"
+                                    >Workouts</Link
                                 >
                                 <Link
                                     method="post"
@@ -95,7 +105,7 @@ const handleLogout = () => {
                                 >
                             </div>
                         </div>
-                        <BaseButton v-else href="/login" size="small" color="secondary">Login</BaseButton>
+                        <BaseButton v-else href="/login" size="small" color="amber">Login</BaseButton>
                     </div>
                 </div>
             </Container>

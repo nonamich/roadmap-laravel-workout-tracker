@@ -14,4 +14,77 @@ import { Head } from '@inertiajs/vue3';
             <BaseButton href="/login">Get Started</BaseButton>
         </div>
     </div>
+    <section id="features" class="bg-black/10 py-16">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <h2 class="mb-12 text-center text-3xl font-bold text-gray-900 dark:text-gray-100">Key Features</h2>
+
+            <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+                <!-- Feature 1 -->
+                <div class="overflow-hidden rounded-xl bg-white shadow-md transition-shadow duration-300 hover:shadow-lg">
+                    <div class="p-6">
+                        <h3 class="mb-2 text-center text-xl font-semibold text-gray-900">Create Workouts</h3>
+                        <p class="mb-4 text-center text-gray-600">Design custom workout plans with multiple exercises, sets, reps, and weights.</p>
+                        <div class="flex justify-center">
+                            <BaseButton size="small">Create Now</BaseButton>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="overflow-hidden rounded-xl bg-white shadow-md transition-shadow duration-300 hover:shadow-lg">
+                    <div class="p-6">
+                        <h3 class="mb-2 text-center text-xl font-semibold text-gray-900">Update Workouts</h3>
+                        <p class="mb-4 text-center text-gray-600">Modify your workout plans and add comments to track your progress.</p>
+                        <div class="flex justify-center">
+                            <BaseButton size="small">Update</BaseButton>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="overflow-hidden rounded-xl bg-white shadow-md transition-shadow duration-300 hover:shadow-lg">
+                    <div class="p-6">
+                        <h3 class="mb-2 text-center text-xl font-semibold text-gray-900">Schedule Workouts</h3>
+                        <p class="mb-4 text-center text-gray-600">Plan your workouts for specific dates and times to stay on track.</p>
+                        <div class="flex justify-center">
+                            <BaseButton size="small">Schedule</BaseButton>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="overflow-hidden rounded-xl bg-white shadow-md transition-shadow duration-300 hover:shadow-lg">
+                    <div class="p-6">
+                        <h3 class="mb-2 text-center text-xl font-semibold text-gray-900">List Workouts</h3>
+                        <p class="mb-4 text-center text-gray-600">View all your active and pending workouts sorted by date and time.</p>
+                        <div class="flex justify-center">
+                            <BaseButton size="small">View List</BaseButton>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="overflow-hidden rounded-xl bg-white shadow-md transition-shadow duration-300 hover:shadow-lg">
+                    <div class="p-6">
+                        <h3 class="mb-2 text-center text-xl font-semibold text-gray-900">Delete Workouts</h3>
+                        <p class="mb-4 text-center text-gray-600">Remove workout plans that you no longer need or want to use.</p>
+                        <div class="flex justify-center">
+                            <BaseButton size="small">Manage</BaseButton>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="overflow-hidden rounded-xl bg-white shadow-md transition-shadow duration-300 hover:shadow-lg">
+                    <div class="p-6">
+                        <h3 class="mb-2 text-center text-xl font-semibold text-gray-900">Generate Reports</h3>
+                        <p class="mb-4 text-center text-gray-600">Track your progress with detailed reports on past workouts and achievements.</p>
+                        <div class="flex justify-center">
+                            <BaseButton size="small">View Reports</BaseButton>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </template>

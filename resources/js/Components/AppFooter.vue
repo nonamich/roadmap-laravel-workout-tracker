@@ -3,7 +3,7 @@ import AppContainer from './AppContainer.vue';
 </script>
 
 <template>
-    <footer class="mt-3 bg-gray-800 py-12 text-white">
+    <footer class="mt-auto bg-gray-800 py-12 text-white">
         <AppContainer>
             <div class="flex flex-col items-center justify-between md:flex-row">
                 <div class="flex items-center">
