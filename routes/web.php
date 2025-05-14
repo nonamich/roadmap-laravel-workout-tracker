@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\WorkoutsController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomepageController::class, 'show'])->name('homepage');
@@ -20,5 +21,6 @@ Route::middleware('auth')->group(function () {
         ->name('logout');
 
     Route::get('/dashboard', [DashboardController::class, 'show']);
+    Route::resource('/workouts', WorkoutsController::class);
 });
 
