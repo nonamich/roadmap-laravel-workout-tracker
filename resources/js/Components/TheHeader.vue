@@ -1,13 +1,17 @@
 <script setup lang="ts">
 import { Link, router, usePage } from '@inertiajs/vue3';
 import { computed, ref, useTemplateRef, watch } from 'vue';
-import Container from './AppContainer.vue';
 import BaseButton from './BaseButton.vue';
+import Container from './BaseContainer.vue';
 
 const isOpenUserDropdown = ref(false);
 const dropdownRef = useTemplateRef('dropdownRef');
 const page = usePage();
 const user = computed(() => page.props.user);
+
+const hideDropdown = () => {
+    isOpenUserDropdown.value = false;
+};
 
 const handleClickOutside = (event: DocumentEventMap['click']) => {
     const $dropdown = dropdownRef.value;
@@ -20,7 +24,7 @@ const handleClickOutside = (event: DocumentEventMap['click']) => {
         return;
     }
 
-    isOpenUserDropdown.value = false;
+    hideDropdown();
 };
 
 watch(isOpenUserDropdown, (newVal) => {
@@ -34,6 +38,8 @@ watch(isOpenUserDropdown, (newVal) => {
 const handleLogout = () => {
     router.flushAll();
 };
+
+watch(page, hideDropdown);
 </script>
 
 <template>
