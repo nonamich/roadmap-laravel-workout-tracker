@@ -17,7 +17,6 @@ return new class extends Migration {
             $table->timestamps();
             $table->string('title');
             $table->text('description')->nullable();
-            $table->tinyInteger('repetitions')->unsigned()->check('repetitions >= 1');
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
             $table->unique(['title', 'user_id']);
         });
@@ -37,10 +36,17 @@ return new class extends Migration {
 
             $table->foreignId('workout_id')->constrained()->cascadeOnDelete();
             $table->foreignId('exercise_id')->constrained()->cascadeOnDelete();
-            $table->tinyInteger('repetitions')->unsigned()->check('repetitions >= 1');
+            $table->tinyInteger('sets')->unsigned();
+            $table->tinyInteger('reps')->unsigned();
 
             $table->primary(['workout_id', 'exercise_id']);
         });
+
+         DB::statement("
+            ALTER TABLE workout_exercise
+            ADD CONSTRAINT check_sets_and_reps
+            CHECK (reps > 1 AND sets < 0)
+        ");
     }
 
     /**

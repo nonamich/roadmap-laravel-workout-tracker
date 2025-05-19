@@ -89,10 +89,16 @@ watch(page, hideDropdown);
                                     >Dashboard</Link
                                 >
                                 <Link
-                                    href="/workouts/create"
+                                    href="/workout/create"
                                     class="block w-full cursor-pointer px-4 py-2 text-start text-sm text-gray-700 hover:bg-gray-100"
                                     role="menuitem"
                                     >Add Workout</Link
+                                >
+                                <Link
+                                    href="/exercise/create"
+                                    class="block w-full cursor-pointer px-4 py-2 text-start text-sm text-gray-700 hover:bg-gray-100"
+                                    role="menuitem"
+                                    >Add Exercise</Link
                                 >
                                 <Link
                                     href="/workouts"

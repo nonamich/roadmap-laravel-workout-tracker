@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreWorkoutRequest;
-use App\Http\Requests\UpdateWorkoutRequest;
+use App\Http\Requests\Workout\StoreWorkoutRequest;
+use App\Http\Requests\Workout\UpdateWorkoutRequest;
 use App\Models\Workout;
+use Inertia\Inertia;
 
 class WorkoutController
 {
@@ -21,7 +22,7 @@ class WorkoutController
      */
     public function create()
     {
-        //
+        return Inertia::render('CreateWorkoutPage');
     }
 
     /**
