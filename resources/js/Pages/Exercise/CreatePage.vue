@@ -7,6 +7,6 @@ import { Head } from '@inertiajs/vue3';
     <Head title="Create Exercise" />
     <div class="py-16 md:py-24">
         <h1 class="mb-8 text-center text-4xl font-bold text-gray-900 md:text-5xl dark:text-gray-100">Add New Exercise</h1>
-        <ExerciseForm method="post" url="/exercise" />
+        <ExerciseForm method="post" url="/exercises" />
     </div>
 </template>

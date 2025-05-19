@@ -8,6 +8,7 @@ use App\Http\Requests\Exercise\StoreExerciseRequest;
 use App\Http\Requests\Exercise\UpdateExerciseRequest;
 use App\Models\Exercise;
 use App\Services\ExerciseService;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class ExerciseController
@@ -21,7 +22,9 @@ class ExerciseController
      */
     public function index()
     {
-        return Inertia::render('Exercise/IndexPage');
+        $props = Auth::user()->exercises()->paginate(5)->withQueryString();
+
+        return Inertia::render('Exercise/IndexPage', $props);
     }
 
     /**
@@ -45,7 +48,7 @@ class ExerciseController
         );
         $exercise = $this->exerciseService->storeExercise($data);
 
-        return redirect()->route('exercise.show', [
+        return redirect()->route('exercises.edit', [
             'exercise' => $exercise,
         ]);
     }
@@ -80,6 +83,6 @@ class ExerciseController
     {
         $exercise->delete();
 
-        return redirect()->route('exercise.index');
+        return redirect()->route('exercises.index');
     }
 }

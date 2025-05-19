@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import BaseButton from '@/Components/BaseButton.vue';
+import BaseTable from '@/Components/BaseTable.vue';
 </script>
 
 <template>
@@ -17,6 +18,16 @@ import BaseButton from '@/Components/BaseButton.vue';
     <section id="workouts" class="bg-white/3 py-16">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <h2 class="mb-12 text-center text-3xl font-bold text-gray-900 dark:text-white">Upcoming Workouts</h2>
+            <BaseTable
+                :columns="{
+                    datetime: 'Date & Time',
+                    name: 'Workout Name',
+                    duration: 'Duration',
+                    actions: 'Actions',
+                }"
+                :data="[]"
+            >
+            </BaseTable>
             <div class="overflow-x-auto rounded-lg bg-white shadow-md dark:bg-gray-900">
                 <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                     <thead class="bg-gray-50 dark:bg-gray-900">

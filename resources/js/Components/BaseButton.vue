@@ -1,17 +1,13 @@
 <script setup lang="ts">
-import { Link } from '@inertiajs/vue3';
 import TailwindcssColors from 'tailwindcss/colors';
 import { computed, defineProps } from 'vue';
 
-interface Props {
+type Props = {
     color?: Exclude<keyof typeof TailwindcssColors, 'inherit' | 'current' | 'transparent' | 'black' | 'white'>;
     size?: 'small' | 'normal';
-    href?: string;
-}
+};
 
-const { href = '', color = 'blue', size = 'normal' } = defineProps<Props>();
-const tag = computed(() => (href ? 'a' : 'button'));
-const isLink = computed(() => tag.value === 'a');
+const { color = 'blue', size = 'normal' } = defineProps<Props>();
 const sizeClassMap = computed<Record<NonNullable<Props['size']>, string>>(() => ({
     small: 'py-2 px-3 rounded-md text-sm font-bold',
     normal: 'py-4 px-6 rounded-lg font-bold text-md',
@@ -43,12 +39,10 @@ const colorClassMap = computed<Record<NonNullable<Props['color']>, string>>(() =
 </script>
 
 <template>
-    <component
-        :is="isLink ? Link : 'button'"
-        :href="isLink ? href : undefined"
+    <button
         class="inline-block transform cursor-pointer text-center align-middle text-white shadow-md transition duration-300 ease-in-out active:scale-95 disabled:pointer-events-none disabled:opacity-55"
         :class="[colorClassMap[color], sizeClassMap[size]]"
     >
         <slot />
-    </component>
+    </button>
 </template>
