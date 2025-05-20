@@ -11,6 +11,9 @@ class Workout extends Model
     /** @use HasFactory<\Database\Factories\WorkoutFactory> */
     use HasFactory;
 
+    /**
+     * @return MorphMany<Comment, Workout>
+     */
     public function comments(): MorphMany
     {
         return $this->morphMany(Comment::class, 'commentable');

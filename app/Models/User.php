@@ -56,11 +56,17 @@ class User extends Authenticatable
         }
     }
 
+    /**
+     * @return HasMany<Exercise, User>
+     */
     public function exercises(): HasMany
     {
         return $this->hasMany(Exercise::class);
     }
 
+    /**
+     * @return HasMany<Workout, User>
+     */
     public function workouts(): HasMany
     {
         return $this->hasMany(Workout::class);

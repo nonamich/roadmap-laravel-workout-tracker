@@ -22,9 +22,14 @@ class ExerciseController
      */
     public function index()
     {
-        $props = Auth::user()->exercises()->paginate(5)->withQueryString();
-
-        $a = Exercise::sort();
+        $props = Auth::user()
+            ->exercises()
+            ->sorted(
+                request()->get('sort_by'),
+                request()->get('sort_dir')
+            )
+            ->paginate(5)
+            ->withQueryString();
 
         return Inertia::render('Exercise/IndexPage', $props);
     }
