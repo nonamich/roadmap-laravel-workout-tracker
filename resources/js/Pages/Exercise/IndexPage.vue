@@ -5,7 +5,7 @@ import BasePagination from '@/Components/BasePagination.vue';
 import BaseTable from '@/Components/BaseTable.vue';
 import { Head, Link, router } from '@inertiajs/vue3';
 
-defineProps<{
+const props = defineProps<{
     data: Array<Record<string, any>>;
     links: any;
 }>();
@@ -43,7 +43,7 @@ const deleteExercise = (id: number) => {
                             <Link :href="`/exercises/${row.id}/edit`">
                                 <BaseButton size="small">Edit</BaseButton>
                             </Link>
-                            <BaseButton size="small" color="red" @click="deleteExercise(row.id)">Delete</BaseButton>
+                            <BaseButton size="small" color="zinc" @click="deleteExercise(row.id)">Delete</BaseButton>
                         </div>
                     </template>
                 </BaseTable>

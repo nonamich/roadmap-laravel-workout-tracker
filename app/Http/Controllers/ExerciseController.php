@@ -24,6 +24,8 @@ class ExerciseController
     {
         $props = Auth::user()->exercises()->paginate(5)->withQueryString();
 
+        $a = Exercise::sort();
+
         return Inertia::render('Exercise/IndexPage', $props);
     }
 
