@@ -15,9 +15,11 @@ return new class extends Migration {
         Schema::create('recurring_schedules', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('name');
             $table->unsignedTinyInteger('weekday')->unsigned();
             $table->time('time');
             $table->foreignIdFor(Workout::class)->constrained()->cascadeOnDelete();
+            $table->unique(['name', 'workout_id']);
             $table->unique(['workout_id', 'weekday', 'time']);
         });
 

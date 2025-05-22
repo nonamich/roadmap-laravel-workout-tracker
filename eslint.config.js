@@ -6,10 +6,20 @@ import typescriptEslint from 'typescript-eslint';
 
 export default typescriptEslint.config(
     {
-        ignores: ['*.d.ts', '**/coverage', '**/dist', '**/vendor', '**/build', '**/node_modules'],
+        ignores: [
+            '**/coverage',
+            '**/dist',
+            '**/vendor',
+            '**/build',
+            '**/node_modules',
+        ],
     },
     {
-        extends: [eslint.configs.recommended, ...typescriptEslint.configs.recommended, ...eslintPluginVue.configs['flat/strongly-recommended']],
+        extends: [
+            eslint.configs.recommended,
+            ...typescriptEslint.configs.recommended,
+            ...eslintPluginVue.configs['flat/strongly-recommended'],
+        ],
         files: ['resources/js/**/*.{ts,vue}'],
         languageOptions: {
             ecmaVersion: 'latest',

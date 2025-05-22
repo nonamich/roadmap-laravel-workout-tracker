@@ -3,15 +3,11 @@ import BaseButton from '@/Components/BaseButton.vue';
 import BaseContainer from '@/Components/BaseContainer.vue';
 import BasePagination from '@/Components/BasePagination.vue';
 import BaseTable from '@/Components/BaseTable.vue';
+import type { PaginatedCollection } from '@/types/laravel';
 import { Head, Link, router } from '@inertiajs/vue3';
 import { ref, watch } from 'vue';
 
-const props = defineProps<{
-    data: Array<Record<string, any>>;
-    links: any;
-    // eslint-disable-next-line vue/prop-name-casing
-    current_page: number;
-}>();
+const props = defineProps<PaginatedCollection<App.Data.ExerciseData>>();
 const search = new URLSearchParams(location.search);
 
 const sort = ref(
@@ -29,7 +25,7 @@ watch(sort, (value) => {
 
     router.get(
         location.pathname,
-        { page: props.current_page, sort_by: sortBy, sort_dir: sortDir },
+        { page: props.meta.current_page, sort_by: sortBy, sort_dir: sortDir },
         { preserveState: true, preserveScroll: true },
     );
 });
@@ -90,7 +86,7 @@ watch(sort, (value) => {
                         </div>
                     </template>
                 </BaseTable>
-                <BasePagination :links="links" />
+                <BasePagination :meta="meta" :links="links" />
             </div>
             <div v-else class="text-center">
                 <BaseButton href="/exercises/create">Add Exercise</BaseButton>

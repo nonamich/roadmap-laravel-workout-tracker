@@ -22,7 +22,7 @@ class WorkoutController
      */
     public function create()
     {
-        return Inertia::render('CreateWorkoutPage');
+        return Inertia::render('Workouts/CreatePage');
     }
 
     /**

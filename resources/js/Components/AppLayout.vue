@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ModalsContainer } from 'vue-final-modal';
 import AppFooter from './TheFooter.vue';
 import AppHeader from './TheHeader.vue';
 </script>
@@ -11,4 +12,5 @@ import AppHeader from './TheHeader.vue';
         </main>
         <AppFooter />
     </div>
+    <ModalsContainer />
 </template>

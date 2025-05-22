@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Data\ExerciseData;
 use App\Data\StoreExerciseData;
 use App\Data\UpdateExerciseData;
 use App\Http\Requests\Exercise\StoreExerciseRequest;
@@ -10,6 +11,7 @@ use App\Models\Exercise;
 use App\Services\ExerciseService;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use Spatie\LaravelData\PaginatedDataCollection;
 
 class ExerciseController
 {
@@ -22,7 +24,7 @@ class ExerciseController
      */
     public function index()
     {
-        $props = Auth::user()
+        $exercises = Auth::user()
             ->exercises()
             ->sorted(
                 request()->get('sort_by'),
@@ -30,6 +32,7 @@ class ExerciseController
             )
             ->paginate(5)
             ->withQueryString();
+        $props = ExerciseData::collect($exercises, PaginatedDataCollection::class);
 
         return Inertia::render('Exercise/IndexPage', $props);
     }

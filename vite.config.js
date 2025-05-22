@@ -21,6 +21,7 @@ export default defineConfig({
             input: ['resources/js/app.ts'],
             refresh: true,
         }),
+        wayfinder(),
         tailwindcss(),
         vue({
             template: {
