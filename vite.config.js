@@ -3,6 +3,7 @@ import vue from '@vitejs/plugin-vue';
 import laravel from 'laravel-vite-plugin';
 import path from 'node:path';
 import { defineConfig } from 'vite';
+import { watch } from 'vite-plugin-watch';
 
 const port = 5173;
 
@@ -21,7 +22,10 @@ export default defineConfig({
             input: ['resources/js/app.ts'],
             refresh: true,
         }),
-        wayfinder(),
+        watch({
+            pattern: 'app/{Data,Enums}/**/*.php',
+            command: 'php artisan typescript:transform',
+        }),
         tailwindcss(),
         vue({
             template: {
