@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { PaginatedCollection } from '@/types/laravel';
+import type { PaginatedCollection } from '@/@types/laravel';
 import { Link } from '@inertiajs/vue3';
 
 type Props = Omit<PaginatedCollection, 'data'>;

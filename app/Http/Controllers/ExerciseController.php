@@ -58,9 +58,7 @@ class ExerciseController
         );
         $exercise = $this->exerciseService->storeExercise($data);
 
-        return redirect()->route('exercises.edit', [
-            'exercise' => $exercise,
-        ]);
+        return redirect()->back()->with('exercise', $exercise);
     }
 
     /**
@@ -83,7 +81,10 @@ class ExerciseController
             category: $request->input('category'),
             description: $request->input('description'),
         );
+
         $this->exerciseService->updateExercise($exercise, $data);
+
+        return redirect()->back();
     }
 
     /**

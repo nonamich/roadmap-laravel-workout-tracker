@@ -12,7 +12,7 @@ defineProps({
 <template>
     <ExerciseForm
         method="put"
-        :url="`/exercises/${exercise.id}`"
+        :url="route('exercises.update', { id: exercise.id })"
         :initial="{
             name: exercise.name,
             category: exercise.category,

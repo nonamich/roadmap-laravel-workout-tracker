@@ -1,9 +1,14 @@
 <script setup lang="ts">
 import BaseButton from '@/Components/BaseButton.vue';
 import type { Method } from '@inertiajs/core';
-import { useForm } from '@inertiajs/vue3';
+import { useForm, type InertiaForm } from '@inertiajs/vue3';
 
-interface Props {
+type Form = InertiaForm<{
+    name: string;
+    category: string;
+    description: string;
+}>;
+type Props = {
     url: string;
     method: Method;
     initial?: {
@@ -11,10 +16,10 @@ interface Props {
         category: string;
         description: string;
     };
-}
+};
 
 const props = defineProps<Props>();
-const form = useForm({
+const form: Form = useForm({
     name: props.initial?.name || '',
     category: props.initial?.category || '',
     description: props.initial?.description || '',
@@ -24,10 +29,17 @@ const form = useForm({
 <template>
     <form
         @submit.prevent="
-            form.post(props.url, {
-                preserveState: true,
-                preserveScroll: true,
-            })
+            form.submit(
+                {
+                    url: props.url,
+                    method: props.method,
+                },
+                {
+                    onSuccess() {
+                        form.reset();
+                    },
+                },
+            )
         "
     >
         <div class="mb-6">
@@ -76,8 +88,9 @@ const form = useForm({
             <label
                 for="description"
                 class="block text-sm font-medium text-gray-700 dark:text-gray-300"
-                >Description</label
             >
+                Description
+            </label>
             <textarea
                 id="description"
                 v-model="form.description"

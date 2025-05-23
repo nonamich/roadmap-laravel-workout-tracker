@@ -3,5 +3,5 @@ import ExerciseForm from './ExerciseForm.vue';
 </script>
 
 <template>
-    <ExerciseForm method="post" url="/exercises" />
+    <ExerciseForm method="post" :url="route('exercises.store')" />
 </template>

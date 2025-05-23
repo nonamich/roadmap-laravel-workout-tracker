@@ -7,6 +7,7 @@ import typescriptEslint from 'typescript-eslint';
 export default typescriptEslint.config(
     {
         ignores: [
+            'resources/js/router',
             '**/coverage',
             '**/dist',
             '**/vendor',

@@ -20,11 +20,16 @@ export default defineConfig({
     plugins: [
         laravel({
             input: ['resources/js/app.ts'],
-            refresh: true,
+            refresh: false,
         }),
         watch({
             pattern: 'app/{Data,Enums}/**/*.php',
             command: 'php artisan typescript:transform',
+        }),
+        watch({
+            pattern: 'routes/**/*.php',
+            command:
+                'php artisan ziggy:generate --types resources/js/router/ziggy',
         }),
         tailwindcss(),
         vue({

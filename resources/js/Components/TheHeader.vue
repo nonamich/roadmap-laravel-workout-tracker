@@ -49,11 +49,20 @@ watch(page, hideDropdown);
                 <div class="flex h-16 justify-between">
                     <div class="flex items-center">
                         <div class="flex flex-shrink-0 items-center">
-                            <Link href="/" class="text-xl font-bold">FitTrack</Link>
+                            <Link
+                                :href="route('homepage')"
+                                class="text-xl font-bold"
+                            >
+                                FitTrack
+                            </Link>
                         </div>
                     </div>
                     <div class="flex items-center">
-                        <div v-if="user" class="relative ml-3" ref="dropdownRef">
+                        <div
+                            v-if="user"
+                            class="relative ml-3"
+                            ref="dropdownRef"
+                        >
                             <div>
                                 <button
                                     id="user-menu-button"
@@ -61,7 +70,9 @@ watch(page, hideDropdown);
                                     class="flex cursor-pointer items-center text-sm font-bold"
                                     aria-expanded="false"
                                     aria-haspopup="true"
-                                    @click="isOpenUserDropdown = !isOpenUserDropdown"
+                                    @click="
+                                        isOpenUserDropdown = !isOpenUserDropdown
+                                    "
                                 >
                                     <img
                                         class="me-2 h-8 w-8 rounded-full bg-amber-500"
@@ -83,38 +94,38 @@ watch(page, hideDropdown);
                                 tabindex="-1"
                             >
                                 <Link
-                                    href="/dashboard"
+                                    :href="route('dashboard')"
                                     class="block w-full cursor-pointer px-4 py-2 text-start text-sm text-gray-700 hover:bg-gray-100"
                                     role="menuitem"
                                     >Dashboard</Link
                                 >
                                 <Link
-                                    href="/workouts/create"
+                                    :href="route('workouts.create')"
                                     class="block w-full cursor-pointer px-4 py-2 text-start text-sm text-gray-700 hover:bg-gray-100"
                                     role="menuitem"
                                     >Add Workout</Link
                                 >
                                 <Link
-                                    href="/exercises/create"
+                                    :href="route('exercises.create')"
                                     class="block w-full cursor-pointer px-4 py-2 text-start text-sm text-gray-700 hover:bg-gray-100"
                                     role="menuitem"
                                     >Add Exercise</Link
                                 >
                                 <Link
-                                    href="/workouts/create"
+                                    :href="route('workouts.index')"
                                     class="block w-full cursor-pointer px-4 py-2 text-start text-sm text-gray-700 hover:bg-gray-100"
                                     role="menuitem"
                                     >Workouts</Link
                                 >
                                 <Link
-                                    href="/exercises"
+                                    :href="route('exercises.index')"
                                     class="block w-full cursor-pointer px-4 py-2 text-start text-sm text-gray-700 hover:bg-gray-100"
                                     role="menuitem"
                                     >Exercises</Link
                                 >
                                 <Link
                                     method="post"
-                                    href="/logout"
+                                    :href="route('logout')"
                                     @click="handleLogout"
                                     as="button"
                                     class="block w-full cursor-pointer px-4 py-2 text-start text-sm text-gray-700 hover:bg-gray-100"
@@ -123,7 +134,13 @@ watch(page, hideDropdown);
                                 >
                             </div>
                         </div>
-                        <BaseButton v-else href="/login" size="small" color="amber">Login</BaseButton>
+                        <BaseButton
+                            v-else
+                            :href="route('login')"
+                            size="small"
+                            color="amber"
+                            >Login</BaseButton
+                        >
                     </div>
                 </div>
             </Container>

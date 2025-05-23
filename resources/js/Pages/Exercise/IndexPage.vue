@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import type { PaginatedCollection } from '@/@types/laravel';
 import BaseButton from '@/Components/BaseButton.vue';
 import BaseContainer from '@/Components/BaseContainer.vue';
 import BasePagination from '@/Components/BasePagination.vue';
 import BaseTable from '@/Components/BaseTable.vue';
-import type { PaginatedCollection } from '@/types/laravel';
 import { Head, Link, router } from '@inertiajs/vue3';
 import { ref, watch } from 'vue';
 
@@ -72,24 +72,33 @@ watch(sort, (value) => {
                     <template #cell-description="{ value }">
                         <div class="w-64 truncate">{{ value }}</div>
                     </template>
-                    <template #cell-actions="{ row }">
+                    <template #cell-actions="{ row: exercise }">
                         <div class="flex space-x-2">
-                            <Link :href="`/exercises/${row.id}/edit`">
+                            <Link
+                                :href="
+                                    route('exercises.edit', {
+                                        id: exercise.id,
+                                    })
+                                "
+                            >
                                 <BaseButton size="small">Edit</BaseButton>
                             </Link>
                             <BaseButton
                                 size="small"
                                 color="zinc"
-                                @click="deleteExercise(row.id)"
-                                >Delete</BaseButton
+                                @click="deleteExercise(exercise.id)"
                             >
+                                Delete
+                            </BaseButton>
                         </div>
                     </template>
                 </BaseTable>
                 <BasePagination :meta="meta" :links="links" />
             </div>
             <div v-else class="text-center">
-                <BaseButton href="/exercises/create">Add Exercise</BaseButton>
+                <BaseButton :href="route('exercises.create')">
+                    Add Exercise
+                </BaseButton>
             </div>
         </div>
     </BaseContainer>
