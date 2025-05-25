@@ -1,9 +1,22 @@
 {
-    "semi": true,
-    "singleQuote": true,
-    "plugins": [
-        "prettier-plugin-organize-imports",
-        "prettier-plugin-tailwindcss"
-    ],
-    "tabWidth": 4
+  "semi": true,
+  "singleQuote": true,
+  "plugins": [
+    "prettier-plugin-organize-imports",
+    "prettier-plugin-tailwindcss"
+  ],
+  "tabWidth": 4,
+  "overrides": [
+    {
+      "files": [
+        "**/*.vue",
+        "**/*.js",
+        "**/*.ts",
+        "**/*.json"
+      ],
+      "options": {
+        "tabWidth": 2
+      }
+    }
+  ]
 }

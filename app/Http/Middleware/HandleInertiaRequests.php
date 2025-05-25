@@ -2,6 +2,8 @@
 
 namespace App\Http\Middleware;
 
+use App\Data\ShareData;
+use App\Data\UserShareData;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -36,18 +38,12 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request): array
     {
         $user = $request->user();
+        $defaultShareData = parent::share($request);
+        $shareData = ShareData::from([
+            'flash' => $request->session()->get('message'),
+            'user' => $user ? UserShareData::from($user) : null
+        ])->toArray();
 
-        return [
-            ...parent::share($request),
-            'flash' => [
-                'success' => fn() => $request->session()->get('success'),
-                'error' => fn() => $request->session()->get('error'),
-            ],
-            'user' => $user ? [
-                'id' => $user->id,
-                'name' => $user->name,
-                'email' => $user->email,
-            ] : null,
-        ];
+        return [...$defaultShareData, ...$shareData,];
     }
 }

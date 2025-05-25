@@ -1,7 +1,13 @@
 <script setup lang="ts">
-import ExerciseForm from './ExerciseForm.vue';
+import ExerciseForm, { type Emits } from './ExerciseForm.vue';
+
+defineEmits<Emits>();
 </script>
 
 <template>
-    <ExerciseForm method="post" :url="route('exercises.store')" />
+  <ExerciseForm
+    method="post"
+    :url="route('exercises.store')"
+    @success="$emit('success')"
+  />
 </template>

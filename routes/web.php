@@ -22,7 +22,7 @@ Route::middleware('auth')->group(function () {
         ->name('logout');
 
     Route::get('/dashboard', [DashboardController::class, 'show'])->name('dashboard');
-    Route::resource('/workouts', WorkoutController::class);
+    Route::resource('/workouts', WorkoutController::class)->names('workouts');
     Route::resource('/exercises', ExerciseController::class)->names('exercises');
 });
 

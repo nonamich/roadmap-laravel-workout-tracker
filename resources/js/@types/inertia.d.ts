@@ -1,13 +1,5 @@
-import { PageProps as InertiaPageProps } from '@inertiajs/core';
-
-type AppPageProps = {
-    user?: {
-        id: number;
-        name: string;
-        email: string;
-    } | null;
-};
+import type { PageProps as InertiaPageProps } from '@inertiajs/core';
 
 declare module '@inertiajs/core' {
-    interface PageProps extends InertiaPageProps, AppPageProps {}
+  interface PageProps extends InertiaPageProps, App.Data.ShareData {}
 }

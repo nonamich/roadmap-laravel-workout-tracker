@@ -22,7 +22,12 @@ class WorkoutController
      */
     public function create()
     {
-        return Inertia::render('Workouts/CreatePage');
+        $exercises = auth()->user()
+            ->exercises()->latest()->get();
+
+        return Inertia::render('Workouts/CreatePage', [
+            'exercises' => $exercises,
+        ]);
     }
 
     /**
@@ -30,7 +35,9 @@ class WorkoutController
      */
     public function store(StoreWorkoutRequest $request)
     {
-        //
+        $b = $request->input();
+
+        $b;
     }
 
     /**

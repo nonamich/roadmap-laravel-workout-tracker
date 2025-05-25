@@ -10,23 +10,23 @@ import { ZiggyVue } from 'ziggy-js';
 import AppLayout from './Components/AppLayout.vue';
 
 createInertiaApp({
-    async resolve(name) {
-        const page = await resolvePageComponent(
-            `./Pages/${name}.vue`,
-            import.meta.glob<DefineComponent>('./Pages/**/*.vue'),
-        );
+  async resolve(name) {
+    const page = await resolvePageComponent(
+      `./Pages/${name}.vue`,
+      import.meta.glob<DefineComponent>('./Pages/**/*.vue'),
+    );
 
-        page.default.layout ??= AppLayout;
+    page.default.layout ??= AppLayout;
 
-        return page;
-    },
-    setup({ el, App, props, plugin }) {
-        const vfm = createVfm();
+    return page;
+  },
+  setup({ el, App, props, plugin }) {
+    const vfm = createVfm();
 
-        createApp({ render: () => h(App, props) })
-            .use(ZiggyVue, Ziggy)
-            .use(vfm)
-            .use(plugin)
-            .mount(el);
-    },
+    createApp({ render: () => h(App, props) })
+      .use(ZiggyVue, Ziggy)
+      .use(vfm)
+      .use(plugin)
+      .mount(el);
+  },
 });

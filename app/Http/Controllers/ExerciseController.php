@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Data\ExerciseData;
+use App\Data\FlashMessageData;
 use App\Data\StoreExerciseData;
 use App\Data\UpdateExerciseData;
+use App\Enums\FlashComponent;
 use App\Http\Requests\Exercise\StoreExerciseRequest;
 use App\Http\Requests\Exercise\UpdateExerciseRequest;
 use App\Models\Exercise;
 use App\Services\ExerciseService;
-use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Spatie\LaravelData\PaginatedDataCollection;
 
@@ -24,7 +25,7 @@ class ExerciseController
      */
     public function index()
     {
-        $exercises = Auth::user()
+        $exercises = auth()->user()
             ->exercises()
             ->sorted(
                 request()->get('sort_by'),
@@ -58,7 +59,17 @@ class ExerciseController
         );
         $exercise = $this->exerciseService->storeExercise($data);
 
-        return redirect()->back()->with('exercise', $exercise);
+        return redirect()
+            ->back()
+            ->with(
+                'message',
+                FlashMessageData::from([
+                    'component' => FlashComponent::ExerciseCreated,
+                    'props' => [
+                        'exercise' => ExerciseData::from($exercise)
+                    ],
+                ])
+            );
     }
 
     /**
@@ -84,7 +95,17 @@ class ExerciseController
 
         $this->exerciseService->updateExercise($exercise, $data);
 
-        return redirect()->back();
+        return redirect()
+            ->back()
+            ->with(
+                'message',
+                FlashMessageData::from([
+                    'component' => FlashComponent::ExerciseUpdated,
+                    'props' => [
+                        'exercise' => ExerciseData::from($exercise)
+                    ],
+                ])
+            );
     }
 
     /**
