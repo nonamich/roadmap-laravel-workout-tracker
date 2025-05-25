@@ -34,6 +34,8 @@ const emit = defineEmits<{
         <form
           @submit.prevent="
             {
+              schedule.days.sort();
+
               emit('save', schedule);
               emit('close');
             }
@@ -64,9 +66,9 @@ const emit = defineEmits<{
                   type="checkbox"
                   :value="day"
                   v-model.number="schedule.days"
-                  class="rounded border-gray-300 dark:border-gray-700"
+                  class="h-5 w-5 rounded border-gray-300 dark:border-gray-700 dark:bg-black/20"
                 />
-                <span>{{ getDayName(day) }}</span>
+                <span class="text-sm text-gray-300">{{ getDayName(day) }}</span>
               </label>
             </div>
           </div>

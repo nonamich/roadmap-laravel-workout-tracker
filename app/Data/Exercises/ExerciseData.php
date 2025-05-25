@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Data;
+namespace App\Data\Exercises;
 
 use Spatie\LaravelData\Data;
 use Spatie\TypeScriptTransformer\Attributes\TypeScript;
@@ -13,5 +13,6 @@ class ExerciseData extends Data
         public string $name,
         public string $category,
         public ?string $description,
-    ) {}
+    ) {
+    }
 }

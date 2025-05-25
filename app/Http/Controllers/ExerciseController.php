@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Data\ExerciseData;
+use App\Data\Exercises\ExerciseData;
+use App\Data\Exercises\ExerciseStoreData;
+use App\Data\Exercises\ExerciseUpdateData;
 use App\Data\FlashMessageData;
-use App\Data\StoreExerciseData;
-use App\Data\UpdateExerciseData;
 use App\Enums\FlashComponent;
-use App\Http\Requests\Exercise\StoreExerciseRequest;
-use App\Http\Requests\Exercise\UpdateExerciseRequest;
 use App\Models\Exercise;
 use App\Services\ExerciseService;
 use Inertia\Inertia;
@@ -49,15 +47,9 @@ class ExerciseController
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreExerciseRequest $request)
+    public function store(ExerciseStoreData $data)
     {
-        $data = new StoreExerciseData(
-            name: $request->input('name'),
-            category: $request->input('category'),
-            description: $request->input('description'),
-            userId: $request->user()->id,
-        );
-        $exercise = $this->exerciseService->storeExercise($data);
+        $exercise = $this->exerciseService->storeExercise($data, auth()->user());
 
         return redirect()
             ->back()
@@ -85,14 +77,8 @@ class ExerciseController
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateExerciseRequest $request, Exercise $exercise)
+    public function update(ExerciseUpdateData $data, Exercise $exercise)
     {
-        $data = new UpdateExerciseData(
-            name: $request->input('name'),
-            category: $request->input('category'),
-            description: $request->input('description'),
-        );
-
         $this->exerciseService->updateExercise($exercise, $data);
 
         return redirect()

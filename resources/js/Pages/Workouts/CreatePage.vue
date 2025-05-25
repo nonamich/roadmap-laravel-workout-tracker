@@ -12,57 +12,43 @@ import { useModal } from 'vue-final-modal';
 type Props = {
   exercises: App.Data.ExerciseData[];
 };
-
-type Schedule = {
-  name: string;
-  days: number[];
-  time: string;
+type Schedule = App.Data.WorkoutSchedulesStoreData;
+type Form = App.Data.WorkoutStoreData;
+type SelectedExercise = Omit<
+  App.Data.WorkoutExercisesStoreData,
+  'exerciseId'
+> & {
+  exerciseId: '' | number;
 };
 
-type SelectableExercise = {
-  exercise?: App.Data.ExerciseData;
-  sets: number;
-  reps: number;
-};
-
-type Form = {
-  name: string;
-  description: string;
-  exercises: Array<{
-    exerciseId: number;
-    seats: number;
-    reps: number;
-  }>;
-  schedules: Schedule[];
-};
-
-const { exercises } = defineProps<Props>();
+const props = defineProps<Props>();
+const exercises = reactive(props.exercises);
 const groupedExercises = computed(() =>
   Object.groupBy(exercises, ({ category }) => category),
 );
 
 const form = useForm<Form>({
-  name: '',
+  title: '',
   description: '',
   exercises: [],
   schedules: [],
 });
 
-const selectableExercises = reactive<SelectableExercise[]>([]);
+const selectedExercises = reactive<SelectedExercise[]>([]);
 
-const addExercise = () => {
-  selectableExercises.push({ sets: 3, reps: 10 });
+const addExercise = (exerciseId: number | '' = '') => {
+  selectedExercises.push({ exerciseId, sets: 3, reps: 10 });
 };
 
 const removeExercise = (idx: number) => {
-  selectableExercises.splice(idx, 1);
+  selectedExercises.splice(idx, 1);
 };
 
 const moveSelectableExercise = (from: number, to: number) => {
-  const item = selectableExercises[from];
+  const item = selectedExercises[from];
 
-  selectableExercises.splice(from, 1);
-  selectableExercises.splice(to, 0, item);
+  selectedExercises.splice(from, 1);
+  selectedExercises.splice(to, 0, item);
 };
 
 const upSelectableExercise = (from: number) => {
@@ -73,14 +59,12 @@ const downSelectableExercise = (from: number) => {
   moveSelectableExercise(from, from + 1);
 };
 
-const schedules = form.schedules;
-
 const addSchedule = (schedule: Schedule) => {
-  schedules.push(schedule);
+  form.schedules.push(schedule);
 };
 
 const removeSchedule = (idx: number) => {
-  schedules.splice(idx, 1);
+  form.schedules.splice(idx, 1);
 };
 
 const modalSchedule = useModal({
@@ -92,6 +76,7 @@ const modalSchedule = useModal({
           initial: undefined,
         },
       });
+
       modalSchedule.close();
     },
   },
@@ -100,41 +85,37 @@ const modalSchedule = useModal({
 const modalExercise = useModal({
   component: ExerciseCreateFormModal,
   attrs: {
+    onSuccess() {
+      modalExercise.close();
+    },
     onClose() {
       modalExercise.patchOptions({
         attrs: {
           initial: undefined,
         },
       });
+
       modalExercise.close();
     },
   },
 });
 
-watch(
-  schedules,
-  (newSchedules) => {
-    newSchedules.sort((a, b) => {
-      return timeToDate(a.time).getTime() - timeToDate(b.time).getTime();
-    });
-  },
-  {
-    immediate: true,
-  },
-);
+watch(form.schedules, () => {
+  form.clearErrors('schedules');
 
-watch(selectableExercises, () => {
-  form.exercises = selectableExercises.flatMap((item) => {
-    if (!item.exercise) {
-      return [];
-    }
-
-    return {
-      reps: item.reps,
-      seats: item.sets,
-      exerciseId: item.exercise.id,
-    };
+  form.schedules.sort((a, b) => {
+    return timeToDate(a.time).getTime() - timeToDate(b.time).getTime();
   });
+});
+
+watch(selectedExercises, () => {
+  form.clearErrors('exercises');
+
+  form.exercises = selectedExercises.filter(
+    (item): item is App.Data.WorkoutExercisesStoreData => {
+      return Boolean(item.exerciseId);
+    },
+  );
 });
 </script>
 
@@ -147,28 +128,32 @@ watch(selectableExercises, () => {
       >
         Add New Workout
       </h1>
-      <form @submit.prevent="form.post(route('workouts.store'))">
+      <form
+        @submit.prevent="
+          form.post(route('workouts.store'), { preserveScroll: true })
+        "
+      >
         <div class="px-4 sm:px-6 lg:px-8">
           <div class="rounded-xl bg-white p-8 shadow-md dark:bg-black/30">
             <div class="mb-6">
               <label
-                for="workoutName"
+                for="workoutTitle"
                 class="block text-sm font-medium text-gray-700 dark:text-gray-300"
               >
-                Workout Name
+                Workout Title
                 <span class="text-red-600">*</span>
               </label>
               <input
-                id="workoutName"
+                id="workoutTitle"
                 type="text"
-                v-model="form.name"
+                v-model="form.title"
                 class="mt-1 block w-full rounded-md border border-gray-300 px-4 py-2 shadow-sm focus:border-blue-600 focus:ring-blue-600 sm:text-sm dark:border-gray-800 dark:bg-gray-900"
-                placeholder="Enter name"
+                placeholder="Enter title"
                 required
               />
               <div
-                v-if="form.errors.name"
-                v-text="form.errors.name"
+                v-if="form.errors.title"
+                v-text="form.errors.title"
                 class="mt-1 text-xs text-red-500"
               />
             </div>
@@ -176,8 +161,9 @@ watch(selectableExercises, () => {
               <label
                 for="description"
                 class="block text-sm font-medium text-gray-700 dark:text-gray-300"
-                >Description</label
               >
+                Description
+              </label>
               <textarea
                 id="description"
                 v-model="form.description"
@@ -198,6 +184,11 @@ watch(selectableExercises, () => {
                   class="text-lg font-semibold text-gray-900 dark:text-gray-100"
                 >
                   Exercises
+                  <div
+                    v-if="form.errors.exercises"
+                    v-text="form.errors.exercises"
+                    class="mt-1 text-xs text-red-500"
+                  />
                 </h2>
                 <div class="flex gap-1.5">
                   <BaseButton
@@ -206,14 +197,6 @@ watch(selectableExercises, () => {
                     type="button"
                     @click="
                       {
-                        modalExercise.patchOptions({
-                          attrs: {
-                            onSuccess() {
-                              modalExercise.close();
-                            },
-                          },
-                        });
-
                         modalExercise.open();
                       }
                     "
@@ -230,7 +213,7 @@ watch(selectableExercises, () => {
                   reps: 'Reps',
                   actions: 'Actions',
                 }"
-                :data="selectableExercises"
+                :data="selectedExercises"
               >
                 <template #cell-order="{ index }">
                   <div class="flex space-x-1">
@@ -248,7 +231,7 @@ watch(selectableExercises, () => {
                       size="small"
                       color="zinc"
                       type="button"
-                      :disabled="index === selectableExercises.length - 1"
+                      :disabled="index === selectedExercises.length - 1"
                     >
                       ↓
                     </BaseButton>
@@ -258,15 +241,21 @@ watch(selectableExercises, () => {
                   <select
                     class="block w-full rounded-md border border-gray-300 px-3 py-2 text-sm dark:border-gray-800 dark:bg-gray-900 dark:text-gray-100"
                     required
-                    :value="row.exercise"
+                    v-model="row.exerciseId"
                   >
-                    <option disabled value="">Select Exercise</option>
+                    <option disabled value="" selected hidden>
+                      Select Exercise
+                    </option>
                     <optgroup
                       v-for="(group, name) of groupedExercises"
                       :key="name"
                       :label="name"
                     >
-                      <option v-for="exercise in group" :key="exercise.id">
+                      <option
+                        v-for="exercise in group"
+                        :value="exercise.id"
+                        :key="exercise.id"
+                      >
                         {{ exercise.name }}
                       </option>
                     </optgroup>
@@ -297,7 +286,7 @@ watch(selectableExercises, () => {
                       color="zinc"
                       @click="removeExercise(index)"
                       type="button"
-                      :disabled="selectableExercises.length < 2"
+                      :disabled="selectedExercises.length < 2"
                     >
                       Delete
                     </BaseButton>
@@ -307,7 +296,7 @@ watch(selectableExercises, () => {
               </BaseTable>
               <div class="mt-3 text-center">
                 <BaseButton
-                  @click="addExercise"
+                  @click="addExercise()"
                   size="small"
                   color="zinc"
                   type="button"
@@ -322,7 +311,12 @@ watch(selectableExercises, () => {
                 <h2
                   class="text-lg font-semibold text-gray-900 dark:text-gray-100"
                 >
-                  Recurring Schedules
+                  Schedules
+                  <div
+                    v-if="form.errors.schedules"
+                    v-text="form.errors.schedules"
+                    class="mt-1 text-xs text-red-500"
+                  />
                 </h2>
                 <BaseButton
                   type="button"
@@ -351,7 +345,7 @@ watch(selectableExercises, () => {
                   days: 'Days',
                   actions: 'Actions',
                 }"
-                :data="schedules"
+                :data="form.schedules"
               >
                 <template #cell-days="{ row }">
                   {{ row.days.map(getDayName).join(', ') }}
@@ -386,7 +380,7 @@ watch(selectableExercises, () => {
                       type="button"
                       color="zinc"
                       @click="removeSchedule(index)"
-                      :disabled="schedules.length < 2"
+                      :disabled="form.schedules.length < 2"
                     >
                       Delete
                     </BaseButton>

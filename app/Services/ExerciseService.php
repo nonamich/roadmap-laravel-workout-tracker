@@ -2,31 +2,25 @@
 
 namespace App\Services;
 
-use App\Data\StoreExerciseData;
-use App\Data\UpdateExerciseData;
+use App\Data\Exercises\ExerciseStoreData;
+use App\Data\Exercises\ExerciseUpdateData;
 use App\Models\Exercise;
+use App\Models\User;
+use Illuminate\Auth\Authenticatable;
 
 class ExerciseService
 {
-    /**
-     * Create a new class instance.
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    public function storeExercise(StoreExerciseData $data): Exercise
+    public function storeExercise(ExerciseStoreData $data, User $user): Exercise
     {
         return Exercise::create([
             'name' => $data->name,
             'category' => $data->category,
             'description' => $data->description,
-            'user_id' => $data->userId,
+            'user_id' => $user->id,
         ]);
     }
 
-    public function updateExercise(Exercise $exercise, UpdateExerciseData $data)
+    public function updateExercise(Exercise $exercise, ExerciseUpdateData $data)
     {
         $exercise->update([
             'name' => $data->name,

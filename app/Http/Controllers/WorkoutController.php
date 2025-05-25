@@ -2,13 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Workout\StoreWorkoutRequest;
-use App\Http\Requests\Workout\UpdateWorkoutRequest;
+use App\Data\Exercises\ExerciseData;
+use App\Data\Workouts\WorkoutStoreData;
 use App\Models\Workout;
+use App\Services\WorkoutService;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class WorkoutController
 {
+    public function __construct(
+        public readonly WorkoutService $workoutService
+    ) {
+
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -22,22 +30,19 @@ class WorkoutController
      */
     public function create()
     {
-        $exercises = auth()->user()
-            ->exercises()->latest()->get();
+        $exercises = auth()->user()->exercises()->latest()->get();
 
         return Inertia::render('Workouts/CreatePage', [
-            'exercises' => $exercises,
+            'exercises' => ExerciseData::collect($exercises),
         ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreWorkoutRequest $request)
+    public function store(WorkoutStoreData $workoutStoreData)
     {
-        $b = $request->input();
-
-        $b;
+        $this->workoutService->storeWorkout($workoutStoreData, auth()->user());
     }
 
     /**
@@ -59,7 +64,7 @@ class WorkoutController
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateWorkoutRequest $request, Workout $workout)
+    public function update(Request $request, Workout $workout)
     {
         //
     }

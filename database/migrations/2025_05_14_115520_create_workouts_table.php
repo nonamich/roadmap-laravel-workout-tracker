@@ -31,7 +31,7 @@ return new class extends Migration {
             $table->unique(['name', 'user_id']);
         });
 
-        Schema::create('workout_exercise', function (Blueprint $table) {
+        Schema::create('exercise_workout', function (Blueprint $table) {
             $table->timestamps();
 
             $table->foreignId('workout_id')->constrained()->cascadeOnDelete();
@@ -42,7 +42,7 @@ return new class extends Migration {
             $table->primary(['workout_id', 'exercise_id']);
         });
 
-         DB::statement("
+        DB::statement("
             ALTER TABLE workout_exercise
             ADD CONSTRAINT check_sets_and_reps
             CHECK (reps > 1 AND sets < 0)

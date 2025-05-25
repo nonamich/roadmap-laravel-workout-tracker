@@ -39,9 +39,8 @@ const emit = defineEmits<Emits>();
           method: props.method,
         },
         {
-          preserveScroll: true,
+          preserveState: false,
           onSuccess() {
-            form.reset();
             emit('success');
           },
         },
