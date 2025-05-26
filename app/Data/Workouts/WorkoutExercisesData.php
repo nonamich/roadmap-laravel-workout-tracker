@@ -7,7 +7,7 @@ use Spatie\LaravelData\Data;
 use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 
 #[TypeScript]
-class WorkoutExercisesStoreData extends Data
+class WorkoutExercisesData extends Data
 {
     public function __construct(
         #[Min(1)]

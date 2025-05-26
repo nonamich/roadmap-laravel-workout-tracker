@@ -9,7 +9,6 @@ use Spatie\LaravelData\Attributes\Validation\Filled;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\Support\Validation\ValidationContext;
 use Spatie\TypeScriptTransformer\Attributes\TypeScript;
-use Illuminate\Support\Collection;
 
 #[TypeScript]
 class WorkoutStoreData extends Data
@@ -18,13 +17,13 @@ class WorkoutStoreData extends Data
         public string $title,
         public ?string $description,
 
-        #[Filled]
-        /** @var Collection<int, WorkoutExercisesStoreData> */
-        public Collection $exercises,
+        #[Filled, DataCollectionOf(WorkoutExercisesData::class)]
+        /** @var array<WorkoutExercisesData> */
+        public array $exercises,
 
-        #[Filled]
-        /** @var Collection<int, WorkoutSchedulesStoreData> */
-        public Collection $schedules
+        #[Filled, DataCollectionOf(WorkoutRecurrenceData::class)]
+        /** @var array<WorkoutRecurrenceData> */
+        public array $schedules
     ) {
     }
 
@@ -32,7 +31,7 @@ class WorkoutStoreData extends Data
     {
         return [
             'title' => [
-                Rule::unique(Workout::class, 'name')
+                Rule::unique(Workout::class, 'title')
                     ->where('user_id', auth()->id())
             ],
         ];

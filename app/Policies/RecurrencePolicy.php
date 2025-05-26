@@ -2,11 +2,10 @@
 
 namespace App\Policies;
 
-use App\Models\ScheduledWorkout;
+use App\Models\Recurrence;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
-class ScheduledWorkoutsPolicy
+class RecurrencePolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -19,7 +18,7 @@ class ScheduledWorkoutsPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, ScheduledWorkout $scheduledWorkouts): bool
+    public function view(User $user, Recurrence $Recurrences): bool
     {
         return false;
     }
@@ -35,7 +34,7 @@ class ScheduledWorkoutsPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, ScheduledWorkout $scheduledWorkouts): bool
+    public function update(User $user, Recurrence $Recurrences): bool
     {
         return false;
     }
@@ -43,7 +42,7 @@ class ScheduledWorkoutsPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, ScheduledWorkout $scheduledWorkouts): bool
+    public function delete(User $user, Recurrence $Recurrences): bool
     {
         return false;
     }
@@ -51,7 +50,7 @@ class ScheduledWorkoutsPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, ScheduledWorkout $scheduledWorkouts): bool
+    public function restore(User $user, Recurrence $Recurrences): bool
     {
         return false;
     }
@@ -59,7 +58,7 @@ class ScheduledWorkoutsPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, ScheduledWorkout $scheduledWorkouts): bool
+    public function forceDelete(User $user, Recurrence $Recurrences): bool
     {
         return false;
     }

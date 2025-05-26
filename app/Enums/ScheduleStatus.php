@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum ScheduledWorkoutStatus: string
+enum ScheduleStatus: string
 {
     case Scheduled = 'scheduled';
     case Done = 'done';

@@ -23,21 +23,21 @@ description: string | null;
 };
 }
 declare namespace App.Data.Workouts {
-export type WorkoutExercisesStoreData = {
+export type WorkoutExercisesData = {
 sets: number;
 reps: number;
 exerciseId: number;
 };
-export type WorkoutSchedulesStoreData = {
+export type WorkoutRecurrenceData = {
 name: string;
-days: Array<number>;
+weekdays: Array<number>;
 time: string;
 };
 export type WorkoutStoreData = {
 title: string;
 description: string | null;
-exercises: { [key: number]: App.Data.Workouts.WorkoutExercisesStoreData } | Array<any>;
-schedules: { [key: number]: App.Data.Workouts.WorkoutSchedulesStoreData } | Array<any>;
+exercises: Array<App.Data.Workouts.WorkoutExercisesData>;
+schedules: Array<App.Data.Workouts.WorkoutRecurrenceData>;
 };
 }
 declare namespace App.Enums {

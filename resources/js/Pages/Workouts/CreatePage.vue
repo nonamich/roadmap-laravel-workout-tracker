@@ -3,26 +3,25 @@ import BaseButton from '@/Components/BaseButton.vue';
 import BaseContainer from '@/Components/BaseContainer.vue';
 import BaseTable from '@/Components/BaseTable.vue';
 import ExerciseCreateFormModal from '@/Components/Exercise/ExerciseCreateFormModal.vue';
-import RecurringScheduleModal from '@/Components/RecurringSchedule/RecurringScheduleModal.vue';
+import RecurrenceModal from '@/Components/Recurrence/RecurrenceModal.vue';
 import { getDayName, timeToDate } from '@/utils';
 import { Head, useForm } from '@inertiajs/vue3';
 import { computed, reactive, watch } from 'vue';
 import { useModal } from 'vue-final-modal';
 
 type Props = {
-  exercises: App.Data.ExerciseData[];
+  exercises: App.Data.Exercises.ExerciseData[];
 };
-type Schedule = App.Data.WorkoutSchedulesStoreData;
-type Form = App.Data.WorkoutStoreData;
+type Schedule = App.Data.Workouts.WorkoutRecurrenceData;
+type Form = App.Data.Workouts.WorkoutStoreData;
 type SelectedExercise = Omit<
-  App.Data.WorkoutExercisesStoreData,
+  App.Data.Workouts.WorkoutExercisesData,
   'exerciseId'
 > & {
   exerciseId: '' | number;
 };
 
-const props = defineProps<Props>();
-const exercises = reactive(props.exercises);
+const { exercises } = defineProps<Props>();
 const groupedExercises = computed(() =>
   Object.groupBy(exercises, ({ category }) => category),
 );
@@ -68,7 +67,7 @@ const removeSchedule = (idx: number) => {
 };
 
 const modalSchedule = useModal({
-  component: RecurringScheduleModal,
+  component: RecurrenceModal,
   attrs: {
     onClose() {
       modalSchedule.patchOptions({
@@ -112,7 +111,7 @@ watch(selectedExercises, () => {
   form.clearErrors('exercises');
 
   form.exercises = selectedExercises.filter(
-    (item): item is App.Data.WorkoutExercisesStoreData => {
+    (item): item is App.Data.Workouts.WorkoutExercisesData => {
       return Boolean(item.exerciseId);
     },
   );
@@ -342,13 +341,13 @@ watch(selectedExercises, () => {
                 :columns="{
                   name: 'Name',
                   time: 'Time',
-                  days: 'Days',
+                  weekdays: 'Weekdays',
                   actions: 'Actions',
                 }"
                 :data="form.schedules"
               >
-                <template #cell-days="{ row }">
-                  {{ row.days.map(getDayName).join(', ') }}
+                <template #cell-weekdays="{ row }">
+                  {{ row.weekdays.map(getDayName).join(', ') }}
                 </template>
                 <template #cell-actions="{ row, index }">
                   <div class="flex space-x-2">
@@ -358,18 +357,15 @@ watch(selectedExercises, () => {
                       @click="
                         modalSchedule.patchOptions({
                           attrs: {
-                            initial: {
-                              days: row.days,
-                              name: row.name,
-                              time: row.time,
-                            },
+                            initial: row,
                             onSave(updatedSchedule) {
-                              row.days = updatedSchedule.days;
+                              row.weekdays = updatedSchedule.weekdays;
                               row.name = updatedSchedule.name;
                               row.time = updatedSchedule.time;
                             },
                           },
                         });
+
                         modalSchedule.open();
                       "
                     >

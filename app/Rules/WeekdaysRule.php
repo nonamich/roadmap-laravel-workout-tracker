@@ -21,8 +21,8 @@ class WeekdaysRule implements ValidationRule
         }
 
         foreach ($value as $item) {
-            if (!is_int($item) || $item < 1 || $item > 7) {
-                $fail("Each value in {$attribute} must be an integer between 1 and 7.");
+            if (!is_int($item) || $item < 0 || $item > 6) {
+                $fail("Each value in {$attribute} must be an integer between 0 and 6.");
 
                 return;
             }

@@ -12,7 +12,7 @@ class ExerciseStoreData extends Data
     public function __construct(
         public readonly string $name,
         public readonly string $category,
-        public readonly string $description,
+        public readonly ?string $description,
     ) {
     }
 

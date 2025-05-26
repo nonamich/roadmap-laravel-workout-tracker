@@ -39,9 +39,9 @@ const emit = defineEmits<Emits>();
           method: props.method,
         },
         {
-          preserveState: false,
           onSuccess() {
             emit('success');
+            form.reset();
           },
         },
       )

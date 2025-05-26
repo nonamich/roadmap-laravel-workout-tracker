@@ -125,9 +125,9 @@ watch(page, hideDropdown);
                 >
               </div>
             </div>
-            <BaseButton v-else :href="route('login')" size="small" color="amber"
-              >Login</BaseButton
-            >
+            <Link v-else :href="route('login')">
+              <BaseButton size="small" color="amber">Login</BaseButton>
+            </Link>
           </div>
         </div>
       </Container>

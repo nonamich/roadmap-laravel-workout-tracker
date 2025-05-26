@@ -43,9 +43,9 @@ return new class extends Migration {
         });
 
         DB::statement("
-            ALTER TABLE workout_exercise
+            ALTER TABLE exercise_workout
             ADD CONSTRAINT check_sets_and_reps
-            CHECK (reps > 1 AND sets < 0)
+            CHECK (reps > 0 AND sets > 0)
         ");
     }
 
@@ -54,6 +54,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
+        Schema::dropIfExists('exercise_workout');
         Schema::dropIfExists('exercises');
         Schema::dropIfExists('workouts');
     }

@@ -9,14 +9,14 @@ use Spatie\LaravelData\Data;
 use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 
 #[TypeScript]
-class WorkoutSchedulesStoreData extends Data
+class WorkoutRecurrenceData extends Data
 {
     public function __construct(
         public string $name,
 
         #[Rule([new WeekdaysRule()])]
         /** @var int[] */
-        public array $days,
+        public array $weekdays,
 
         #[Regex('/^[0-2]\d:[0-5]\d$/')]
         public string $time,

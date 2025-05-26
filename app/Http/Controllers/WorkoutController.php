@@ -42,7 +42,7 @@ class WorkoutController
      */
     public function store(WorkoutStoreData $workoutStoreData)
     {
-        $this->workoutService->storeWorkout($workoutStoreData, auth()->user());
+        $this->workoutService->createWorkout($workoutStoreData, auth()->user());
     }
 
     /**
