@@ -66,6 +66,34 @@ declare module 'ziggy-js' {
             "required": true,
             "binding": "id"
         }
+    ],
+    "schedules.index": [],
+    "schedules.create": [],
+    "schedules.store": [],
+    "schedules.show": [
+        {
+            "name": "schedule",
+            "required": true
+        }
+    ],
+    "schedules.edit": [
+        {
+            "name": "schedule",
+            "required": true
+        }
+    ],
+    "schedules.update": [
+        {
+            "name": "schedule",
+            "required": true
+        }
+    ],
+    "schedules.destroy": [
+        {
+            "name": "schedule",
+            "required": true,
+            "binding": "id"
+        }
     ]
 }
 }

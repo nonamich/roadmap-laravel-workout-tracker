@@ -1,33 +1,34 @@
 name: workout-tracker
 type: laravel
 docroot: public
-php_version: "8.3"
+php_version: '8.3'
 webserver_type: nginx-fpm
 xdebug_enabled: true
 additional_hostnames: []
 additional_fqdns: []
 database:
     type: mariadb
-    version: "10.11"
+    version: '10.11'
 use_dns_when_possible: true
-composer_version: "2"
+timezone: Etc/UTC
+composer_version: '2'
 web_environment: []
-nodejs_version: "22"
 corepack_enable: false
 web_extra_exposed_ports:
-  - name: node-vite
-    container_port: 5173
-    http_port: 5172
-    https_port: 5173
+    - name: node-vite
+      container_port: 5173
+      http_port: 5172
+      https_port: 5173
 web_extra_daemons:
-  - name: dev
-    command: composer run dev
-    directory: /var/www/html
-
+    - name: dev
+      command: composer run dev
+      directory: /var/www/html
 # Key features of DDEV's config.yaml:
 
 # name: <projectname> # Name of the project, automatically provides
 #   http://projectname.ddev.site and https://projectname.ddev.site
+# If the name is omitted, the project will take the name of the enclosing directory,
+# which is useful if you want to have a copy of the project side by side with this one.
 
 # type: <projecttype>  # backdrop, cakephp, craftcms, drupal, drupal6, drupal7, drupal8, drupal9, drupal10, drupal11, generic, laravel, magento, magento2, php, shopware6, silverstripe, symfony, typo3, wordpress
 # See https://ddev.readthedocs.io/en/stable/users/quickstart/ for more

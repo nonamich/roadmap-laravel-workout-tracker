@@ -17,7 +17,8 @@ return new class extends Migration {
             $table->id();
             $table->timestamps();
             $table->dateTime('scheduled_at');
-            $table->string('status', 10);
+            $table->string('status', 20);
+            $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Workout::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Recurrence::class)->nullable()->constrained()->cascadeOnDelete();
         });

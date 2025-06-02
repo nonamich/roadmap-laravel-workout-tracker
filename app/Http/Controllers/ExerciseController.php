@@ -8,6 +8,7 @@ use App\Data\Exercises\ExerciseUpdateData;
 use App\Data\FlashMessageData;
 use App\Enums\FlashComponent;
 use App\Models\Exercise;
+use App\Models\Scopes\SortScope;
 use App\Services\ExerciseService;
 use Inertia\Inertia;
 use Spatie\LaravelData\PaginatedDataCollection;
@@ -25,15 +26,15 @@ class ExerciseController
     {
         $exercises = auth()->user()
             ->exercises()
-            ->sorted(
-                request()->get('sort_by'),
-                request()->get('sort_dir')
+            ->withGlobalScope(
+                'sort',
+                new SortScope(allowedBy: ['created_at', 'name'])
             )
             ->paginate(5)
             ->withQueryString();
         $props = ExerciseData::collect($exercises, PaginatedDataCollection::class);
 
-        return Inertia::render('Exercise/IndexPage', $props);
+        return Inertia::render('exercises/IndexPage', $props);
     }
 
     /**
@@ -41,7 +42,7 @@ class ExerciseController
      */
     public function create()
     {
-        return Inertia::render('Exercise/CreatePage');
+        return Inertia::render('exercises/CreatePage');
     }
 
     /**
@@ -69,7 +70,7 @@ class ExerciseController
      */
     public function edit(Exercise $exercise)
     {
-        return Inertia::render('Exercise/EditPage', [
+        return Inertia::render('exercises/EditPage', [
             'exercise' => $exercise,
         ]);
     }

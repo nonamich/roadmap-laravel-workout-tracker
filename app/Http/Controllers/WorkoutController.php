@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Data\Exercises\ExerciseData;
+use App\Data\Workouts\WorkoutData;
 use App\Data\Workouts\WorkoutStoreData;
+use App\Models\Scopes\SortScope;
 use App\Models\Workout;
 use App\Services\WorkoutService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Spatie\LaravelData\PaginatedDataCollection;
 
 class WorkoutController
 {
@@ -22,7 +25,18 @@ class WorkoutController
      */
     public function index()
     {
-        //
+        $workouts = auth()->user()
+            ->workouts()
+            ->withGlobalScope(
+                'sort',
+                new SortScope(allowedBy: ['created_at', 'title'])
+            )
+            ->paginate(5)
+            ->withQueryString();
+        $props = WorkoutData::collect($workouts, PaginatedDataCollection::class);
+
+        return Inertia::render('workouts/IndexPage', $props);
+
     }
 
     /**
@@ -32,7 +46,7 @@ class WorkoutController
     {
         $exercises = auth()->user()->exercises()->latest()->get();
 
-        return Inertia::render('Workouts/CreatePage', [
+        return Inertia::render('workouts/CreatePage', [
             'exercises' => ExerciseData::collect($exercises),
         ]);
     }
@@ -74,6 +88,8 @@ class WorkoutController
      */
     public function destroy(Workout $workout)
     {
-        //
+        $workout->delete();
+
+        return redirect()->route('workouts.index');
     }
 }

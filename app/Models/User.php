@@ -48,7 +48,8 @@ class User extends Authenticatable
         ];
     }
 
-    public function setPasswordAttribute(string $password) {
+    public function setPasswordAttribute(string $password)
+    {
         if (!Hash::needsRehash($password)) {
             $this->attributes['password'] = $password;
         } else {
@@ -70,5 +71,13 @@ class User extends Authenticatable
     public function workouts(): HasMany
     {
         return $this->hasMany(Workout::class);
+    }
+
+    /**
+     * @return HasMany<Schedule, User>
+     */
+    public function schedules(): HasMany
+    {
+        return $this->hasMany(Schedule::class);
     }
 }

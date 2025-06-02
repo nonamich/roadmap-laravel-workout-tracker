@@ -12,11 +12,13 @@ use Inertia\Response;
 
 class LoginController extends BaseController
 {
-    public function create(): Response {
-        return Inertia::render('Auth/LoginPage');
+    public function create(): Response
+    {
+        return Inertia::render('auth/LoginPage');
     }
 
-    public function store(LoginRequest $request) {
+    public function store(LoginRequest $request)
+    {
         $credentials = $request->all([
             'email',
             'password',

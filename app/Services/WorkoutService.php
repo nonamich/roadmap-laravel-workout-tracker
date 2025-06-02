@@ -31,7 +31,7 @@ class WorkoutService
                 $data->exercises
             );
 
-            $this->createRecurrences($workout, $data->schedules);
+            $this->createRecurrences($workout, $data->recurrences);
 
             return $workout;
         });
@@ -63,7 +63,7 @@ class WorkoutService
      */
     public function createRecurrences(Workout $workout, array $schedules)
     {
-        $recurrences = $workout->recurrences()->createMany(
+        $workout->recurrences()->createMany(
             array_map(
                 function (WorkoutRecurrenceData $schedule) {
                     return $schedule->toArray();
@@ -72,13 +72,13 @@ class WorkoutService
             )
         );
 
-        $this->createSchedules($workout);
+        $this->createSchedulesByWorkout($workout);
     }
 
     /**
      * @param array<WorkoutRecurrenceData> $schedules
      */
-    public function createSchedules(
+    public function createSchedulesByWorkout(
         Workout $workout,
         int $nextDays = 7
     ) {
@@ -96,12 +96,13 @@ class WorkoutService
                         continue;
                     }
 
-                    $data = ScheduleStoreData::from([
-                        'status' => ScheduleStatus::Scheduled,
-                        'workoutId' => $workout->id,
-                        'recurrenceId' => $recurrence->id,
-                        'scheduledAt' => $datetime,
-                    ]);
+                    $data = new ScheduleStoreData(
+                        status: ScheduleStatus::Scheduled,
+                        workoutId: $workout->id,
+                        userId: $workout->user_id,
+                        recurrenceId: $recurrence->id,
+                        scheduledAt: $datetime,
+                    );
 
                     $this->createSchedule($data);
                 }
@@ -112,9 +113,10 @@ class WorkoutService
 
     public function createSchedule(ScheduleStoreData $data): Schedule
     {
-        return Schedule::create([
+        return Schedule::createOrFirst([
             'status' => $data->status,
             'workout_id' => $data->workoutId,
+            'user_id' => $data->userId,
             'recurrence_id' => $data->recurrenceId,
             'scheduled_at' => $data->scheduledAt,
         ]);

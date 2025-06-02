@@ -23,7 +23,7 @@ class WorkoutStoreData extends Data
 
         #[Filled, DataCollectionOf(WorkoutRecurrenceData::class)]
         /** @var array<WorkoutRecurrenceData> */
-        public array $schedules
+        public array $recurrences
     ) {
     }
 

@@ -6,7 +6,6 @@ use App\Data\Exercises\ExerciseStoreData;
 use App\Data\Exercises\ExerciseUpdateData;
 use App\Models\Exercise;
 use App\Models\User;
-use Illuminate\Auth\Authenticatable;
 
 class ExerciseService
 {

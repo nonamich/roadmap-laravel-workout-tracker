@@ -13,7 +13,7 @@ class RegisterController
 {
     public function create(): Response
     {
-        return Inertia::render('Auth/RegisterPage');
+        return Inertia::render('auth/RegisterPage');
     }
 
     public function store(RegisterRequest $request)

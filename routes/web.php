@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ExerciseController;
+use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\WorkoutController;
@@ -24,5 +25,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'show'])->name('dashboard');
     Route::resource('/workouts', WorkoutController::class)->names('workouts');
     Route::resource('/exercises', ExerciseController::class)->names('exercises');
+    Route::resource('/schedules', ScheduleController::class)->names('schedules');
 });
 

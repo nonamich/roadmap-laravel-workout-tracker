@@ -24,6 +24,9 @@ export default defineConfig({
       refresh: false,
     }),
     vue({
+      script: {
+        globalTypeFiles: ['./resources/js/types/laravel-generated.d.ts'],
+      },
       template: {
         transformAssetUrls: {
           base: null,
@@ -33,10 +36,10 @@ export default defineConfig({
     }),
     watch({
       pattern: 'app/{Data,Enums}/**/*.php',
-      command: 'php artisan typescript:transform',
+      command: 'php artisan typescript:transform --format',
     }),
     watch({
-      pattern: 'routes/**/*.php',
+      pattern: 'routes/web.php',
       command: 'php artisan ziggy:generate --types resources/js/router/ziggy',
     }),
   ],
