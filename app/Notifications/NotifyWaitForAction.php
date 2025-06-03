@@ -12,11 +12,14 @@ class NotifyWaitForAction extends Notification implements ShouldQueue
 {
     use Queueable;
 
+    private Schedule $schedule;
+
     /**
      * Create a new notification instance.
      */
     public function __construct(private int $scheduleId)
     {
+        $this->schedule = Schedule::findOrFail($scheduleId)->first();
     }
 
     /**
@@ -34,7 +37,9 @@ class NotifyWaitForAction extends Notification implements ShouldQueue
      */
     public function toMail(object $notifiable): MailMessage
     {
-        return (new MailMessage)->markdown('mail.schedule-wait-for-action');
+        return (new MailMessage)->markdown('mail.schedule-wait-for-action', [
+            'scheduleId' => $this->scheduleId,
+        ]);
     }
 
     /**
@@ -45,7 +50,7 @@ class NotifyWaitForAction extends Notification implements ShouldQueue
     public function toArray(object $notifiable): array
     {
         return [
-            //
+            'scheduleId' => $this->schedule->id,
         ];
     }
 }

@@ -1,12 +1,10 @@
 <x-mail::message>
-    # Introduction
+    # Schedules Workout need report
 
-    The body of your message.
-
-    <x-mail::button :url="''">
-        Button Text
+    <x-mail::button :url="route('schedules.show', $scheduleId)">
+        Report
     </x-mail::button>
 
-    Thanks,<br>
+    Thanks,
     {{ config('app.name') }}
 </x-mail::message>
