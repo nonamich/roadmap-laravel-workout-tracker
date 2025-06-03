@@ -2,7 +2,7 @@
 import BaseNotification from '../BaseNotification.vue';
 
 type Props = {
-  exercise: App.Data.ExerciseData;
+  exercise: App.Data.Exercises.ExerciseData;
 };
 
 defineProps<Props>();

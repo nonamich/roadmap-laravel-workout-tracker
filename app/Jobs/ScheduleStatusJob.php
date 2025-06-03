@@ -2,8 +2,7 @@
 
 namespace App\Jobs;
 
-use App\Enums\ScheduleStatus;
-use App\Models\Schedule;
+use App\Services\ScheduleService;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Support\Facades\DB;
@@ -22,27 +21,9 @@ class ScheduleStatusJob implements ShouldQueue
     /**
      * Execute the job.
      */
-    public function handle(): void
+    public function handle(ScheduleService $scheduleService): void
     {
-        $this->updateStatusToMissedAndSave();
-        $this->updateStatusToWaitForActionAndSave();
-    }
-
-    protected function updateStatusToWaitForActionAndSave(): void
-    {
-        Schedule::where('scheduled_at', '<', now())
-            ->where('status', '=', ScheduleStatus::Scheduled)
-            ->update([
-                'status' => ScheduleStatus::WaitForAction,
-            ]);
-    }
-
-    protected function updateStatusToMissedAndSave(): void
-    {
-        Schedule::where('scheduled_at', '<', now()->subDay())
-            ->whereIn('status', [ScheduleStatus::WaitForAction, ScheduleStatus::Scheduled])
-            ->update([
-                'status' => ScheduleStatus::Missed,
-            ]);
+        $scheduleService->updateStatusToWaitForActionAndSave();
+        $scheduleService->updateStatusToMissedAndSave();
     }
 }

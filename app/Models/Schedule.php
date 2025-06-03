@@ -36,7 +36,7 @@ class Schedule extends Model
     /**
      * @return BelongsTo<Workout, Schedule>
      */
-    public function workout()
+    public function workout(): BelongsTo
     {
         return $this->belongsTo(Workout::class);
     }
@@ -44,8 +44,16 @@ class Schedule extends Model
     /**
      * @return BelongsTo<Recurrence, Schedule>
      */
-    public function recurrence()
+    public function recurrence(): BelongsTo
     {
-        return $this->belongsTo(Workout::class);
+        return $this->belongsTo(Recurrence::class);
+    }
+
+    /**
+     * @return BelongsTo<User, Schedule>
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }
