@@ -25,7 +25,7 @@ class Exercise extends Model
     ];
 
     /**
-     * @return BelongsToMany<Workout, Exercise, Pivot>
+     * @return BelongsToMany<Workout, Exercise, ExerciseWorkout>
      */
     public function workouts()
     {

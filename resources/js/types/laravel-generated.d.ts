@@ -25,6 +25,18 @@ declare namespace App.Data.Exercises {
     description: string | null;
   };
 }
+declare namespace App.Data.Props {
+  export type WorkoutCreateData = {
+    workout: App.Data.Workouts.WorkoutData;
+    exercises: Array<App.Data.Props.WorkoutCreateExercisesData>;
+    recurrences: Array<App.Data.Recurrences.RecurrenceData>;
+  };
+  export type WorkoutCreateExercisesData = {
+    exercise: App.Data.Exercises.ExerciseData;
+    sets: number;
+    reps: number;
+  };
+}
 declare namespace App.Data.Recurrences {
   export type RecurrenceData = {
     id: number;

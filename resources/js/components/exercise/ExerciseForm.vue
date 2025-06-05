@@ -11,11 +11,7 @@ type Form = InertiaForm<{
 type Props = {
   url: string;
   method: Method;
-  initial?: {
-    name: string;
-    category: string;
-    description: string;
-  };
+  initial?: Omit<App.Data.Exercises.ExerciseData, 'id'>;
 };
 export type Emits = {
   success: [];

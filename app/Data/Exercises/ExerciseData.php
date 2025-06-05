@@ -2,6 +2,7 @@
 
 namespace App\Data\Exercises;
 
+use App\Models\Exercise;
 use Spatie\LaravelData\Data;
 use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 
@@ -14,5 +15,15 @@ class ExerciseData extends Data
         public string $category,
         public ?string $description,
     ) {
+    }
+
+    public static function fromModel(Exercise $exercise)
+    {
+        return new self(
+            id: $exercise->id,
+            name: $exercise->name,
+            category: $exercise->category,
+            description: $exercise->description,
+        );
     }
 }

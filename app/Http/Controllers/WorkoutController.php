@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Data\Exercises\ExerciseData;
+use App\Data\Props\WorkoutCreateData;
+use App\Data\Props\WorkoutCreateExercisesData;
+use App\Data\Recurrences\RecurrenceData;
 use App\Data\Workouts\WorkoutData;
 use App\Data\Workouts\WorkoutStoreData;
 use App\Models\Scopes\SortScope;
@@ -10,6 +13,7 @@ use App\Models\Workout;
 use App\Services\WorkoutService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Spatie\LaravelData\DataCollection;
 use Spatie\LaravelData\PaginatedDataCollection;
 
 class WorkoutController
@@ -72,7 +76,17 @@ class WorkoutController
      */
     public function edit(Workout $workout)
     {
-        //
+        $exercises = auth()->user()->exercises()->latest()->get();
+        $exercises = $workout->exercises()->get();
+        $recurrences = $workout->recurrences()->get();
+
+        $props = new WorkoutCreateData(
+            workout: WorkoutData::fromModel($workout),
+            exercises: WorkoutCreateExercisesData::collect($exercises, DataCollection::class),
+            recurrences: RecurrenceData::collect($recurrences, DataCollection::class)
+        );
+
+        return Inertia::render('workouts/EditPage', $props);
     }
 
     /**

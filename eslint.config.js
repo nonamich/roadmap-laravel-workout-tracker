@@ -31,6 +31,14 @@ export default typescriptEslint.config(
         parser: typescriptEslint.parser,
       },
     },
+    rules: {
+      'vue/no-undef-components': [
+        'error',
+        {
+          ignorePatterns: [],
+        },
+      ],
+    },
   },
   eslintPluginPrettierRecommended,
 );

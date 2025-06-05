@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import ExerciseForm from './ExerciseForm.vue';
 
-defineProps({
-  exercise: {
-    type: Object,
-    required: true,
-  },
-});
+type Props = {
+  exercise: App.Data.Exercises.ExerciseData;
+};
+
+defineProps<Props>();
 </script>
 
 <template>
