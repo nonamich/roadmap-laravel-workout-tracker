@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import ExerciseEditForm from '@/components/exercise/ExerciseEditForm.vue';
+import type { ExerciseEditProps } from '@/types/laravel-data';
 import { Head } from '@inertiajs/vue3';
-defineProps({
-  exercise: {
-    type: Object,
-    required: true,
-  },
-});
+
+type Props = ExerciseEditProps;
+
+defineProps<Props>();
 </script>
 
 <template>
@@ -19,7 +18,7 @@ defineProps({
     </h1>
     <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
       <div class="rounded-xl bg-white p-8 shadow-md dark:bg-black/30">
-        <ExerciseEditForm :exercise="exercise" />
+        <ExerciseEditForm v-bind="exercise" />
       </div>
     </div>
   </div>

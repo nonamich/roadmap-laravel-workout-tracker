@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 
-const isVisible = ref(true);
+const isVisible = ref(false);
 
 const hideMessage = () => {
   isVisible.value = false;

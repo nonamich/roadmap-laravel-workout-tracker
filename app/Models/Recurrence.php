@@ -29,7 +29,7 @@ class Recurrence extends Model
     protected function weekdays(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => $value ? array_map('intval', explode(',', $value)) : [],
+            get: fn($value) => $value || $value === '0' ? array_map('intval', explode(',', $value)) : [],
             set: fn($value) => is_array($value) ? implode(',', $value) : $value,
         );
     }

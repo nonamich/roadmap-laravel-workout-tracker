@@ -20,7 +20,6 @@ return new class extends Migration {
             $table->time('time');
             $table->foreignIdFor(Workout::class)->constrained()->cascadeOnDelete();
             $table->unique(['name', 'workout_id']);
-            $table->unique(['workout_id', 'weekdays', 'time']);
         });
     }
 

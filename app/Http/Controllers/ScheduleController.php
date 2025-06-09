@@ -20,53 +20,19 @@ use Spatie\LaravelData\PaginatedDataCollection;
 
 class ScheduleController
 {
-    public function __construct()
-    {
-    }
 
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $schedules = auth()->user()->schedules()->with('workout')
-            ->orderByDesc('scheduled_at')
-            ->paginate(5);
+        $schedules = auth()->user()->schedules()->with(['workout', 'recurrence'])
+            ->orderBy('scheduled_at')
+            ->paginate(10);
 
         $props = ScheduleData::collect($schedules, PaginatedDataCollection::class);
 
         return Inertia::render('schedules/IndexPage', $props);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(ExerciseStoreData $data)
-    {
-
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Schedule $exercise)
-    {
-
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(array $data, Schedule $exercise)
-    {
-
     }
 
     /**
@@ -77,5 +43,15 @@ class ScheduleController
         $schedule->delete();
 
         return redirect()->route('schedules.index');
+    }
+
+    public function markAsDone(Schedule $schedule)
+    {
+        $schedule->markAsDone();
+    }
+
+    public function markAsMissed(Schedule $schedule)
+    {
+        $schedule->markAsMissed();
     }
 }

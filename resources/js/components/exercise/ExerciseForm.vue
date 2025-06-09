@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import BaseButton from '@/components/BaseButton.vue';
+import type { ExerciseData } from '@/types/laravel-data';
 import type { Method } from '@inertiajs/core';
 import { useForm, type InertiaForm } from '@inertiajs/vue3';
 
@@ -11,7 +12,7 @@ type Form = InertiaForm<{
 type Props = {
   url: string;
   method: Method;
-  initial?: Omit<App.Data.Exercises.ExerciseData, 'id'>;
+  initial?: Omit<ExerciseData, 'id'>;
 };
 export type Emits = {
   success: [];

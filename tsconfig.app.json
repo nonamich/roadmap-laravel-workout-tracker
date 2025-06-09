@@ -20,6 +20,7 @@
     }
   },
   "include": [
+    "resources/js/types/laravel-data.ts",
     "resources/js/**/*.ts",
     "resources/js/**/*.vue"
   ]

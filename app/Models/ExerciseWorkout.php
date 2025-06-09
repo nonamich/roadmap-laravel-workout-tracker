@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class ExerciseWorkout extends Pivot
 {
-    protected $fillable = ['reps', 'sets'];
+    protected $fillable = ['reps', 'sets', 'order'];
 }

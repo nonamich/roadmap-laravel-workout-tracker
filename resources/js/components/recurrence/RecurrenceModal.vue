@@ -1,16 +1,24 @@
 <script setup lang="ts">
+import type { RecurrenceStoreData } from '@/types/laravel-data';
 import { getDayName } from '@/utils';
 import { reactive } from 'vue';
 import { VueFinalModal } from 'vue-final-modal';
 import BaseButton from '../BaseButton.vue';
 
-type Schedule = App.Data.Workouts.WorkoutRecurrenceData;
+type Schedule = RecurrenceStoreData;
 
 type Props = {
   initial?: Schedule;
 };
 
-const { initial = { name: '', weekdays: [], time: '' } } = defineProps<Props>();
+const { initial } = withDefaults(defineProps<Props>(), {
+  initial: () => ({
+    id: null,
+    name: '',
+    weekdays: [],
+    time: '',
+  }),
+});
 const schedule = reactive({ ...initial });
 
 const emit = defineEmits<{
@@ -77,6 +85,7 @@ const emit = defineEmits<{
             <input
               v-model="schedule.time"
               type="time"
+              step="2"
               class="w-full rounded border border-gray-300 px-3 py-2 dark:border-gray-700 dark:bg-black/20 dark:text-gray-100"
               required
             />

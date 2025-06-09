@@ -1,9 +1,10 @@
 <script setup lang="ts">
+import type { ExerciseData } from '@/types/laravel-data';
 import { Link } from '@inertiajs/vue3';
 import BaseNotification from '../BaseNotification.vue';
 
 type Props = {
-  exercise: App.Data.Exercises.ExerciseData;
+  exercise: ExerciseData;
 };
 
 defineProps<Props>();

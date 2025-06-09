@@ -5,10 +5,11 @@ import BasePagination from '@/components/BasePagination.vue';
 import BaseSort from '@/components/BaseSort.vue';
 import BaseTable from '@/components/BaseTable.vue';
 import type { PaginatedCollection } from '@/types/laravel';
+import type { WorkoutData } from '@/types/laravel-data';
 import { Head, Link, router } from '@inertiajs/vue3';
 import { route } from 'ziggy-js';
 
-defineProps<PaginatedCollection<App.Data.Workouts.WorkoutData>>();
+defineProps<PaginatedCollection<WorkoutData>>();
 
 const deleteWorkout = (id: number) => {
   if (confirm()) {

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Data\Exercises\ExerciseData;
 use App\Data\Exercises\ExerciseStoreData;
 use App\Data\Exercises\ExerciseUpdateData;
+use App\Data\Exercises\Pages\Edit\ExerciseEditProps;
 use App\Data\FlashMessageData;
 use App\Enums\FlashComponent;
 use App\Models\Exercise;
@@ -70,9 +71,11 @@ class ExerciseController
      */
     public function edit(Exercise $exercise)
     {
-        return Inertia::render('exercises/EditPage', [
-            'exercise' => $exercise,
-        ]);
+        $props = new ExerciseEditProps(
+            exercise: ExerciseData::fromModel($exercise)
+        );
+
+        return Inertia::render('exercises/EditPage', $props);
     }
 
     /**

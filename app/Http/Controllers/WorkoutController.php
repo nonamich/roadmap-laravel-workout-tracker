@@ -3,15 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Data\Exercises\ExerciseData;
-use App\Data\Props\WorkoutCreateData;
-use App\Data\Props\WorkoutCreateExercisesData;
+use App\Data\FlashMessageData;
+use App\Data\Workouts\Pages\Create\WorkoutCreateProps;
+use App\Data\Workouts\Pages\Edit\WorkoutEditProps;
+use App\Data\Workouts\Pages\Edit\WorkoutEditExercisesProps;
 use App\Data\Recurrences\RecurrenceData;
 use App\Data\Workouts\WorkoutData;
-use App\Data\Workouts\WorkoutStoreData;
+use App\Data\Workouts\Store\WorkoutStoreData;
+use App\Enums\FlashComponent;
 use App\Models\Scopes\SortScope;
 use App\Models\Workout;
 use App\Services\WorkoutService;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Spatie\LaravelData\DataCollection;
 use Spatie\LaravelData\PaginatedDataCollection;
@@ -49,10 +51,11 @@ class WorkoutController
     public function create()
     {
         $exercises = auth()->user()->exercises()->latest()->get();
+        $props = new WorkoutCreateProps(
+            exercises: ExerciseData::collect($exercises, DataCollection::class)
+        );
 
-        return Inertia::render('workouts/CreatePage', [
-            'exercises' => ExerciseData::collect($exercises),
-        ]);
+        return Inertia::render('workouts/CreatePage', $props);
     }
 
     /**
@@ -60,7 +63,9 @@ class WorkoutController
      */
     public function store(WorkoutStoreData $workoutStoreData)
     {
-        $this->workoutService->createWorkout($workoutStoreData, auth()->user());
+        $workout = $this->workoutService->createOrUpdate($workoutStoreData, auth()->user());
+
+        return redirect()->route('workouts.show', $workout->id);
     }
 
     /**
@@ -76,14 +81,20 @@ class WorkoutController
      */
     public function edit(Workout $workout)
     {
-        $exercises = auth()->user()->exercises()->latest()->get();
-        $exercises = $workout->exercises()->get();
+        $exercises = auth()->user()->exercises()->get();
+        $workoutExercises = $workout->exercises()->get();
         $recurrences = $workout->recurrences()->get();
-
-        $props = new WorkoutCreateData(
+        $props = new WorkoutEditProps(
             workout: WorkoutData::fromModel($workout),
-            exercises: WorkoutCreateExercisesData::collect($exercises, DataCollection::class),
-            recurrences: RecurrenceData::collect($recurrences, DataCollection::class)
+            exercises: ExerciseData::collect($exercises, DataCollection::class),
+            workoutExercises: WorkoutEditExercisesProps::collect(
+                $workoutExercises,
+                DataCollection::class
+            ),
+            recurrences: RecurrenceData::collect(
+                $recurrences,
+                DataCollection::class
+            ),
         );
 
         return Inertia::render('workouts/EditPage', $props);
@@ -92,9 +103,25 @@ class WorkoutController
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Workout $workout)
+    public function update(Workout $workout, WorkoutStoreData $workoutStoreData)
     {
-        //
+        if (!$workoutStoreData->id || $workout->id !== $workoutStoreData->id) {
+            abort(400);
+        }
+
+        $workout = $this->workoutService->createOrUpdate($workoutStoreData, auth()->user());
+
+        return redirect()->back()
+            ->with(
+                'message',
+                FlashMessageData::from([
+                    'component' => FlashComponent::WorkoutUpdated,
+                    'props' => [
+                        'workout' => WorkoutData::fromModel($workout)
+                    ],
+                ])
+            );
+        ;
     }
 
     /**

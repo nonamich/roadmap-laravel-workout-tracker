@@ -24,9 +24,6 @@ export default defineConfig({
       refresh: false,
     }),
     vue({
-      script: {
-        globalTypeFiles: ['./resources/js/types/laravel-generated.d.ts'],
-      },
       template: {
         transformAssetUrls: {
           base: null,

@@ -34,7 +34,7 @@ defineProps<Props>();
           <td
             v-for="(_col, colKey) in columns"
             :key="colKey"
-            class="px-6 py-4 text-sm whitespace-nowrap"
+            class="px-6 py-4 text-sm"
           >
             <slot
               :name="`cell-${colKey}`"

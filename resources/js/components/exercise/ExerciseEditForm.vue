@@ -1,9 +1,8 @@
 <script setup lang="ts">
+import type { ExerciseData } from '@/types/laravel-data';
 import ExerciseForm from './ExerciseForm.vue';
 
-type Props = {
-  exercise: App.Data.Exercises.ExerciseData;
-};
+type Props = ExerciseData;
 
 defineProps<Props>();
 </script>
@@ -11,11 +10,11 @@ defineProps<Props>();
 <template>
   <ExerciseForm
     method="put"
-    :url="route('exercises.update', { id: exercise.id })"
+    :url="route('exercises.update', { id })"
     :initial="{
-      name: exercise.name,
-      category: exercise.category,
-      description: exercise.description,
+      name,
+      category,
+      description,
     }"
   />
 </template>

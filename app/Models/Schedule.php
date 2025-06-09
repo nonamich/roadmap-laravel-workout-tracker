@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\ScheduleStatus;
+use App\Exceptions\InvalidStatusChangeException;
 use App\Observers\ScheduleObserver;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -56,5 +57,27 @@ class Schedule extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function markAsDone()
+    {
+        if (now()->lt($this->schedule_at)) {
+            throw new InvalidStatusChangeException();
+        }
+
+        $this->status = ScheduleStatus::Done;
+
+        $this->save();
+    }
+
+    public function markAsMissed()
+    {
+        if (now()->lt($this->schedule_at)) {
+            throw new InvalidStatusChangeException();
+        }
+
+        $this->status = ScheduleStatus::Missed;
+
+        $this->save();
     }
 }

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Data\Workouts;
+namespace App\Data\Workouts\Store;
 
 use Spatie\LaravelData\Attributes\Validation\Min;
 use Spatie\LaravelData\Data;
 use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 
 #[TypeScript]
-class WorkoutExercisesData extends Data
+class WorkoutStoreExercisesData extends Data
 {
     public function __construct(
         #[Min(1)]

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Data\Props;
+namespace App\Data\Workouts\Pages\Edit;
 
+use App\Data\Exercises\ExerciseData;
 use App\Data\Recurrences\RecurrenceData;
 use App\Data\Workouts\WorkoutData;
 use Spatie\LaravelData\Attributes\DataCollectionOf;
@@ -10,13 +11,17 @@ use Spatie\LaravelData\DataCollection;
 use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 
 #[TypeScript]
-class WorkoutCreateData extends Data
+class WorkoutEditProps extends Data
 {
     public function __construct(
         public WorkoutData $workout,
 
-        #[DataCollectionOf(WorkoutCreateExercisesData::class)]
+        #[DataCollectionOf(WorkoutEditExercisesProps::class)]
         /** @var DataCollection<WorkoutCreateExercisesData> */
+        public DataCollection $workoutExercises,
+
+        #[DataCollectionOf(ExerciseData::class)]
+        /** @var DataCollection<ExerciseData> */
         public DataCollection $exercises,
 
         #[DataCollectionOf(RecurrenceData::class)]

@@ -7,7 +7,7 @@ import typescriptEslint from 'typescript-eslint';
 export default typescriptEslint.config(
   {
     ignores: [
-      'resources/js/types/laravel-generated.d.ts',
+      'resources/js/types/laravel-data.ts',
       'resources/js/router',
       '**/coverage',
       '**/dist',

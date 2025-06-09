@@ -1,23 +1,16 @@
 <script setup lang="ts">
-import { Link, router } from '@inertiajs/vue3';
+import type { ScheduleData } from '@/types/laravel-data';
+import { Link } from '@inertiajs/vue3';
 import dayjs from 'dayjs';
 import { route } from 'ziggy-js';
 import BaseButton from './BaseButton.vue';
 import BaseTable from './BaseTable.vue';
 
 type Props = {
-  schedules: App.Data.Schedules.ScheduleData[];
+  schedules: ScheduleData[];
 };
 
 defineProps<Props>();
-
-const deleteSchedule = (id: number) => {
-  if (!confirm()) {
-    return;
-  }
-
-  router.delete(route('schedules.destroy', id));
-};
 </script>
 
 <template>
@@ -25,8 +18,7 @@ const deleteSchedule = (id: number) => {
     v-if="schedules.length"
     :columns="{
       time: 'Time',
-      title: 'Title',
-      description: 'Description',
+      workout: 'Workout',
       status: 'Status',
       actions: 'Actions',
     }"
@@ -40,11 +32,15 @@ const deleteSchedule = (id: number) => {
         {{ dayjs(row.scheduled_at).fromNow() }}
       </div>
     </template>
-    <template #cell-title="{ row }">
-      <div class="truncate">{{ row.workout.title }}</div>
-    </template>
-    <template #cell-description="{ row }">
-      <div class="truncate">{{ row.workout.description }}</div>
+    <template #cell-workout="{ row }">
+      <div class="truncate">
+        <Link
+          :href="route('workouts.show', row.workout.id)"
+          class="text-blue-500 hover:underline"
+        >
+          {{ row.workout.title }}
+        </Link>
+      </div>
     </template>
     <template #cell-status="{ row }">
       <span
@@ -52,6 +48,8 @@ const deleteSchedule = (id: number) => {
         :class="{
           'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300':
             row.status === 'scheduled',
+          'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300':
+            row.status === 'wait-for-action',
           'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300':
             row.status === 'missed',
           'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300':
@@ -62,19 +60,13 @@ const deleteSchedule = (id: number) => {
       </span>
     </template>
     <template #cell-actions="{ row }">
-      <div class="flex space-x-2">
-        <Link
-          :href="
-            route('schedules.edit', {
-              id: row.id,
-            })
-          "
-        >
-          <BaseButton size="small">Edit</BaseButton>
+      <div class="flex space-x-2" v-if="row.status === 'wait-for-action'">
+        <Link :href="route('schedules.show', row.id)">
+          <BaseButton size="small" color="emerald">Done</BaseButton>
         </Link>
-        <BaseButton size="small" color="zinc" @click="deleteSchedule(row.id)">
-          Delete
-        </BaseButton>
+        <Link :href="route('schedules.show', row.id)">
+          <BaseButton size="small" color="rose">Miss</BaseButton>
+        </Link>
       </div>
     </template>
   </BaseTable>

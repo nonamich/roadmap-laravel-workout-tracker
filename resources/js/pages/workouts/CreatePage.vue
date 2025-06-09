@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import BaseContainer from '@/components/BaseContainer.vue';
 import WorkoutForm from '@/components/workout/WorkoutForm.vue';
+import type { WorkoutCreateProps } from '@/types/laravel-data';
 import { Head } from '@inertiajs/vue3';
 
-type Props = {
-  exercises: App.Data.Exercises.ExerciseData[];
-};
+type Props = WorkoutCreateProps;
 
 defineProps<Props>();
 </script>
@@ -19,7 +18,11 @@ defineProps<Props>();
       >
         Add New Workout
       </h1>
-      <WorkoutForm :exercises="exercises" />
+      <WorkoutForm
+        method="post"
+        :url="route('workouts.store')"
+        :exercises="exercises"
+      />
     </div>
   </BaseContainer>
 </template>

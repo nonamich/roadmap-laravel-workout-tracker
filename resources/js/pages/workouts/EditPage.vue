@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import BaseContainer from '@/components/BaseContainer.vue';
 import WorkoutForm from '@/components/workout/WorkoutForm.vue';
+import type { WorkoutEditProps } from '@/types/laravel-data';
 import { Head } from '@inertiajs/vue3';
 
-type Props = {
-  exercises: App.Data.Exercises.ExerciseData[];
-};
+type Props = WorkoutEditProps;
 
 defineProps<Props>();
 </script>
@@ -19,7 +18,18 @@ defineProps<Props>();
       >
         Edit Workout
       </h1>
-      <WorkoutForm :exercises="exercises" />
+      <WorkoutForm
+        method="put"
+        :url="route('workouts.update', workout.id)"
+        :exercises="exercises"
+        :initial="{
+          id: workout.id,
+          title: workout.title,
+          description: workout.description,
+          exercises: workoutExercises,
+          recurrences: recurrences,
+        }"
+      />
     </div>
   </BaseContainer>
 </template>

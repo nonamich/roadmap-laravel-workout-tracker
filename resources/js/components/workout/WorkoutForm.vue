@@ -1,39 +1,50 @@
 <script setup lang="ts">
 import ExerciseCreateFormModal from '@/components/exercise/ExerciseCreateFormModal.vue';
 import RecurrenceModal from '@/components/recurrence/RecurrenceModal.vue';
+import type {
+  ExerciseData,
+  WorkoutStoreData,
+  WorkoutStoreExercisesData,
+} from '@/types/laravel-data';
 import { getDayName, timeToDate } from '@/utils';
+import type { Method } from '@inertiajs/core';
 import { useForm } from '@inertiajs/vue3';
+import dayjs from 'dayjs';
 import { computed, reactive, watch } from 'vue';
 import { useModal } from 'vue-final-modal';
 import BaseButton from '../BaseButton.vue';
 import BaseTable from '../BaseTable.vue';
 
+type Form = WorkoutStoreData;
+
 type Props = {
-  exercises: App.Data.Exercises.ExerciseData[];
+  url: string;
+  method: Method;
+  exercises: ExerciseData[];
+  initial?: Form;
 };
 
-type Schedule = App.Data.Workouts.WorkoutRecurrenceData;
-type Form = App.Data.Workouts.WorkoutStoreData;
-type SelectedExercise = Omit<
-  App.Data.Workouts.WorkoutExercisesData,
-  'exerciseId'
-> & {
+type SelectedExercise = Omit<WorkoutStoreExercisesData, 'exerciseId'> & {
   exerciseId: '' | number;
 };
 
-const { exercises } = defineProps<Props>();
+const { exercises, initial } = withDefaults(defineProps<Props>(), {
+  exercises: () => [],
+  initial: () => ({
+    id: null,
+    title: '',
+    description: '',
+    exercises: [],
+    recurrences: [],
+  }),
+});
 const groupedExercises = computed(() =>
   Object.groupBy(exercises, ({ category }) => category),
 );
 
-const form = useForm<Form>({
-  title: '',
-  description: '',
-  exercises: [],
-  recurrences: [],
-});
+const form = useForm<Form>(initial);
 
-const selectedExercises = reactive<SelectedExercise[]>([]);
+const selectedExercises = reactive<SelectedExercise[]>(initial.exercises);
 
 const addExercise = (exerciseId: number | '' = '') => {
   selectedExercises.push({ exerciseId, sets: 3, reps: 10 });
@@ -58,7 +69,7 @@ const downSelectableExercise = (from: number) => {
   moveSelectableExercise(from, from + 1);
 };
 
-const addSchedule = (schedule: Schedule) => {
+const addSchedule = (schedule: Form['recurrences'][number]) => {
   form.recurrences.push(schedule);
 };
 
@@ -99,19 +110,25 @@ const modalExercise = useModal({
   },
 });
 
-watch(form.recurrences, () => {
-  form.clearErrors('recurrences');
+watch(
+  form.recurrences,
+  () => {
+    form.clearErrors('recurrences');
 
-  form.recurrences.sort((a, b) => {
-    return timeToDate(a.time).getTime() - timeToDate(b.time).getTime();
-  });
-});
+    form.recurrences.sort((a, b) => {
+      return timeToDate(a.time).getTime() - timeToDate(b.time).getTime();
+    });
+  },
+  {
+    immediate: true,
+  },
+);
 
 watch(selectedExercises, () => {
   form.clearErrors('exercises');
 
   form.exercises = selectedExercises.filter(
-    (item): item is App.Data.Workouts.WorkoutExercisesData => {
+    (item): item is WorkoutStoreExercisesData => {
       return Boolean(item.exerciseId);
     },
   );
@@ -121,7 +138,13 @@ watch(selectedExercises, () => {
 <template>
   <form
     @submit.prevent="
-      form.post(route('workouts.store'), { preserveScroll: true })
+      form.submit(
+        {
+          method,
+          url,
+        },
+        { preserveScroll: true },
+      )
     "
   >
     <div class="px-4 sm:px-6 lg:px-8">
@@ -305,25 +328,6 @@ watch(selectedExercises, () => {
                 class="mt-1 text-xs text-red-500"
               />
             </h2>
-            <BaseButton
-              type="button"
-              @click="
-                {
-                  modalSchedule.patchOptions({
-                    attrs: {
-                      initial: undefined,
-                      onSave: addSchedule,
-                    },
-                  });
-
-                  modalSchedule.open();
-                }
-              "
-              size="small"
-              color="zinc"
-            >
-              Create Schedule
-            </BaseButton>
           </div>
           <BaseTable
             :columns="{
@@ -335,7 +339,9 @@ watch(selectedExercises, () => {
             :data="form.recurrences"
           >
             <template #cell-weekdays="{ row }">
-              {{ row.weekdays.map(getDayName).join(', ') }}
+              <div class="max-w-25">
+                {{ row.weekdays.map(getDayName).join(', ') }}
+              </div>
             </template>
             <template #cell-actions="{ row, index }">
               <div class="flex space-x-2">
@@ -370,8 +376,28 @@ watch(selectedExercises, () => {
                 </BaseButton>
               </div>
             </template>
-            <template #no-data> No Schedules </template>
+            <template #no-data>No Schedules</template>
           </BaseTable>
+          <div class="mt-3 text-center">
+            <BaseButton
+              @click="
+                () => {
+                  addSchedule({
+                    id: null,
+                    name: `#${form.recurrences.length + 1}`,
+                    time:
+                      form.recurrences.at(-1)?.time || dayjs().from('hh:mm'),
+                    weekdays: Array.from({ length: 7 }, (_, i) => i),
+                  });
+                }
+              "
+              size="small"
+              color="zinc"
+              type="button"
+            >
+              + Schedule
+            </BaseButton>
+          </div>
         </div>
         <hr class="my-5 h-px border-0 bg-gray-200 dark:bg-gray-700" />
         <div class="flex justify-center">

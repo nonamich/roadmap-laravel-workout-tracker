@@ -9,4 +9,5 @@ enum FlashComponent: string
 {
     case ExerciseCreated = 'exercise-created';
     case ExerciseUpdated = 'exercise-updated';
+    case WorkoutUpdated = 'workout-updated';
 }

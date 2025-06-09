@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import type { ExerciseData } from '@/types/laravel-data';
+import type { WorkoutData } from '@/types/laravel-data';
 import BaseNotification from '../BaseNotification.vue';
 
 type Props = {
-  exercise: ExerciseData;
+  workout: WorkoutData;
 };
 
 defineProps<Props>();
 </script>
 <template>
   <BaseNotification>
-    {{ exercise.name }} exercise was updated!
+    {{ workout.title }} workout was updated!
   </BaseNotification>
 </template>
