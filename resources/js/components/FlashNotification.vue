@@ -22,26 +22,32 @@ watch(
 </script>
 <template>
   <div v-if="flash" :key="flashKey">
-    <template
-      v-if="
-        typeof flash === 'object' &&
-        flash.props &&
-        typeof flash.props === 'object' &&
-        !Array.isArray(flash.props)
-      "
-    >
-      <ExerciseCreateNotification
-        v-if="flash.component === 'exercise-created'"
-        v-bind="flash.props"
-      />
-      <ExerciseUpdatedNotification
-        v-else-if="flash.component === 'exercise-updated'"
-        v-bind="flash.props"
-      />
-      <WorkoutUpdatedNotification
-        v-else-if="flash.component === 'workout-updated'"
-        v-bind="flash.props"
-      />
+    <template v-if="typeof flash === 'object'">
+      <template
+        v-if="
+          flash.props &&
+          typeof flash.props === 'object' &&
+          !Array.isArray(flash.props)
+        "
+      >
+        <ExerciseCreateNotification
+          v-if="flash.component === 'exercise-created'"
+          v-bind="flash.props"
+        />
+        <ExerciseUpdatedNotification
+          v-else-if="flash.component === 'exercise-updated'"
+          v-bind="flash.props"
+        />
+        <WorkoutUpdatedNotification
+          v-else-if="flash.component === 'workout-updated'"
+          v-bind="flash.props"
+        />
+      </template>
+      <template v-else>
+        <BaseNotification>
+          {{ flash.title }}
+        </BaseNotification>
+      </template>
     </template>
     <template v-else>
       <BaseNotification>

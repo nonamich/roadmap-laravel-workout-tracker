@@ -48,10 +48,24 @@ class ScheduleController
     public function markAsDone(Schedule $schedule)
     {
         $schedule->markAsDone();
+
+        return redirect()->back()->with(
+            'message',
+            new FlashMessageData(
+                title: 'Schedule was marked as done'
+            )
+        );
     }
 
     public function markAsMissed(Schedule $schedule)
     {
         $schedule->markAsMissed();
+
+        return redirect()->back()->with(
+            'message',
+            new FlashMessageData(
+                title: 'Schedule was marked as done'
+            )
+        );
     }
 }

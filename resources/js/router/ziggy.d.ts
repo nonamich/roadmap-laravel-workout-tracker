@@ -68,27 +68,21 @@ declare module 'ziggy-js' {
         }
     ],
     "schedules.index": [],
-    "schedules.create": [],
-    "schedules.store": [],
-    "schedules.show": [
-        {
-            "name": "schedule",
-            "required": true
-        }
-    ],
-    "schedules.edit": [
-        {
-            "name": "schedule",
-            "required": true
-        }
-    ],
-    "schedules.update": [
-        {
-            "name": "schedule",
-            "required": true
-        }
-    ],
     "schedules.destroy": [
+        {
+            "name": "schedule",
+            "required": true,
+            "binding": "id"
+        }
+    ],
+    "schedules.mark-as-done": [
+        {
+            "name": "schedule",
+            "required": true,
+            "binding": "id"
+        }
+    ],
+    "schedules.mark-as-missed": [
         {
             "name": "schedule",
             "required": true,

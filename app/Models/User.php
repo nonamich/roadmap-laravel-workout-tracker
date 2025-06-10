@@ -80,4 +80,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Schedule::class);
     }
+
+    /**
+     * @return HasMany<Notification, User>
+     */
+    public function notifications(): HasMany
+    {
+        return $this->hasMany(Notification::class, 'notifiable_id');
+    }
 }

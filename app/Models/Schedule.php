@@ -61,7 +61,7 @@ class Schedule extends Model
 
     public function markAsDone()
     {
-        if (now()->lt($this->schedule_at)) {
+        if (now()->lt($this->scheduled_at)) {
             throw new InvalidStatusChangeException();
         }
 
@@ -72,7 +72,7 @@ class Schedule extends Model
 
     public function markAsMissed()
     {
-        if (now()->lt($this->schedule_at)) {
+        if (now()->lt($this->scheduled_at)) {
             throw new InvalidStatusChangeException();
         }
 

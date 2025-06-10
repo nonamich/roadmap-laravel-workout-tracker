@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import BaseButton from '@/components/BaseButton.vue';
+import BaseContainer from '@/components/BaseContainer.vue';
 import SchedulesTable from '@/components/SchedulesTable.vue';
 import type { DashboardPageData } from '@/types/laravel-data';
 import { Link } from '@inertiajs/vue3';
@@ -30,7 +31,7 @@ defineProps<DashboardPageData>();
     </div>
   </section>
   <section id="workouts" class="bg-white/3 py-16">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <BaseContainer>
       <h2
         class="mb-12 text-center text-3xl font-bold text-gray-900 dark:text-white"
       >
@@ -42,6 +43,6 @@ defineProps<DashboardPageData>();
           <BaseButton>View All Schedules</BaseButton>
         </Link>
       </div>
-    </div>
+    </BaseContainer>
   </section>
 </template>

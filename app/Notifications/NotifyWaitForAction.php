@@ -38,8 +38,8 @@ class NotifyWaitForAction extends Notification implements ShouldQueue
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->line($this->getMessage())
-            ->action('See', route('schedules.show', $this->scheduleId));
+            ->to($this->getMessage())
+            ->action('See', route('schedules.index'));
     }
 
     /**
@@ -50,13 +50,7 @@ class NotifyWaitForAction extends Notification implements ShouldQueue
     public function toArray(object $notifiable): array
     {
         return [
-            'message' => $this->getMessage(),
             'scheduleId' => $this->schedule->id,
         ];
-    }
-
-    protected function getMessage()
-    {
-        return 'Schedule Workout need action';
     }
 }

@@ -60,11 +60,15 @@ defineProps<Props>();
       </span>
     </template>
     <template #cell-actions="{ row }">
-      <div class="flex space-x-2" v-if="row.status === 'wait-for-action'">
-        <Link :href="route('schedules.show', row.id)">
+      <div
+        class="flex place-items-center space-x-2"
+        v-if="row.status === 'wait-for-action'"
+      >
+        <Link method="post" :href="route('schedules.mark-as-done', row.id)">
           <BaseButton size="small" color="emerald">Done</BaseButton>
         </Link>
-        <Link :href="route('schedules.show', row.id)">
+        <span class="text-gray-400">- or -</span>
+        <Link method="post" :href="route('schedules.mark-as-missed', row.id)">
           <BaseButton size="small" color="rose">Miss</BaseButton>
         </Link>
       </div>

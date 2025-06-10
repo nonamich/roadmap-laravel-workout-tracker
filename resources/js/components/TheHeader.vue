@@ -3,6 +3,7 @@ import { Link, router, usePage } from '@inertiajs/vue3';
 import { computed, ref, useTemplateRef, watch } from 'vue';
 import BaseButton from './BaseButton.vue';
 import Container from './BaseContainer.vue';
+import TheNotificationBell from './TheNotificationBell.vue';
 
 const isOpenUserDropdown = ref(false);
 const dropdownRef = useTemplateRef('dropdownRef');
@@ -54,7 +55,8 @@ watch(page, hideDropdown);
               </Link>
             </div>
           </div>
-          <div class="flex items-center">
+          <div class="flex items-center gap-2">
+            <TheNotificationBell />
             <div v-if="user" class="relative ml-3" ref="dropdownRef">
               <div>
                 <button

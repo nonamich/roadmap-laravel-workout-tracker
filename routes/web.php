@@ -25,6 +25,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'show'])->name('dashboard');
     Route::resource('/workouts', WorkoutController::class)->names('workouts');
     Route::resource('/exercises', ExerciseController::class)->names('exercises');
-    Route::resource('/schedules', ScheduleController::class)->names('schedules');
+
+    Route::name('schedules.')->prefix('/schedules')->group(function () {
+        Route::get('/', [ScheduleController::class, 'index'])->name('index');
+        Route::prefix('/{schedule}', )->group(function () {
+            Route::delete('/', [ScheduleController::class, 'destroy'])->name('destroy');
+            Route::post('/mark-as-done', [ScheduleController::class, 'markAsDone'])->name('mark-as-done');
+            Route::post('/mark-as-missed', [ScheduleController::class, 'markAsMissed'])->name('mark-as-missed');
+        });
+    });
 });
 
