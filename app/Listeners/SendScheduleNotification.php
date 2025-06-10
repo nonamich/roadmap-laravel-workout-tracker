@@ -3,7 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\ScheduleWaitForActionEvent;
-use App\Notifications\NotifyWaitForAction;
+use App\Notifications\NotificationWaitForAction;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Notification;
 
@@ -23,7 +23,7 @@ class SendScheduleNotification implements ShouldQueue
     {
         Notification::send(
             $event->schedule->user,
-            new NotifyWaitForAction($event->schedule->id)
+            new NotificationWaitForAction($event->schedule->id)
         );
     }
 }
