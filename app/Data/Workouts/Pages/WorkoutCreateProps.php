@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Data\Workouts\Pages\Create;
+namespace App\Data\Workouts\Pages;
 
 use App\Data\Exercises\ExerciseData;
 use Spatie\LaravelData\Attributes\DataCollectionOf;

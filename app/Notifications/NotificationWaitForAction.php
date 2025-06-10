@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Data\Notifications\Database\NotificationWaitForActionData;
 use App\Models\Schedule;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -37,9 +38,9 @@ class NotificationWaitForAction extends Notification implements ShouldQueue
      */
     public function toMail(object $notifiable): MailMessage
     {
-        return (new MailMessage)
-            ->to($this->getMessage())
-            ->action('See', route('schedules.index'));
+        return (new MailMessage)->markdown('mail.wait-for-action', [
+            'schedule' => $this->schedule,
+        ]);
     }
 
     /**
@@ -49,8 +50,10 @@ class NotificationWaitForAction extends Notification implements ShouldQueue
      */
     public function toArray(object $notifiable): array
     {
-        return [
-            'scheduleId' => $this->schedule->id,
-        ];
+        $data = new NotificationWaitForActionData(
+            scheduleId: $this->schedule->id
+        );
+
+        return $data->toArray();
     }
 }

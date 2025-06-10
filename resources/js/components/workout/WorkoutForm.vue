@@ -28,16 +28,16 @@ type SelectedExercise = Omit<WorkoutStoreExercisesData, 'exerciseId'> & {
   exerciseId: '' | number;
 };
 
-const { exercises, initial } = withDefaults(defineProps<Props>(), {
-  exercises: () => [],
-  initial: () => ({
+const {
+  exercises = [],
+  initial = {
     id: null,
     title: '',
     description: '',
     exercises: [],
     recurrences: [],
-  }),
-});
+  },
+} = defineProps<Props>();
 const groupedExercises = computed(() =>
   Object.groupBy(exercises, ({ category }) => category),
 );

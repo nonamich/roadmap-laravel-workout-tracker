@@ -29,6 +29,6 @@ class RegisterController
 
         event(new Registered($user));
 
-        return redirect()->route('homepage');
+        return redirect()->route('homepage.show');
     }
 }

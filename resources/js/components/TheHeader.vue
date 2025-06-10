@@ -50,7 +50,7 @@ watch(page, hideDropdown);
         <div class="flex h-16 justify-between">
           <div class="flex items-center">
             <div class="flex flex-shrink-0 items-center">
-              <Link :href="route('homepage')" class="text-xl font-bold">
+              <Link :href="route('homepage.show')" class="text-xl font-bold">
                 FitTrack
               </Link>
             </div>
@@ -87,7 +87,7 @@ watch(page, hideDropdown);
                 tabindex="-1"
               >
                 <Link
-                  :href="route('dashboard')"
+                  :href="route('dashboard.show')"
                   class="block w-full cursor-pointer px-4 py-2 text-start text-sm text-gray-700 hover:bg-gray-100"
                   role="menuitem"
                   >Dashboard</Link
@@ -115,6 +115,12 @@ watch(page, hideDropdown);
                   class="block w-full cursor-pointer px-4 py-2 text-start text-sm text-gray-700 hover:bg-gray-100"
                   role="menuitem"
                   >Exercises</Link
+                >
+                <Link
+                  :href="route('schedules.index')"
+                  class="block w-full cursor-pointer px-4 py-2 text-start text-sm text-gray-700 hover:bg-gray-100"
+                  role="menuitem"
+                  >Schedules</Link
                 >
                 <Link
                   method="post"

@@ -18,7 +18,7 @@ import { Head, Link } from '@inertiajs/vue3';
         Create, manage, and schedule your workout plans with ease. Track your
         progress and achieve your fitness goals.
       </p>
-      <Link :href="$page.props.user ? route('dashboard') : route('login')">
+      <Link :href="$page.props.user ? route('dashboard.show') : route('login')">
         <BaseButton>Get Started</BaseButton>
       </Link>
     </div>

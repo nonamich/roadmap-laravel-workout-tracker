@@ -2,7 +2,6 @@
 
 namespace App\Data\Notifications;
 
-use App\Models\Notification;
 use DateTimeInterface;
 use Spatie\LaravelData\Data;
 
@@ -15,7 +14,7 @@ class NotificationData extends Data
     ) {
     }
 
-    public static function fromModel(Notification $notification)
+    public static function fromModel(mixed $notification)
     {
         return new self(
             id: $notification->id,

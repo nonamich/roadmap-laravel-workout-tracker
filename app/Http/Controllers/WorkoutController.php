@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Data\Exercises\ExerciseData;
 use App\Data\FlashMessageData;
-use App\Data\Workouts\Pages\Create\WorkoutCreateProps;
+use App\Data\Workouts\Pages\WorkoutCreateProps;
 use App\Data\Workouts\Pages\Edit\WorkoutEditProps;
 use App\Data\Workouts\Pages\Edit\WorkoutEditExercisesProps;
 use App\Data\Recurrences\RecurrenceData;
+use App\Data\Workouts\Pages\WorkoutShowProps;
 use App\Data\Workouts\WorkoutData;
 use App\Data\Workouts\Store\WorkoutStoreData;
 use App\Enums\FlashComponent;
@@ -26,9 +27,6 @@ class WorkoutController
 
     }
 
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $workouts = auth()->user()
@@ -45,9 +43,6 @@ class WorkoutController
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $exercises = auth()->user()->exercises()->latest()->get();
@@ -58,27 +53,13 @@ class WorkoutController
         return Inertia::render('workouts/CreatePage', $props);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(WorkoutStoreData $workoutStoreData)
     {
         $workout = $this->workoutService->createOrUpdate($workoutStoreData, auth()->user());
 
-        return redirect()->route('workouts.show', $workout->id);
+        return redirect()->route('workouts.edit', $workout->id);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Workout $workout)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Workout $workout)
     {
         $exercises = auth()->user()->exercises()->get();
@@ -100,9 +81,6 @@ class WorkoutController
         return Inertia::render('workouts/EditPage', $props);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Workout $workout, WorkoutStoreData $workoutStoreData)
     {
         if (!$workoutStoreData->id || $workout->id !== $workoutStoreData->id) {

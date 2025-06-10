@@ -38,6 +38,9 @@ export type ScheduleData = {
   workout: WorkoutData;
   recurrence: RecurrenceData | null;
 };
+export type ScheduleShowProps = {
+  schedule: ScheduleData;
+};
 export type ScheduleStatus =
   | 'scheduled'
   | 'done'
@@ -77,6 +80,9 @@ export type WorkoutEditProps = {
   workoutExercises: Array<any>;
   exercises: Array<ExerciseData>;
   recurrences: Array<RecurrenceData>;
+};
+export type WorkoutShowProps = {
+  workout: WorkoutData;
 };
 export type WorkoutStoreData = {
   id: number | null;

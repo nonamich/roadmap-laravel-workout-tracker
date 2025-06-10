@@ -44,6 +44,6 @@ class LoginController extends BaseController
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('homepage');
+        return redirect()->route('homepage.show');
     }
 }

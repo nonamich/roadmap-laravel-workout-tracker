@@ -20,9 +20,6 @@ class ExerciseController
     {
     }
 
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $exercises = auth()->user()
@@ -38,17 +35,11 @@ class ExerciseController
         return Inertia::render('exercises/IndexPage', $props);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return Inertia::render('exercises/CreatePage');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(ExerciseStoreData $data)
     {
         $exercise = $this->exerciseService->storeExercise($data, auth()->user());
@@ -66,9 +57,6 @@ class ExerciseController
             );
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Exercise $exercise)
     {
         $props = new ExerciseEditProps(
@@ -78,9 +66,6 @@ class ExerciseController
         return Inertia::render('exercises/EditPage', $props);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(ExerciseUpdateData $data, Exercise $exercise)
     {
         $this->exerciseService->updateExercise($exercise, $data);
@@ -98,9 +83,6 @@ class ExerciseController
             );
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Exercise $exercise)
     {
         $exercise->delete();

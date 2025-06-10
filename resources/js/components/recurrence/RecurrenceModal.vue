@@ -11,14 +11,14 @@ type Props = {
   initial?: Schedule;
 };
 
-const { initial } = withDefaults(defineProps<Props>(), {
-  initial: () => ({
+const {
+  initial = {
     id: null,
     name: '',
     weekdays: [],
     time: '',
-  }),
-});
+  },
+} = defineProps<Props>();
 const schedule = reactive({ ...initial });
 
 const emit = defineEmits<{

@@ -7,6 +7,7 @@ use App\Data\Exercises\ExerciseData;
 use App\Data\Exercises\ExerciseStoreData;
 use App\Data\Exercises\ExerciseUpdateData;
 use App\Data\FlashMessageData;
+use App\Data\Schedules\Pages\ScheduleShowProps;
 use App\Data\Schedules\ScheduleData;
 use App\Data\Schedules\ScheduleIndexData;
 use App\Enums\FlashComponent;
@@ -21,9 +22,15 @@ use Spatie\LaravelData\PaginatedDataCollection;
 class ScheduleController
 {
 
-    /**
-     * Display a listing of the resource.
-     */
+    public function show(Schedule $schedule)
+    {
+        $props = new ScheduleShowProps(
+            schedule: ScheduleData::fromModel($schedule),
+        );
+
+        return Inertia::render('schedules/ShowPage', props: $props);
+    }
+
     public function index()
     {
         $schedules = auth()->user()->schedules()->with(['workout', 'recurrence'])
@@ -35,9 +42,6 @@ class ScheduleController
         return Inertia::render('schedules/IndexPage', $props);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Schedule $schedule)
     {
         $schedule->delete();

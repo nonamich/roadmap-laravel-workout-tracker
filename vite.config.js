@@ -36,7 +36,7 @@ export default defineConfig({
       command: 'php artisan typescript:transform --format',
     }),
     watch({
-      pattern: 'routes/web.php',
+      pattern: ['routes/web.php', 'routes/web/**/*.php'],
       command: 'php artisan ziggy:generate --types resources/js/router/ziggy',
     }),
   ],

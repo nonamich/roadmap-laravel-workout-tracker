@@ -2,7 +2,6 @@
 import type { ScheduleData } from '@/types/laravel-data';
 import { Link } from '@inertiajs/vue3';
 import dayjs from 'dayjs';
-import { route } from 'ziggy-js';
 import BaseButton from './BaseButton.vue';
 import BaseTable from './BaseTable.vue';
 
@@ -35,7 +34,7 @@ defineProps<Props>();
     <template #cell-workout="{ row }">
       <div class="truncate">
         <Link
-          :href="route('workouts.show', row.workout.id)"
+          :href="route('workouts.edit', row.workout.id)"
           class="text-blue-500 hover:underline"
         >
           {{ row.workout.title }}
