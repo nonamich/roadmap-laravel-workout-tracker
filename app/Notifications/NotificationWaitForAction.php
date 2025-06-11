@@ -20,7 +20,7 @@ class NotificationWaitForAction extends Notification implements ShouldQueue
      */
     public function __construct(private int $scheduleId)
     {
-        $this->schedule = Schedule::findOrFail($scheduleId)->first();
+        $this->schedule = Schedule::findOrFail($scheduleId);
     }
 
     /**
@@ -50,10 +50,11 @@ class NotificationWaitForAction extends Notification implements ShouldQueue
      */
     public function toArray(object $notifiable): array
     {
-        $data = new NotificationWaitForActionData(
-            scheduleId: $this->schedule->id
-        );
+        $scheduleLink = route('schedules.show', $this->schedule->id);
 
-        return $data->toArray();
+        return [
+            'message' => __('Schedule need your attention'),
+            'link' => $scheduleLink,
+        ];
     }
 }

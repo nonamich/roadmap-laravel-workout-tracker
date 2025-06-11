@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { Link } from '@inertiajs/vue3';
-import { onMounted, onUnmounted, ref, useTemplateRef } from 'vue';
+import { Link, usePage } from '@inertiajs/vue3';
+import { computed, onMounted, onUnmounted, ref, useTemplateRef } from 'vue';
 const wrap = useTemplateRef('wrap');
-
+const page = usePage();
+const notifications = computed(() => page.props.notifications);
 const isDropdownOpen = ref(false);
 
 const handleClickOutside = (event: MouseEvent) => {
@@ -50,6 +51,7 @@ onUnmounted(() => {
         />
       </svg>
       <div
+        v-if="notifications.length"
         class="absolute start-2.5 -top-0.5 block h-3 w-3 rounded-full border-2 border-white bg-red-500 dark:border-gray-900"
       ></div>
     </button>
@@ -65,23 +67,19 @@ onUnmounted(() => {
       >
         Notifications
       </div>
-      <div class="divide-y divide-gray-100 dark:divide-gray-700">
+      <div
+        class="mb-1.5 divide-y divide-gray-100 text-sm text-gray-500 dark:divide-gray-700 dark:text-gray-400"
+      >
         <a
-          href="#"
+          :href="notification.link"
           class="flex px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700"
-        >
-          <div class="w-full ps-3">
-            <div class="mb-1.5 text-sm text-gray-500 dark:text-gray-400">
-              New message from
-              <span class="font-semibold text-gray-900 dark:text-white"
-                >Jese Leos</span
-              >: "Hey, what's up? All set for the presentation?"
-            </div>
-            <div class="text-xs text-blue-600 dark:text-blue-500">
-              a few moments ago
-            </div>
-          </div>
-        </a>
+          v-for="notification of notifications"
+          :key="notification.id"
+          v-html="notification.message"
+        />
+        <span v-if="!notifications.length" class="flex px-4 py-3">
+          No Notifications
+        </span>
       </div>
       <Link
         :href="route('notifications.index')"

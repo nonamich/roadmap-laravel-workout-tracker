@@ -2,10 +2,12 @@
 
 namespace App\Http\Middleware;
 
+use App\Data\Notifications\NotificationData;
 use App\Data\ShareData;
 use App\Data\UserShareData;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
+use Spatie\LaravelData\DataCollection;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -37,13 +39,17 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
-        $user = $request->user();
         $defaultShareData = parent::share($request);
-        $shareData = ShareData::from([
-            'flash' => $request->session()->get('message'),
-            'user' => $user ? UserShareData::from($user) : null
-        ])->toArray();
+        $user = $request->user();
+        $shareData = new ShareData(
+            flash: $request->session()->get('message'),
+            user: $user ? UserShareData::from($user) : null,
+            notifications: $user ? NotificationData::collect(
+                $user->notifications()->get(),
+                DataCollection::class
+            ) : null
+        );
 
-        return [...$defaultShareData, ...$shareData,];
+        return [...$defaultShareData, ...$shareData->toArray()];
     }
 }

@@ -19,6 +19,13 @@ export type FlashMessageData = {
   component: FlashComponent | null;
   title: string | null;
 };
+export type NotificationData = {
+  id: string;
+  message: string;
+  link: string;
+  createdAt: any;
+  readAt: any | null;
+};
 export type RecurrenceData = {
   id: number;
   name: string;
@@ -55,6 +62,7 @@ export type ScheduleStoreData = {
 };
 export type ShareData = {
   user: UserShareData | null;
+  notifications: Array<NotificationData>;
   flash: FlashMessageData | string | null;
 };
 export type UserShareData = {
