@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Link, usePage } from '@inertiajs/vue3';
+import { usePage } from '@inertiajs/vue3';
 import { computed, onMounted, onUnmounted, ref, useTemplateRef } from 'vue';
 const wrap = useTemplateRef('wrap');
 const page = usePage();
@@ -81,25 +81,6 @@ onUnmounted(() => {
           No Notifications
         </span>
       </div>
-      <Link
-        :href="route('notifications.index')"
-        class="block rounded-b-lg bg-gray-50 py-2 text-center text-sm font-medium text-gray-900 hover:bg-gray-100 dark:bg-gray-900 dark:text-white dark:hover:bg-gray-700"
-      >
-        <div class="inline-flex items-center">
-          <svg
-            class="me-2 h-4 w-4 text-gray-500 dark:text-gray-400"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="currentColor"
-            viewBox="0 0 20 14"
-          >
-            <path
-              d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"
-            />
-          </svg>
-          View all
-        </div>
-      </Link>
     </div>
   </div>
 </template>

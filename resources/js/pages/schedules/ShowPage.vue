@@ -14,8 +14,9 @@ defineProps<ScheduleShowProps>();
         <Link
           class="text-blue-500"
           :href="route('workouts.edit', schedule.workout.id)"
-          >{{ schedule.workout.title }}</Link
         >
+          {{ schedule.workout.title }}
+        </Link>
       </h1>
       <div class="mb-4">
         <span class="font-semibold text-gray-700 dark:text-gray-300"
@@ -34,12 +35,12 @@ defineProps<ScheduleShowProps>();
         }}</span>
       </div>
       <div class="mb-4">
-        <span class="font-semibold text-gray-700 dark:text-gray-300"
-          >Status:</span
-        >
-        <span class="ml-2 text-gray-800 capitalize dark:text-gray-200">{{
-          schedule.status.replace(/-/g, ' ')
-        }}</span>
+        <span class="font-semibold text-gray-700 dark:text-gray-300">
+          Status:
+        </span>
+        <span class="ml-2 text-gray-800 capitalize dark:text-gray-200">
+          {{ schedule.status.replace(/-/g, ' ') }}
+        </span>
       </div>
       <div v-if="schedule.status === 'wait-for-action'" class="mt-8 flex gap-4">
         <Link
