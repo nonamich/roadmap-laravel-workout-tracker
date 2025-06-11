@@ -3,8 +3,8 @@
 namespace App\Data\Schedules;
 
 use App\Enums\ScheduleStatus;
-use Spatie\LaravelData\Data;
 use DateTimeInterface;
+use Spatie\LaravelData\Data;
 use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 
 #[TypeScript]
@@ -16,6 +16,5 @@ class ScheduleStoreData extends Data
         public int $recurrenceId,
         public int $userId,
         public DateTimeInterface $scheduledAt,
-    ) {
-    }
+    ) {}
 }

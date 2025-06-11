@@ -16,9 +16,7 @@ use Spatie\LaravelData\PaginatedDataCollection;
 
 class ExerciseController
 {
-    public function __construct(private ExerciseService $exerciseService)
-    {
-    }
+    public function __construct(private ExerciseService $exerciseService) {}
 
     public function index()
     {
@@ -51,7 +49,7 @@ class ExerciseController
                 FlashMessageData::from([
                     'component' => FlashComponent::ExerciseCreated,
                     'props' => [
-                        'exercise' => ExerciseData::from($exercise)
+                        'exercise' => ExerciseData::from($exercise),
                     ],
                 ])
             );
@@ -77,7 +75,7 @@ class ExerciseController
                 FlashMessageData::from([
                     'component' => FlashComponent::ExerciseUpdated,
                     'props' => [
-                        'exercise' => ExerciseData::from($exercise)
+                        'exercise' => ExerciseData::from($exercise),
                     ],
                 ])
             );

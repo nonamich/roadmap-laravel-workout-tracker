@@ -2,6 +2,4 @@
 
 namespace App\Http\Requests\Auth;
 
-class LoginRequest extends BaseAuthRequest
-{
-}
+class LoginRequest extends BaseAuthRequest {}

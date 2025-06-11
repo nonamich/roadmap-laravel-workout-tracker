@@ -16,8 +16,7 @@ class NotificationData extends Data
         public string $link,
         public DateTimeInterface $createdAt,
         public ?DateTimeInterface $readAt,
-    ) {
-    }
+    ) {}
 
     public static function fromModel(DatabaseNotification $notification)
     {

@@ -15,6 +15,5 @@ class DashboardPageData extends Data
         #[DataCollectionOf(ScheduleData::class)]
         /** @var DataCollection<ScheduleData> */
         public DataCollection $schedules,
-    ) {
-    }
+    ) {}
 }

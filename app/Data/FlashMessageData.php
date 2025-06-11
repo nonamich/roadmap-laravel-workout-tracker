@@ -10,12 +10,11 @@ use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 class FlashMessageData extends Data
 {
     /**
-     * @param string|array|null $props
+     * @param  string|array|null  $props
      */
     public function __construct(
         public mixed $props = null,
         public ?FlashComponent $component = null,
         public ?string $title = null,
-    ) {
-    }
+    ) {}
 }

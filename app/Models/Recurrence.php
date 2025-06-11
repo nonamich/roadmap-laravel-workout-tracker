@@ -25,12 +25,11 @@ class Recurrence extends Model
         'workout_id',
     ];
 
-
     protected function weekdays(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => $value || $value === '0' ? array_map('intval', explode(',', $value)) : [],
-            set: fn($value) => is_array($value) ? implode(',', $value) : $value,
+            get: fn ($value) => $value || $value === '0' ? array_map('intval', explode(',', $value)) : [],
+            set: fn ($value) => is_array($value) ? implode(',', $value) : $value,
         );
     }
 

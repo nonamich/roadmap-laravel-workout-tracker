@@ -9,8 +9,5 @@ use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 #[TypeScript]
 class ScheduleShowProps extends Data
 {
-    public function __construct(public ScheduleData $schedule)
-    {
-
-    }
+    public function __construct(public ScheduleData $schedule) {}
 }

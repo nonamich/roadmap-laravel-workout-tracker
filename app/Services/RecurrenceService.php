@@ -3,27 +3,23 @@
 namespace App\Services;
 
 use App\Data\Recurrences\Store\RecurrenceStoreData;
-use App\Models\Workout;
 use App\Models\Recurrence;
-use Illuminate\Support\Collection;
+use App\Models\Workout;
 
 class RecurrenceService
 {
-    public function __construct(private ScheduleService $scheduleService)
-    {
-    }
+    public function __construct(private ScheduleService $scheduleService) {}
 
     /**
-     * @param array<RecurrenceStoreData> $recurrencesDto
+     * @param  array<RecurrenceStoreData>  $recurrencesDto
      */
     public function createOrUpdate(Workout $workout, array $recurrencesDto)
     {
         $recurrencesDto = collect($recurrencesDto);
-        $recurrencesDtoWithId = $recurrencesDto->filter(fn($dto) => !!$dto->id);
-        $recurrencesDtoWithoutId = $recurrencesDto->filter(fn($dto) => !$dto->id);
+        $recurrencesDtoWithId = $recurrencesDto->filter(fn ($dto) => (bool) $dto->id);
+        $recurrencesDtoWithoutId = $recurrencesDto->filter(fn ($dto) => ! $dto->id);
         $selectedRecurrencesIds = $recurrencesDtoWithId->pluck('id');
         $recurrences = $workout->recurrences()->get();
-
 
         foreach ($recurrences as $recurrence) {
             if ($selectedRecurrencesIds->contains($recurrence->id)) {
@@ -36,7 +32,7 @@ class RecurrenceService
         $workout->recurrences()
             ->createMany(
                 $recurrencesDtoWithoutId->map(
-                    fn($dto) => [
+                    fn ($dto) => [
                         'name' => $dto->name,
                         'time' => $dto->time,
                         'weekdays' => $dto->weekdays,
@@ -47,7 +43,7 @@ class RecurrenceService
         foreach ($recurrencesDtoWithId as $dto) {
             $recurrence = $recurrences->firstWhere('id', $dto->id);
 
-            if (!($recurrence instanceof Recurrence)) {
+            if (! ($recurrence instanceof Recurrence)) {
                 continue;
             }
 

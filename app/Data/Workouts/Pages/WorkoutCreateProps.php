@@ -15,6 +15,5 @@ class WorkoutCreateProps extends Data
         #[DataCollectionOf(ExerciseData::class)]
         /** @var DataCollection<ExerciseData> */
         public DataCollection $exercises,
-    ) {
-    }
+    ) {}
 }

@@ -5,9 +5,7 @@ namespace App\Http\Controllers;
 use App\Data\DashboardPageData;
 use App\Data\Schedules\ScheduleData;
 use App\Enums\ScheduleStatus;
-use App\Models\Workout;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Spatie\LaravelData\DataCollection;
 

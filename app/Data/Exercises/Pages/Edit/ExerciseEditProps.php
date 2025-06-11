@@ -11,6 +11,5 @@ class ExerciseEditProps extends Data
 {
     public function __construct(
         public ExerciseData $exercise
-    ) {
-    }
+    ) {}
 }

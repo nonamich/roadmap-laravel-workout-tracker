@@ -13,8 +13,7 @@ class WorkoutEditExercisesProps extends Data
         public int $exerciseId,
         public int $sets,
         public int $reps,
-    ) {
-    }
+    ) {}
 
     public static function fromModel(Exercise $exercise)
     {

@@ -27,6 +27,5 @@ class WorkoutEditProps extends Data
         #[DataCollectionOf(RecurrenceData::class)]
         /** @var DataCollection<RecurrenceData> */
         public DataCollection $recurrences,
-    ) {
-    }
+    ) {}
 }

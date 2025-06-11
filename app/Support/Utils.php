@@ -6,7 +6,8 @@ class Utils
 {
     /**
      * @template TModel of \Illuminate\Database\Eloquent\Model
-     * @param class-string<TModel> $modelClass
+     *
+     * @param  class-string<TModel>  $modelClass
      * @return TModel|null
      */
     public static function getModelFromRoute(string $modelClass)
@@ -14,7 +15,7 @@ class Utils
         $parameters = request()->route()?->parameters() ?? [];
 
         foreach ($parameters as $parameter) {
-            if (!($parameter instanceof $modelClass)) {
+            if (! ($parameter instanceof $modelClass)) {
                 continue;
             }
 

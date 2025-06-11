@@ -2,5 +2,5 @@
 
 return [
     'except' => ['debugbar.*', 'storage.*', 'admin.*'],
-    'types' => true
+    'types' => true,
 ];

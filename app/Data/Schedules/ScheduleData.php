@@ -6,8 +6,8 @@ use App\Data\Recurrences\RecurrenceData;
 use App\Data\Workouts\WorkoutData;
 use App\Enums\ScheduleStatus;
 use App\Models\Schedule;
-use Spatie\LaravelData\Data;
 use DateTime;
+use Spatie\LaravelData\Data;
 use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 
 #[TypeScript]
@@ -19,8 +19,7 @@ class ScheduleData extends Data
         public ScheduleStatus $status,
         public WorkoutData $workout,
         public ?RecurrenceData $recurrence,
-    ) {
-    }
+    ) {}
 
     public static function fromModel(Schedule $schedule): self
     {

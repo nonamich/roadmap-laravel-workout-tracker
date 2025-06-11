@@ -2,26 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Data\DashboardPageData;
-use App\Data\Exercises\ExerciseData;
-use App\Data\Exercises\ExerciseStoreData;
-use App\Data\Exercises\ExerciseUpdateData;
 use App\Data\FlashMessageData;
 use App\Data\Schedules\Pages\ScheduleShowProps;
 use App\Data\Schedules\ScheduleData;
-use App\Data\Schedules\ScheduleIndexData;
-use App\Enums\FlashComponent;
-use App\Models\Exercise;
 use App\Models\Schedule;
-use App\Models\Scopes\SortScope;
-use App\Services\ExerciseService;
-use Carbon\Carbon;
 use Inertia\Inertia;
 use Spatie\LaravelData\PaginatedDataCollection;
 
 class ScheduleController
 {
-
     public function show(Schedule $schedule)
     {
         $props = new ScheduleShowProps(
@@ -56,7 +45,7 @@ class ScheduleController
         return redirect()->back()->with(
             'message',
             new FlashMessageData(
-                title: 'Schedule was marked as done'
+                title: __('messages.schedules.flash.done')
             )
         );
     }
@@ -68,7 +57,7 @@ class ScheduleController
         return redirect()->back()->with(
             'message',
             new FlashMessageData(
-                title: 'Schedule was marked as done'
+                title: __('messages.schedules.flash.missed')
             )
         );
     }

@@ -4,13 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Data\Exercises\ExerciseData;
 use App\Data\FlashMessageData;
-use App\Data\Workouts\Pages\WorkoutCreateProps;
-use App\Data\Workouts\Pages\Edit\WorkoutEditProps;
-use App\Data\Workouts\Pages\Edit\WorkoutEditExercisesProps;
 use App\Data\Recurrences\RecurrenceData;
-use App\Data\Workouts\Pages\WorkoutShowProps;
-use App\Data\Workouts\WorkoutData;
+use App\Data\Workouts\Pages\Edit\WorkoutEditExercisesProps;
+use App\Data\Workouts\Pages\Edit\WorkoutEditProps;
+use App\Data\Workouts\Pages\WorkoutCreateProps;
 use App\Data\Workouts\Store\WorkoutStoreData;
+use App\Data\Workouts\WorkoutData;
 use App\Enums\FlashComponent;
 use App\Models\Scopes\SortScope;
 use App\Models\Workout;
@@ -23,9 +22,7 @@ class WorkoutController
 {
     public function __construct(
         public readonly WorkoutService $workoutService
-    ) {
-
-    }
+    ) {}
 
     public function index()
     {
@@ -83,7 +80,7 @@ class WorkoutController
 
     public function update(Workout $workout, WorkoutStoreData $workoutStoreData)
     {
-        if (!$workoutStoreData->id || $workout->id !== $workoutStoreData->id) {
+        if (! $workoutStoreData->id || $workout->id !== $workoutStoreData->id) {
             abort(400);
         }
 
@@ -95,11 +92,11 @@ class WorkoutController
                 FlashMessageData::from([
                     'component' => FlashComponent::WorkoutUpdated,
                     'props' => [
-                        'workout' => WorkoutData::fromModel($workout)
+                        'workout' => WorkoutData::fromModel($workout),
                     ],
                 ])
             );
-        ;
+
     }
 
     /**

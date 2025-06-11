@@ -2,7 +2,6 @@
 
 namespace App\Notifications;
 
-use App\Data\Notifications\Database\NotificationWaitForActionData;
 use App\Models\Schedule;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -53,7 +52,7 @@ class NotificationWaitForAction extends Notification implements ShouldQueue
         $scheduleLink = route('schedules.show', $this->schedule->id);
 
         return [
-            'message' => __('Schedule need your attention'),
+            'message' => __('messages.schedules.events.wait-for-action'),
             'link' => $scheduleLink,
         ];
     }

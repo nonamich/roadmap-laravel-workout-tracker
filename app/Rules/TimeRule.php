@@ -2,8 +2,6 @@
 
 namespace App\Rules;
 
-use Closure;
-use Illuminate\Contracts\Validation\ValidationRule;
 use Spatie\LaravelData\Attributes\Validation\Regex;
 
 class TimeRule extends Regex

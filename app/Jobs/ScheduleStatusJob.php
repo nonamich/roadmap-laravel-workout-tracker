@@ -5,7 +5,6 @@ namespace App\Jobs;
 use App\Services\ScheduleService;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
-use Illuminate\Support\Facades\DB;
 
 class ScheduleStatusJob implements ShouldQueue
 {
@@ -14,9 +13,7 @@ class ScheduleStatusJob implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     /**
      * Execute the job.

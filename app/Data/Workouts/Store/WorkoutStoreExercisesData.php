@@ -17,6 +17,5 @@ class WorkoutStoreExercisesData extends Data
         public int $reps,
 
         public int $exerciseId,
-    ) {
-    }
+    ) {}
 }

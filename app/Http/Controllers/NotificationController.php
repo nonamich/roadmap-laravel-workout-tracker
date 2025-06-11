@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Data\Notifications\NotificationData;
 use App\Data\Notifications\Pages\Index\NotificationIndexProps;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Spatie\LaravelData\DataCollection;
 

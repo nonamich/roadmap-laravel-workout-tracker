@@ -19,6 +19,5 @@ class ShareData extends Data
         public DataCollection $notifications,
 
         public FlashMessageData|string|null $flash,
-    ) {
-    }
+    ) {}
 }

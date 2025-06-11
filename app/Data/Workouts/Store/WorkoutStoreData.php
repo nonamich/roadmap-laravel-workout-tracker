@@ -27,8 +27,7 @@ class WorkoutStoreData extends Data
         #[Filled, DataCollectionOf(RecurrenceStoreData::class)]
         /** @var array<RecurrenceStoreData> */
         public array $recurrences
-    ) {
-    }
+    ) {}
 
     public static function rules(ValidationContext $context): array
     {
@@ -42,7 +41,7 @@ class WorkoutStoreData extends Data
 
         return [
             'title' => [
-                $unique
+                $unique,
             ],
         ];
     }

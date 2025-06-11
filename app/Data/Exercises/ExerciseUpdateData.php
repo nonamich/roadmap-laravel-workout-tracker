@@ -23,7 +23,7 @@ class ExerciseUpdateData extends Data
             'name' => [
                 Rule::unique(Exercise::class, 'name')
                     ->where('user_id', auth()->id())
-                    ->ignore(Utils::getModelFromRoute(Exercise::class)?->id ?? null)
+                    ->ignore(Utils::getModelFromRoute(Exercise::class)?->id ?? null),
             ],
         ];
     }

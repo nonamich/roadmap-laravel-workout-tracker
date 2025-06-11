@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Data\Schedules\ScheduleStoreData;
 use App\Enums\ScheduleStatus;
-use App\Models\Recurrence;
 use App\Models\Schedule;
 use App\Models\Workout;
 use Carbon\Carbon;

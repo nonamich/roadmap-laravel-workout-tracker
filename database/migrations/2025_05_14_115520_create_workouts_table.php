@@ -7,7 +7,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
@@ -42,11 +43,11 @@ return new class extends Migration {
             $table->tinyInteger('order')->unsigned();
         });
 
-        DB::statement("
+        DB::statement('
             ALTER TABLE exercise_workout
             ADD CONSTRAINT check_sets_and_reps
             CHECK (reps > 0 AND sets > 0)
-        ");
+        ');
     }
 
     /**

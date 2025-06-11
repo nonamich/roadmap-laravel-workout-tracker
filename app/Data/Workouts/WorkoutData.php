@@ -13,8 +13,7 @@ class WorkoutData extends Data
         public int $id,
         public string $title,
         public ?string $description,
-    ) {
-    }
+    ) {}
 
     public static function fromModel(Workout $workout): self
     {

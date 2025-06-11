@@ -14,14 +14,14 @@ class WeekdaysRule implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        if (!is_array($value)) {
+        if (! is_array($value)) {
             $fail("The {$attribute} must be an array.");
 
             return;
         }
 
         foreach ($value as $item) {
-            if (!is_int($item) || $item < 0 || $item > 6) {
+            if (! is_int($item) || $item < 0 || $item > 6) {
                 $fail("Each value in {$attribute} must be an integer between 0 and 6.");
 
                 return;

@@ -14,8 +14,7 @@ class ExerciseData extends Data
         public string $name,
         public string $category,
         public ?string $description,
-    ) {
-    }
+    ) {}
 
     public static function fromModel(Exercise $exercise)
     {

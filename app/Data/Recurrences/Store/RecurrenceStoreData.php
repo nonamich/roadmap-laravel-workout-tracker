@@ -5,8 +5,8 @@ namespace App\Data\Recurrences\Store;
 use App\Models\Recurrence;
 use App\Rules\TimeRule;
 use App\Rules\WeekdaysRule;
-use Spatie\LaravelData\Attributes\Validation\Rule;
 use Spatie\LaravelData\Attributes\Validation\Exists;
+use Spatie\LaravelData\Attributes\Validation\Rule;
 use Spatie\LaravelData\Data;
 use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 
@@ -19,12 +19,11 @@ class RecurrenceStoreData extends Data
 
         public string $name,
 
-        #[Rule(new WeekdaysRule())]
+        #[Rule(new WeekdaysRule)]
         /** @var int[] */
         public array $weekdays,
 
-        #[Rule(new TimeRule())]
+        #[Rule(new TimeRule)]
         public string $time,
-    ) {
-    }
+    ) {}
 }

@@ -15,8 +15,7 @@ class RecurrenceData extends Data
         /** @var int[] */
         public array $weekdays,
         public string $time,
-    ) {
-    }
+    ) {}
 
     public static function fromModel(Recurrence $recurrence): self
     {

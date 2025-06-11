@@ -12,8 +12,7 @@ class SortScope implements Scope
         private ?string $sortBy = null,
         private ?string $sortDir = null,
         private ?array $allowedBy = ['created_at']
-    ) {
-    }
+    ) {}
 
     /**
      * Apply the scope to a given Eloquent query builder.
@@ -23,11 +22,11 @@ class SortScope implements Scope
         $sortBy = $this->sortBy ?: request()->get('sort_by');
         $sortDir = $this->sortDir ?: request()->get('sort_dir');
 
-        if (!in_array($sortBy, $this->allowedBy)) {
+        if (! in_array($sortBy, $this->allowedBy)) {
             $sortBy = 'created_at';
         }
 
-        if (!in_array($sortDir, ['asc', 'desc'])) {
+        if (! in_array($sortDir, ['asc', 'desc'])) {
             $sortDir = 'desc';
         }
 
