@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\Web\ScheduleController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->prefix('/schedules')->group(function () {

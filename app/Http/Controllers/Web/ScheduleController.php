@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web;
 
 use App\Data\FlashMessageData;
 use App\Data\Schedules\Pages\ScheduleShowProps;
