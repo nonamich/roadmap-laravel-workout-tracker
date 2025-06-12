@@ -5,11 +5,12 @@ namespace App\Http\Controllers\Web;
 use App\Data\DashboardPageData;
 use App\Data\Schedules\ScheduleData;
 use App\Enums\ScheduleStatus;
+use App\Http\Controllers\BaseController;
 use Carbon\Carbon;
 use Inertia\Inertia;
 use Spatie\LaravelData\DataCollection;
 
-class DashboardController
+class DashboardController extends BaseController
 {
     public function show()
     {

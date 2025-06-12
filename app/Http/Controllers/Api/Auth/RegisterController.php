@@ -1,22 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Web\Auth;
+namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
-use Inertia\Inertia;
-use Inertia\Response;
 
 class RegisterController extends BaseController
 {
-    public function create(): Response
-    {
-        return Inertia::render('auth/RegisterPage');
-    }
-
     public function store(RegisterRequest $request)
     {
         $user = User::create($request->all([
@@ -30,6 +23,6 @@ class RegisterController extends BaseController
 
         event(new Registered($user));
 
-        return redirect()->route('homepage.show');
+        return response()->json(['user' => $user], 201);
     }
 }

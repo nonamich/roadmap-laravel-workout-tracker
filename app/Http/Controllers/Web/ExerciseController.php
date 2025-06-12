@@ -8,13 +8,14 @@ use App\Data\Exercises\ExerciseUpdateData;
 use App\Data\Exercises\Pages\Edit\ExerciseEditProps;
 use App\Data\FlashMessageData;
 use App\Enums\FlashComponent;
+use App\Http\Controllers\BaseController;
 use App\Models\Exercise;
 use App\Models\Scopes\SortScope;
 use App\Services\ExerciseService;
 use Inertia\Inertia;
 use Spatie\LaravelData\PaginatedDataCollection;
 
-class ExerciseController
+class ExerciseController extends BaseController
 {
     public function __construct(private ExerciseService $exerciseService) {}
 

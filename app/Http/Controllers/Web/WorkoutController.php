@@ -11,6 +11,7 @@ use App\Data\Workouts\Pages\WorkoutCreateProps;
 use App\Data\Workouts\Store\WorkoutStoreData;
 use App\Data\Workouts\WorkoutData;
 use App\Enums\FlashComponent;
+use App\Http\Controllers\BaseController;
 use App\Models\Scopes\SortScope;
 use App\Models\Workout;
 use App\Services\WorkoutService;
@@ -18,7 +19,7 @@ use Inertia\Inertia;
 use Spatie\LaravelData\DataCollection;
 use Spatie\LaravelData\PaginatedDataCollection;
 
-class WorkoutController
+class WorkoutController extends BaseController
 {
     public function __construct(
         public readonly WorkoutService $workoutService

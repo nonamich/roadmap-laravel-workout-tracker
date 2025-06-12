@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Http\Controllers\BaseController;
 use Inertia\Inertia;
 
 class HomepageController extends BaseController

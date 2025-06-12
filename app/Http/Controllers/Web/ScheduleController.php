@@ -5,11 +5,12 @@ namespace App\Http\Controllers\Web;
 use App\Data\FlashMessageData;
 use App\Data\Schedules\Pages\ScheduleShowProps;
 use App\Data\Schedules\ScheduleData;
+use App\Http\Controllers\BaseController;
 use App\Models\Schedule;
 use Inertia\Inertia;
 use Spatie\LaravelData\PaginatedDataCollection;
 
-class ScheduleController
+class ScheduleController extends BaseController
 {
     public function show(Schedule $schedule)
     {
