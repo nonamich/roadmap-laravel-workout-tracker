@@ -951,7 +951,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        true
+                        false
                     </div>
                 </div>
             </div>
@@ -1074,7 +1074,7 @@ fetch(url, {
                                 >{
     "email": "gbailey@example.net",
     "password": "architecto",
-    "remember": true,
+    "remember": false,
     "name": "n"
 }</div>
                             </div>
@@ -1173,7 +1173,7 @@ You can check the Dev Tools console for debugging information.</p>
     --data "{
     \"email\": \"gbailey@example.net\",
     \"password\": \"architecto\",
-    \"remember\": true,
+    \"remember\": false,
     \"name\": \"n\"
 }"
 </code></pre>                                        </div>
@@ -1195,7 +1195,7 @@ const headers = {
 let body = {
     "email": "gbailey@example.net",
     "password": "architecto",
-    "remember": true,
+    "remember": false,
     "name": "n"
 };
 

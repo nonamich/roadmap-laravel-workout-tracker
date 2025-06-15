@@ -48,7 +48,7 @@ endpoints:
         name: remember
         description: ''
         required: false
-        example: true
+        example: false
         type: boolean
         enumValues: []
         exampleWasSpecified: false
@@ -57,7 +57,7 @@ endpoints:
     cleanBodyParameters:
       email: gbailey@example.net
       password: architecto
-      remember: true
+      remember: false
     fileParameters: []
     responses: []
     responseFields: []
@@ -111,7 +111,7 @@ endpoints:
         name: remember
         description: ''
         required: false
-        example: true
+        example: false
         type: boolean
         enumValues: []
         exampleWasSpecified: false
@@ -130,7 +130,7 @@ endpoints:
     cleanBodyParameters:
       email: gbailey@example.net
       password: architecto
-      remember: true
+      remember: false
       name: 'n'
     fileParameters: []
     responses: []
