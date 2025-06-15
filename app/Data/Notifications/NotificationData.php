@@ -18,14 +18,14 @@ class NotificationData extends Data
         public ?DateTimeInterface $readAt,
     ) {}
 
-    public static function fromModel(DatabaseNotification $notification)
+    public static function fromModel(DatabaseNotification $notification): NotificationData
     {
         return new self(
             id: $notification->id,
             readAt: $notification->read_at,
             message: $notification->data['message'],
             link: $notification->data['link'],
-            createdAt: $notification->created_at,
+            createdAt: $notification->created_at instanceof DateTimeInterface ? $notification->created_at : new \DateTime,
         );
     }
 }

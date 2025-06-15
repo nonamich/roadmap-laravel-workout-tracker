@@ -16,7 +16,7 @@ class ExerciseData extends Data
         public ?string $description,
     ) {}
 
-    public static function fromModel(Exercise $exercise)
+    public static function fromModel(Exercise $exercise): ExerciseData
     {
         return new self(
             id: $exercise->id,

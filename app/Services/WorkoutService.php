@@ -16,7 +16,7 @@ class WorkoutService
     {
         $workout = DB::transaction(function () use ($dto, $user) {
             if ($dto->id) {
-                $workout = Workout::find($dto->id);
+                $workout = Workout::findOrFail($dto->id);
             } else {
                 $workout = $user->workouts()->create([
                     'title' => $dto->title,
@@ -35,15 +35,13 @@ class WorkoutService
             return $workout;
         });
 
-        assert($workout instanceof Workout);
-
         return $workout;
     }
 
     /**
      * @param  array<WorkoutStoreExercisesData>  $workoutExercisesData
      */
-    public function syncExerciseWorkout(Workout $workout, array $workoutExercisesData)
+    public function syncExerciseWorkout(Workout $workout, array $workoutExercisesData): void
     {
         $workout->exercises()->detach();
 

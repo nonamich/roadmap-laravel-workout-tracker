@@ -2,6 +2,8 @@
 
 namespace App\Support;
 
+use Illuminate\Database\Eloquent\Model;
+
 class Utils
 {
     /**
@@ -10,7 +12,7 @@ class Utils
      * @param  class-string<TModel>  $modelClass
      * @return TModel|null
      */
-    public static function getModelFromRoute(string $modelClass)
+    public static function getModelFromRoute(string $modelClass): ?Model
     {
         $parameters = request()->route()?->parameters() ?? [];
 

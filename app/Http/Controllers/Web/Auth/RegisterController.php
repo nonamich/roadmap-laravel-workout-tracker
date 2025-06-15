@@ -6,6 +6,7 @@ use App\Http\Controllers\BaseController;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -17,7 +18,7 @@ class RegisterController extends BaseController
         return Inertia::render('auth/RegisterPage');
     }
 
-    public function store(RegisterRequest $request)
+    public function store(RegisterRequest $request): RedirectResponse
     {
         $user = User::create($request->all([
             'name',

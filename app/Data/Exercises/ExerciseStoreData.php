@@ -15,6 +15,9 @@ class ExerciseStoreData extends Data
         public readonly ?string $description,
     ) {}
 
+    /**
+     * @return array<string, mixed>
+     */
     public static function rules(ValidationContext $context): array
     {
         return [

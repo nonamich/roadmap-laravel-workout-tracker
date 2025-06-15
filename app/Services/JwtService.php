@@ -17,10 +17,10 @@ class JwtService
         private string $algorithm,
 
         #[Config('jwt.expiration_in_sec')]
-        private string $expirationInSec,
+        private int $expirationInSec,
     ) {}
 
-    public function encode(Authenticatable $user)
+    public function encode(Authenticatable $user): string
     {
         return JWT::encode(
             $this->createPayload($user),
@@ -29,7 +29,10 @@ class JwtService
         );
     }
 
-    public function createPayload(Authenticatable $user)
+    /**
+     * @return array<string, mixed>
+     */
+    public function createPayload(Authenticatable $user): array
     {
         $timestamp = time();
 
@@ -40,7 +43,7 @@ class JwtService
         ];
     }
 
-    public function decode(string $token)
+    public function decode(string $token): \stdClass
     {
         $payload = JWT::decode(
             $token,

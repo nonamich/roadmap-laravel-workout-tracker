@@ -8,13 +8,20 @@ use App\Enums\ScheduleStatus;
 use App\Http\Controllers\BaseController;
 use Carbon\Carbon;
 use Inertia\Inertia;
+use Inertia\Response;
 use Spatie\LaravelData\DataCollection;
 
 class DashboardController extends BaseController
 {
-    public function show()
+    public function show(): Response
     {
-        $schedules = auth()->user()->schedules()->with('workout')
+        $user = auth()->user();
+
+        if (! $user) {
+            abort(401);
+        }
+
+        $schedules = $user->schedules()->with('workout')
             ->where('scheduled_at', '>=', Carbon::now())
             ->where('status', '=', ScheduleStatus::Scheduled)
             ->orderByDesc('scheduled_at')

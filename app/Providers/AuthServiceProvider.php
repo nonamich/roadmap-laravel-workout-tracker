@@ -8,12 +8,8 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthServiceProvider extends ServiceProvider
 {
-    public function boot()
+    public function boot(): void
     {
-        Auth::extend('jwt', function () {
-            $guard = new JwtGuard;
-
-            return $guard;
-        });
+        Auth::extend('jwt', fn () => new JwtGuard);
     }
 }

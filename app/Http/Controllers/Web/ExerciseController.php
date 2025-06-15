@@ -12,16 +12,24 @@ use App\Http\Controllers\BaseController;
 use App\Models\Exercise;
 use App\Models\Scopes\SortScope;
 use App\Services\ExerciseService;
+use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
+use Inertia\Response;
 use Spatie\LaravelData\PaginatedDataCollection;
 
 class ExerciseController extends BaseController
 {
     public function __construct(private ExerciseService $exerciseService) {}
 
-    public function index()
+    public function index(): Response
     {
-        $exercises = auth()->user()
+        $user = auth()->user();
+
+        if (! $user) {
+            abort(401);
+        }
+
+        $exercises = $user
             ->exercises()
             ->withGlobalScope(
                 'sort',
@@ -34,14 +42,20 @@ class ExerciseController extends BaseController
         return Inertia::render('exercises/IndexPage', $props);
     }
 
-    public function create()
+    public function create(): Response
     {
         return Inertia::render('exercises/CreatePage');
     }
 
-    public function store(ExerciseStoreData $data)
+    public function store(ExerciseStoreData $data): RedirectResponse
     {
-        $exercise = $this->exerciseService->storeExercise($data, auth()->user());
+        $user = auth()->user();
+
+        if (! $user) {
+            abort(401);
+        }
+
+        $exercise = $this->exerciseService->storeExercise($data, $user);
 
         return redirect()
             ->back()
@@ -56,7 +70,7 @@ class ExerciseController extends BaseController
             );
     }
 
-    public function edit(Exercise $exercise)
+    public function edit(Exercise $exercise): Response
     {
         $props = new ExerciseEditProps(
             exercise: ExerciseData::fromModel($exercise)
@@ -65,7 +79,7 @@ class ExerciseController extends BaseController
         return Inertia::render('exercises/EditPage', $props);
     }
 
-    public function update(ExerciseUpdateData $data, Exercise $exercise)
+    public function update(ExerciseUpdateData $data, Exercise $exercise): RedirectResponse
     {
         $this->exerciseService->updateExercise($exercise, $data);
 
@@ -82,7 +96,7 @@ class ExerciseController extends BaseController
             );
     }
 
-    public function destroy(Exercise $exercise)
+    public function destroy(Exercise $exercise): RedirectResponse
     {
         $exercise->delete();
 

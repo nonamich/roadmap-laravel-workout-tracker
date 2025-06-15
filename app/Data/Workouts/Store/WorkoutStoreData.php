@@ -15,20 +15,25 @@ use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 #[TypeScript]
 class WorkoutStoreData extends Data
 {
+    /**
+     * @param  array<WorkoutStoreExercisesData>  $exercises
+     * @param  array<RecurrenceStoreData>  $recurrences
+     */
     public function __construct(
         public ?int $id,
         public string $title,
         public ?string $description,
 
         #[Filled, DataCollectionOf(WorkoutStoreExercisesData::class)]
-        /** @var array<WorkoutStoreExercisesData> */
         public array $exercises,
 
         #[Filled, DataCollectionOf(RecurrenceStoreData::class)]
-        /** @var array<RecurrenceStoreData> */
         public array $recurrences
     ) {}
 
+    /**
+     * @return array<string, mixed>
+     */
     public static function rules(ValidationContext $context): array
     {
         $workout = Utils::getModelFromRoute(Workout::class);

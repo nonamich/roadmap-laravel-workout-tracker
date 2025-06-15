@@ -15,7 +15,7 @@ class WorkoutEditExercisesProps extends Data
         public int $reps,
     ) {}
 
-    public static function fromModel(Exercise $exercise)
+    public static function fromModel(Exercise $exercise): WorkoutEditExercisesProps
     {
         return new self(
             exerciseId: $exercise->id,

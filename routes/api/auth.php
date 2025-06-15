@@ -1,17 +1,16 @@
 <?php
 
-use App\Http\Controllers\Api\Auth\LoginController;
-use App\Http\Controllers\Api\Auth\RegisterController;
+use App\Http\Controllers\Api\AuthController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('guest')->group(function () {
-    Route::get('/login', [LoginController::class, 'create'])->name('login');
-    Route::post('/login', [LoginController::class, 'store']);
-    Route::get('/register', [RegisterController::class, 'create'])->name('register');
-    Route::post('/register', [RegisterController::class, 'store']);
-});
+Route::prefix('/auth')->group(function () {
+    Route::middleware('guest:api')->group(function () {
+        Route::post('/login', [AuthController::class, 'login'])->name('api.auth.login');
+        Route::post('/register', [AuthController::class, 'register'])->name('api.auth.register');
+    });
 
-Route::middleware('auth')->group(function () {
-    Route::post('logout', [LoginController::class, 'destroy'])
-        ->name('logout');
+    Route::middleware('auth:api')->group(function () {
+        Route::get('/me', [AuthController::class, 'me'])->name('api.auth.me');
+        Route::delete('/logout', [AuthController::class, 'logout'])->name('api.auth.logout');
+    });
 });

@@ -13,7 +13,7 @@ class RecurrenceService
     /**
      * @param  array<RecurrenceStoreData>  $recurrencesDto
      */
-    public function createOrUpdate(Workout $workout, array $recurrencesDto)
+    public function createOrUpdate(Workout $workout, array $recurrencesDto): void
     {
         $recurrencesDto = collect($recurrencesDto);
         $recurrencesDtoWithId = $recurrencesDto->filter(fn ($dto) => (bool) $dto->id);
@@ -37,7 +37,7 @@ class RecurrenceService
                         'time' => $dto->time,
                         'weekdays' => $dto->weekdays,
                     ]
-                )->toArray()
+                )
             );
 
         foreach ($recurrencesDtoWithId as $dto) {

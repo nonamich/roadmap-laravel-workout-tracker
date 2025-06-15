@@ -11,9 +11,11 @@ use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 #[TypeScript]
 class DashboardPageData extends Data
 {
+    /**
+     * @param  DataCollection<int, ScheduleData>  $schedules
+     */
     public function __construct(
         #[DataCollectionOf(ScheduleData::class)]
-        /** @var DataCollection<ScheduleData> */
         public DataCollection $schedules,
     ) {}
 }

@@ -7,12 +7,14 @@ use App\Data\Schedules\Pages\ScheduleShowProps;
 use App\Data\Schedules\ScheduleData;
 use App\Http\Controllers\BaseController;
 use App\Models\Schedule;
+use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
+use Inertia\Response;
 use Spatie\LaravelData\PaginatedDataCollection;
 
 class ScheduleController extends BaseController
 {
-    public function show(Schedule $schedule)
+    public function show(Schedule $schedule): Response
     {
         $props = new ScheduleShowProps(
             schedule: ScheduleData::fromModel($schedule),
@@ -21,9 +23,15 @@ class ScheduleController extends BaseController
         return Inertia::render('schedules/ShowPage', props: $props);
     }
 
-    public function index()
+    public function index(): Response
     {
-        $schedules = auth()->user()->schedules()->with(['workout', 'recurrence'])
+        $user = auth()->user();
+
+        if (! $user) {
+            abort(401);
+        }
+
+        $schedules = $user->schedules()->with(['workout', 'recurrence'])
             ->orderBy('scheduled_at')
             ->paginate(10);
 
@@ -32,14 +40,14 @@ class ScheduleController extends BaseController
         return Inertia::render('schedules/IndexPage', $props);
     }
 
-    public function destroy(Schedule $schedule)
+    public function destroy(Schedule $schedule): RedirectResponse
     {
         $schedule->delete();
 
         return redirect()->route('schedules.index');
     }
 
-    public function markAsDone(Schedule $schedule)
+    public function markAsDone(Schedule $schedule): RedirectResponse
     {
         $schedule->markAsDone();
 
@@ -51,7 +59,7 @@ class ScheduleController extends BaseController
         );
     }
 
-    public function markAsMissed(Schedule $schedule)
+    public function markAsMissed(Schedule $schedule): RedirectResponse
     {
         $schedule->markAsMissed();
 

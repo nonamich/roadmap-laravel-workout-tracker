@@ -13,19 +13,21 @@ use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 #[TypeScript]
 class WorkoutEditProps extends Data
 {
+    /**
+     * @param  DataCollection<int, WorkoutEditExercisesProps>  $workoutExercises
+     * @param  DataCollection<int, ExerciseData>  $exercises
+     * @param  DataCollection<int, RecurrenceData>  $recurrences
+     */
     public function __construct(
         public WorkoutData $workout,
 
         #[DataCollectionOf(WorkoutEditExercisesProps::class)]
-        /** @var DataCollection<WorkoutCreateExercisesData> */
         public DataCollection $workoutExercises,
 
         #[DataCollectionOf(ExerciseData::class)]
-        /** @var DataCollection<ExerciseData> */
         public DataCollection $exercises,
 
         #[DataCollectionOf(RecurrenceData::class)]
-        /** @var DataCollection<RecurrenceData> */
         public DataCollection $recurrences,
     ) {}
 }

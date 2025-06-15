@@ -15,6 +15,8 @@ class RegisterRequest extends BaseAuthRequest
     public function rules(): array
     {
         $rules = parent::rules();
+        $rules['email'] = is_array($rules['email']) ? $rules['email'] : [$rules['email']];
+        $rules['password'] = is_array($rules['password']) ? $rules['password'] : [$rules['password']];
 
         $rules['name'] = ['required', 'string', 'max:255'];
         $rules['email'][] = new Rules\Unique(User::class);

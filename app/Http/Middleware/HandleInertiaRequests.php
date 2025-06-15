@@ -42,12 +42,13 @@ class HandleInertiaRequests extends Middleware
         $defaultShareData = parent::share($request);
         $user = $request->user();
         $shareData = new ShareData(
+            // @phpstan-ignore argument.type
             flash: $request->session()->get('message'),
             user: $user ? UserShareData::from($user) : null,
-            notifications: $user ? NotificationData::collect(
-                $user->notifications()->get(),
+            notifications: NotificationData::collect(
+                $user ? $user->notifications()->get() : [],
                 DataCollection::class
-            ) : null
+            )
         );
 
         return [...$defaultShareData, ...$shareData->toArray()];

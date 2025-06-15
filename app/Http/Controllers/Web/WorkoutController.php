@@ -15,7 +15,9 @@ use App\Http\Controllers\BaseController;
 use App\Models\Scopes\SortScope;
 use App\Models\Workout;
 use App\Services\WorkoutService;
+use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
+use Inertia\Response;
 use Spatie\LaravelData\DataCollection;
 use Spatie\LaravelData\PaginatedDataCollection;
 
@@ -25,9 +27,15 @@ class WorkoutController extends BaseController
         public readonly WorkoutService $workoutService
     ) {}
 
-    public function index()
+    public function index(): Response
     {
-        $workouts = auth()->user()
+        $user = auth()->user();
+
+        if (! $user) {
+            abort(401);
+        }
+
+        $workouts = $user
             ->workouts()
             ->withGlobalScope(
                 'sort',
@@ -41,9 +49,15 @@ class WorkoutController extends BaseController
 
     }
 
-    public function create()
+    public function create(): Response
     {
-        $exercises = auth()->user()->exercises()->latest()->get();
+        $user = auth()->user();
+
+        if (! $user) {
+            abort(401);
+        }
+
+        $exercises = $user->exercises()->latest()->get();
         $props = new WorkoutCreateProps(
             exercises: ExerciseData::collect($exercises, DataCollection::class)
         );
@@ -51,16 +65,28 @@ class WorkoutController extends BaseController
         return Inertia::render('workouts/CreatePage', $props);
     }
 
-    public function store(WorkoutStoreData $workoutStoreData)
+    public function store(WorkoutStoreData $workoutStoreData): RedirectResponse
     {
-        $workout = $this->workoutService->createOrUpdate($workoutStoreData, auth()->user());
+        $user = auth()->user();
+
+        if (! $user) {
+            abort(401);
+        }
+
+        $workout = $this->workoutService->createOrUpdate($workoutStoreData, $user);
 
         return redirect()->route('workouts.edit', $workout->id);
     }
 
-    public function edit(Workout $workout)
+    public function edit(Workout $workout): Response
     {
-        $exercises = auth()->user()->exercises()->get();
+        $user = auth()->user();
+
+        if (! $user) {
+            abort(401);
+        }
+
+        $exercises = $user->exercises()->get();
         $workoutExercises = $workout->exercises()->get();
         $recurrences = $workout->recurrences()->get();
         $props = new WorkoutEditProps(
@@ -79,13 +105,19 @@ class WorkoutController extends BaseController
         return Inertia::render('workouts/EditPage', $props);
     }
 
-    public function update(Workout $workout, WorkoutStoreData $workoutStoreData)
+    public function update(Workout $workout, WorkoutStoreData $workoutStoreData): RedirectResponse
     {
         if (! $workoutStoreData->id || $workout->id !== $workoutStoreData->id) {
             abort(400);
         }
 
-        $workout = $this->workoutService->createOrUpdate($workoutStoreData, auth()->user());
+        $user = auth()->user();
+
+        if (! $user) {
+            abort(401);
+        }
+
+        $workout = $this->workoutService->createOrUpdate($workoutStoreData, $user);
 
         return redirect()->back()
             ->with(
@@ -103,7 +135,7 @@ class WorkoutController extends BaseController
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Workout $workout)
+    public function destroy(Workout $workout): RedirectResponse
     {
         $workout->delete();
 

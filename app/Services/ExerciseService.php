@@ -19,7 +19,7 @@ class ExerciseService
         ]);
     }
 
-    public function updateExercise(Exercise $exercise, ExerciseUpdateData $data)
+    public function updateExercise(Exercise $exercise, ExerciseUpdateData $data): void
     {
         $exercise->update([
             'name' => $data->name,

@@ -16,7 +16,6 @@ class Schedule extends Model
     /** @use HasFactory<\Database\Factories\ScheduleFactory> */
     use HasFactory;
 
-    // If you're using Laravel 8 or above, you can use the $casts property:
     protected $casts = [
         'scheduled_at' => 'datetime',
         'status' => ScheduleStatus::class,
@@ -36,7 +35,7 @@ class Schedule extends Model
     ];
 
     /**
-     * @return BelongsTo<Workout, Schedule>
+     * @return BelongsTo<Workout, covariant $this>
      */
     public function workout(): BelongsTo
     {
@@ -44,7 +43,7 @@ class Schedule extends Model
     }
 
     /**
-     * @return BelongsTo<Recurrence, Schedule>
+     * @return BelongsTo<Recurrence, covariant $this>
      */
     public function recurrence(): BelongsTo
     {
@@ -52,14 +51,14 @@ class Schedule extends Model
     }
 
     /**
-     * @return BelongsTo<User, Schedule>
+     * @return BelongsTo<User, covariant $this>
      */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function markAsDone()
+    public function markAsDone(): void
     {
         if (now()->lt($this->scheduled_at)) {
             throw new InvalidStatusChangeException;
@@ -70,7 +69,7 @@ class Schedule extends Model
         $this->save();
     }
 
-    public function markAsMissed()
+    public function markAsMissed(): void
     {
         if (now()->lt($this->scheduled_at)) {
             throw new InvalidStatusChangeException;

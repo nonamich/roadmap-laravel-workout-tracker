@@ -22,7 +22,7 @@ class AppServiceProvider extends ServiceProvider
         $this->configureModel();
     }
 
-    private function configureModel()
+    private function configureModel(): void
     {
         if ($this->app->isProduction()) {
             return;
@@ -32,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
         Model::preventSilentlyDiscardingAttributes();
     }
 
-    private function setPasswordDefaultRules()
+    private function setPasswordDefaultRules(): void
     {
         Password::defaults(function () {
             return Password::min(8)

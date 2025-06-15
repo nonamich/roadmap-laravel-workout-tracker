@@ -25,24 +25,42 @@ class Recurrence extends Model
         'workout_id',
     ];
 
+    /**
+     * Summary of weekdays
+     */
+    /**
+     * @return Attribute<int[], string>
+     */
     protected function weekdays(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => $value || $value === '0' ? array_map('intval', explode(',', $value)) : [],
-            set: fn ($value) => is_array($value) ? implode(',', $value) : $value,
+            get: function ($value) {
+                if ((is_string($value) && ($value || $value === '0'))) {
+                    return array_map('intval', explode(',', $value));
+                }
+
+                return [];
+            },
+            set: function ($value) {
+                if (is_array($value)) {
+                    return implode(',', $value);
+                }
+
+                return $value;
+            },
         );
     }
 
     /**
-     * @return BelongsTo<Workout, Recurrence>
+     * @return BelongsTo<Workout, covariant $this>
      */
-    public function workout()
+    public function workout(): BelongsTo
     {
         return $this->belongsTo(Workout::class);
     }
 
     /**
-     * @return HasMany<Schedule, Recurrence>
+     * @return HasMany<Schedule, covariant $this>
      */
     public function schedules(): HasMany
     {

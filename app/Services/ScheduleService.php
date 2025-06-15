@@ -38,7 +38,7 @@ class ScheduleService
     public function createSchedulesByWorkout(
         Workout $workout,
         int $nextDays = 14
-    ) {
+    ): void {
         $now = Carbon::now();
         $recurrences = $workout->recurrences()->get();
 

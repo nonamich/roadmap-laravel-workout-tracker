@@ -25,7 +25,7 @@ class Workout extends Model
     ];
 
     /**
-     * @return MorphMany<Comment, Workout>
+     * @return MorphMany<Comment, covariant $this>
      */
     public function comments(): MorphMany
     {
@@ -33,9 +33,9 @@ class Workout extends Model
     }
 
     /**
-     * @return BelongsToMany<Exercise, Workout, ExerciseWorkout>
+     * @return BelongsToMany<Exercise, covariant $this, ExerciseWorkout>
      */
-    public function exercises()
+    public function exercises(): BelongsToMany
     {
         return $this->belongsToMany(Exercise::class)
             ->using(ExerciseWorkout::class)
@@ -45,7 +45,7 @@ class Workout extends Model
     }
 
     /**
-     * @return HasMany<Recurrence, Workout>
+     * @return HasMany<Recurrence, covariant $this>
      */
     public function recurrences(): HasMany
     {
@@ -53,7 +53,7 @@ class Workout extends Model
     }
 
     /**
-     * @return HasMany<Schedule, Workout>
+     * @return HasMany<Schedule, covariant $this>
      */
     public function schedules(): HasMany
     {

@@ -6,6 +6,7 @@ use App\Data\Recurrences\RecurrenceData;
 use App\Data\Workouts\WorkoutData;
 use App\Enums\ScheduleStatus;
 use App\Models\Schedule;
+use App\Models\Workout;
 use DateTime;
 use Spatie\LaravelData\Data;
 use Spatie\TypeScriptTransformer\Attributes\TypeScript;
@@ -23,12 +24,17 @@ class ScheduleData extends Data
 
     public static function fromModel(Schedule $schedule): self
     {
+        $workout = $schedule->workout()->first();
+        $recurrence = $schedule->relationLoaded('recurrence') ? $schedule->recurrence()->first() : null;
+
+        assert($workout instanceof Workout);
+
         return new self(
             id: $schedule->id,
             scheduled_at: $schedule->scheduled_at,
             status: $schedule->status,
-            workout: WorkoutData::fromModel($schedule->workout),
-            recurrence: $schedule->relationLoaded('recurrence') ? RecurrenceData::fromModel($schedule->recurrence) : null,
+            workout: WorkoutData::fromModel($workout),
+            recurrence: $recurrence ? RecurrenceData::fromModel($recurrence) : null,
         );
     }
 }

@@ -17,7 +17,7 @@ class NotificationWaitForAction extends Notification implements ShouldQueue
     /**
      * Create a new notification instance.
      */
-    public function __construct(private int $scheduleId)
+    public function __construct(int $scheduleId)
     {
         $this->schedule = Schedule::findOrFail($scheduleId);
     }

@@ -9,9 +9,11 @@ use Spatie\LaravelData\DataCollection;
 
 class NotificationIndexProps extends Data
 {
+    /**
+     * @param  DataCollection<int, NotificationData>  $notifications
+     */
     public function __construct(
-        #[DataCollectionOf(NotificationWaitForActionData::class)]
-        /** @var DataCollection<NotificationData> */
+        #[DataCollectionOf(NotificationData::class)]
         public DataCollection $notifications,
     ) {}
 }

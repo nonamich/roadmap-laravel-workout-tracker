@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
+/**
+ * @property ExerciseWorkout $pivot
+ */
 class Exercise extends Model
 {
     /** @use HasFactory<\Database\Factories\ExerciseFactory> */
@@ -24,13 +27,13 @@ class Exercise extends Model
     ];
 
     /**
-     * @return BelongsToMany<Workout, Exercise, ExerciseWorkout>
+     * @return BelongsToMany<Workout, $this, ExerciseWorkout>
      */
-    public function workouts()
+    public function workouts(): BelongsToMany
     {
         return $this->belongsToMany(Workout::class)
-            ->using(ExerciseWorkout::class)
             ->withPivot('sets', 'reps')
+            ->using(ExerciseWorkout::class)
             ->withTimestamps();
     }
 }

@@ -13,6 +13,9 @@ use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 #[TypeScript]
 class RecurrenceStoreData extends Data
 {
+    /**
+     * @param  int[]  $weekdays
+     */
     public function __construct(
         #[Exists(Recurrence::class, 'id')]
         public ?int $id,
@@ -20,7 +23,6 @@ class RecurrenceStoreData extends Data
         public string $name,
 
         #[Rule(new WeekdaysRule)]
-        /** @var int[] */
         public array $weekdays,
 
         #[Rule(new TimeRule)]

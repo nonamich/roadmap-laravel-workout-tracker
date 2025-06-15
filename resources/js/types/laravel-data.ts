@@ -1,5 +1,5 @@
 export type DashboardPageData = {
-  schedules: Array<ScheduleData>;
+  schedules: any;
 };
 export type ExerciseData = {
   id: number;
@@ -35,7 +35,7 @@ export type RecurrenceData = {
 export type RecurrenceStoreData = {
   id: number | null;
   name: string;
-  weekdays: Array<number>;
+  weekdays: Array<any>;
   time: string;
 };
 export type ScheduleData = {
@@ -62,7 +62,7 @@ export type ScheduleStoreData = {
 };
 export type ShareData = {
   user: UserShareData | null;
-  notifications: Array<NotificationData>;
+  notifications: any;
   flash: FlashMessageData | string | null;
 };
 export type UserShareData = {
@@ -71,7 +71,7 @@ export type UserShareData = {
   email: string;
 };
 export type WorkoutCreateProps = {
-  exercises: Array<ExerciseData>;
+  exercises: any;
 };
 export type WorkoutData = {
   id: number;
@@ -85,9 +85,9 @@ export type WorkoutEditExercisesProps = {
 };
 export type WorkoutEditProps = {
   workout: WorkoutData;
-  workoutExercises: Array<any>;
-  exercises: Array<ExerciseData>;
-  recurrences: Array<RecurrenceData>;
+  workoutExercises: any;
+  exercises: any;
+  recurrences: any;
 };
 export type WorkoutShowProps = {
   workout: WorkoutData;
@@ -96,8 +96,8 @@ export type WorkoutStoreData = {
   id: number | null;
   title: string;
   description: string | null;
-  exercises: Array<WorkoutStoreExercisesData>;
-  recurrences: Array<RecurrenceStoreData>;
+  exercises: Array<any>;
+  recurrences: Array<any>;
 };
 export type WorkoutStoreExercisesData = {
   sets: number;

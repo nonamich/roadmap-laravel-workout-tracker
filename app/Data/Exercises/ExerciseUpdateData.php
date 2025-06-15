@@ -14,24 +14,29 @@ class ExerciseUpdateData extends Data
         public readonly string $name,
         public readonly string $category,
         public readonly ?string $description,
-    ) {
-    }
+    ) {}
 
+    /**
+     * @return array<string, mixed>
+     */
     public static function rules(ValidationContext $context): array
     {
         return [
             'name' => [
                 Rule::unique(Exercise::class, 'name')
                     ->where('user_id', auth()->id())
-                    ->ignore(Utils::getModelFromRoute(Exercise::class)?->id ?? null),
+                    ->ignore(Utils::getModelFromRoute(Exercise::class)?->id),
             ],
         ];
     }
 
     public static function authorize(): bool
     {
+        $user = auth()->user();
         $exercise = Utils::getModelFromRoute(Exercise::class);
 
-        return auth()->user()->id === $exercise->user_id;
+        return $user !== null
+            && $exercise !== null
+            && $user->id === $exercise->user_id;
     }
 }
