@@ -2,9 +2,9 @@
 
 namespace App\Http\Middleware;
 
-use App\Data\Notifications\NotificationData;
-use App\Data\ShareData;
-use App\Data\UserShareData;
+use App\Data\Web\Notifications\NotificationData;
+use App\Data\Web\ShareData;
+use App\Data\Web\UserShareData;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Spatie\LaravelData\DataCollection;

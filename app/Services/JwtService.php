@@ -37,7 +37,7 @@ class JwtService
         $timestamp = time();
 
         return [
-            'user_id' => $user->getAuthIdentifier(),
+            'sub' => $user->getAuthIdentifier(),
             'iat' => $timestamp,
             'exp' => $timestamp + $this->expirationInSec,
         ];

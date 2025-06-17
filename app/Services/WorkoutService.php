@@ -2,8 +2,8 @@
 
 namespace App\Services;
 
-use App\Data\Workouts\Store\WorkoutStoreData;
-use App\Data\Workouts\Store\WorkoutStoreExercisesData;
+use App\Data\Web\Workouts\Store\WorkoutStoreData;
+use App\Data\Web\Workouts\Store\WorkoutStoreExercisesData;
 use App\Models\User;
 use App\Models\Workout;
 use Illuminate\Support\Facades\DB;

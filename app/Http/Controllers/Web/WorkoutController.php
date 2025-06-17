@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Web;
 
-use App\Data\Exercises\ExerciseData;
-use App\Data\FlashMessageData;
-use App\Data\Recurrences\RecurrenceData;
-use App\Data\Workouts\Pages\Edit\WorkoutEditExercisesProps;
-use App\Data\Workouts\Pages\Edit\WorkoutEditProps;
-use App\Data\Workouts\Pages\WorkoutCreateProps;
-use App\Data\Workouts\Store\WorkoutStoreData;
-use App\Data\Workouts\WorkoutData;
+use App\Data\Shared\Exercises\ExerciseData;
+use App\Data\Web\FlashMessageData;
+use App\Data\Web\Recurrences\RecurrenceData;
+use App\Data\Web\Workouts\Pages\Edit\WorkoutEditExercisesProps;
+use App\Data\Web\Workouts\Pages\Edit\WorkoutEditProps;
+use App\Data\Web\Workouts\Pages\WorkoutCreateProps;
+use App\Data\Web\Workouts\Store\WorkoutStoreData;
+use App\Data\Web\Workouts\WorkoutData;
 use App\Enums\FlashComponent;
 use App\Http\Controllers\BaseController;
 use App\Models\Scopes\SortScope;

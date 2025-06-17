@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Web;
 
-use App\Data\FlashMessageData;
-use App\Data\Schedules\Pages\ScheduleShowProps;
-use App\Data\Schedules\ScheduleData;
+use App\Data\Web\FlashMessageData;
+use App\Data\Web\Schedules\Pages\ScheduleShowProps;
+use App\Data\Web\Schedules\ScheduleData;
 use App\Http\Controllers\BaseController;
 use App\Models\Schedule;
 use Illuminate\Http\RedirectResponse;

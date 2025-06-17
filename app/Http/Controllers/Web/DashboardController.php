@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Web;
 
-use App\Data\DashboardPageData;
-use App\Data\Schedules\ScheduleData;
+use App\Data\Web\DashboardPageData;
+use App\Data\Web\Schedules\ScheduleData;
 use App\Enums\ScheduleStatus;
 use App\Http\Controllers\BaseController;
 use Carbon\Carbon;

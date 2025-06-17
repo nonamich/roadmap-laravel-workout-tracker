@@ -56,7 +56,7 @@ class JwtGuard implements Guard
         try {
             $payload = $this->jwtService->decode($token);
 
-            $this->user = $this->provider->retrieveById($payload->user_id);
+            $this->user = $this->provider->retrieveById($payload->sub);
         } catch (\Exception $e) {
             return null;
         }

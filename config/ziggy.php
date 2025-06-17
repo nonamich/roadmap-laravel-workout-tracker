@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'except' => ['debugbar.*', 'storage.*', 'admin.*'],
+    'except' => ['debugbar.*', 'storage.*', 'admin.*', 'scribe.*', 'scribe'],
     'types' => true,
 ];

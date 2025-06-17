@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Data\Schedules\ScheduleStoreData;
+use App\Data\Web\Schedules\ScheduleStoreData;
 use App\Enums\ScheduleStatus;
 use App\Models\Schedule;
 use App\Models\Workout;

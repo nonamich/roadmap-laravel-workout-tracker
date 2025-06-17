@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Web;
 
-use App\Data\Exercises\ExerciseData;
-use App\Data\Exercises\ExerciseStoreData;
-use App\Data\Exercises\ExerciseUpdateData;
-use App\Data\Exercises\Pages\Edit\ExerciseEditProps;
-use App\Data\FlashMessageData;
+use App\Data\Shared\Exercises\ExerciseData;
+use App\Data\Shared\Exercises\ExerciseStoreData;
+use App\Data\Shared\Exercises\ExerciseUpdateData;
+use App\Data\Web\Exercises\Pages\Edit\ExerciseEditProps;
+use App\Data\Web\FlashMessageData;
 use App\Enums\FlashComponent;
 use App\Http\Controllers\BaseController;
 use App\Models\Exercise;
