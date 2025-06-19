@@ -21,11 +21,7 @@ class ExerciseService
 
     public function updateExercise(Exercise $exercise, ExerciseUpdateData $data): Exercise
     {
-        $exercise->update([
-            'name' => $data->name,
-            'category' => $data->category,
-            'description' => $data->description,
-        ]);
+        $exercise->update($data->toArray());
 
         return $exercise;
     }

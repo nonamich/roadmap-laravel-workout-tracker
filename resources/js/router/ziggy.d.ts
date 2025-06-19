@@ -5,23 +5,23 @@ declare module 'ziggy-js' {
     "api.auth.register": [],
     "api.auth.me": [],
     "api.auth.logout": [],
-    "api.exercises.index": [],
-    "api.exercises.store": [],
-    "api.exercises.show": [
+    "exercises:api.exercises.index": [],
+    "exercises:api.exercises.store": [],
+    "exercises:api.exercises.show": [
         {
             "name": "exercise",
             "required": true,
             "binding": "id"
         }
     ],
-    "api.exercises.update": [
+    "exercises:api.exercises.update": [
         {
             "name": "exercise",
             "required": true,
             "binding": "id"
         }
     ],
-    "api.exercises.destroy": [
+    "exercises:api.exercises.destroy": [
         {
             "name": "exercise",
             "required": true,

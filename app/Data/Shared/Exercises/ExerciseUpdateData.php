@@ -5,15 +5,18 @@ namespace App\Data\Shared\Exercises;
 use App\Models\Exercise;
 use App\Support\Utils;
 use Illuminate\Validation\Rule;
+use Spatie\LaravelData\Attributes\MergeValidationRules;
 use Spatie\LaravelData\Data;
+use Spatie\LaravelData\Optional;
 use Spatie\LaravelData\Support\Validation\ValidationContext;
 
+#[MergeValidationRules]
 class ExerciseUpdateData extends Data
 {
     public function __construct(
-        public readonly ?string $name,
-        public readonly ?string $category,
-        public readonly ?string $description,
+        public readonly Optional|string $name,
+        public readonly Optional|string $category,
+        public readonly Optional|string $description,
     ) {}
 
     /**

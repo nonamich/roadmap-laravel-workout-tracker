@@ -4,9 +4,11 @@ namespace App\Data\Shared\Exercises;
 
 use App\Models\Exercise;
 use Illuminate\Validation\Rule;
+use Spatie\LaravelData\Attributes\MergeValidationRules;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\Support\Validation\ValidationContext;
 
+#[MergeValidationRules]
 class ExerciseStoreData extends Data
 {
     public function __construct(

@@ -6,3 +6,5 @@ parameters:
     paths:
         - app/
     level: 9
+    excludePaths:
+        - '%currentWorkingDirectory%/app/Scribe/ScribeLaravelDataPlugin.php'

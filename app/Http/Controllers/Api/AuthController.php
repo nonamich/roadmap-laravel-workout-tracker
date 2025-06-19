@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Data\Api\Auth\LoginResponseData;
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
@@ -9,12 +10,19 @@ use App\Models\User;
 use App\Services\JwtService;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Auth;
+use Knuckles\Scribe\Attributes\Authenticated;
+use Knuckles\Scribe\Attributes\ResponseFromApiResource;
+use Knuckles\Scribe\Attributes\Subgroup;
 
+#[Subgroup('Auth')]
 class AuthController extends BaseController
 {
     public function __construct(private readonly JwtService $jwtService) {}
 
+    #[Authenticated]
+    #[ResponseFromApiResource(JsonResource::class, LoginResponseData::class)]
     public function login(LoginRequest $request): JsonResponse
     {
         $credentials = $request->only([
@@ -39,7 +47,8 @@ class AuthController extends BaseController
         return response()->json(['token' => $token]);
     }
 
-    public function register(RegisterRequest $request): JsonResponse
+    #[ResponseFromApiResource(JsonResource::class, User::class)]
+    public function register(RegisterRequest $request): JsonResource
     {
         $user = User::create($request->only([
             'name',
@@ -49,18 +58,25 @@ class AuthController extends BaseController
 
         event(new Registered($user));
 
-        return response()->json($user, 201);
+        return new JsonResource($user);
     }
 
-    public function me(): JsonResponse
+    #[Authenticated]
+    #[ResponseFromApiResource(JsonResource::class, User::class)]
+    public function me(): JsonResource
     {
-        return response()->json(request()->user());
+        $user = auth()->user();
+
+        if (! $user) {
+            abort(401);
+        }
+
+        return new JsonResource($user);
     }
 
-    public function logout(): JsonResponse
+    #[Authenticated]
+    public function logout(): void
     {
         Auth::guard('api')->logout();
-
-        return response()->json(['message' => 'Successfully logged out']);
     }
 }

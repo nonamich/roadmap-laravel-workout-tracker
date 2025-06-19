@@ -1,5 +1,6 @@
 <?php
 
+use App\Scribe\ScribeLaravelDataPlugin;
 use Knuckles\Scribe\Config\AuthIn;
 use Knuckles\Scribe\Config\Defaults;
 use Knuckles\Scribe\Extracting\Strategies;
@@ -226,6 +227,7 @@ return [
         ],
         'bodyParameters' => [
             ...Defaults::BODY_PARAMETERS_STRATEGIES,
+            ScribeLaravelDataPlugin::class,
         ],
         'responses' => configureStrategy(
             Defaults::RESPONSES_STRATEGIES,

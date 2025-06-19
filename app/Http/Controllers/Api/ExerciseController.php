@@ -7,7 +7,11 @@ use App\Data\Shared\Exercises\ExerciseUpdateData;
 use App\Http\Controllers\BaseController;
 use App\Models\Exercise;
 use App\Services\ExerciseService;
+use Knuckles\Scribe\Attributes\Authenticated;
+use Knuckles\Scribe\Attributes\Subgroup;
 
+#[Authenticated]
+#[Subgroup('Exercise')]
 class ExerciseController extends BaseController
 {
     public function __construct(private ExerciseService $service) {}
