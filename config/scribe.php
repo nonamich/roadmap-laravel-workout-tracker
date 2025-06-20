@@ -1,6 +1,7 @@
 <?php
 
-use App\Scribe\ScribeLaravelDataPlugin;
+use App\Scribe\BodyGetFromLaravelData;
+use App\Scribe\QueryGetFromLaravelData;
 use Knuckles\Scribe\Config\AuthIn;
 use Knuckles\Scribe\Config\Defaults;
 use Knuckles\Scribe\Extracting\Strategies;
@@ -224,10 +225,11 @@ return [
         ],
         'queryParameters' => [
             ...Defaults::QUERY_PARAMETERS_STRATEGIES,
+            QueryGetFromLaravelData::class,
         ],
         'bodyParameters' => [
             ...Defaults::BODY_PARAMETERS_STRATEGIES,
-            ScribeLaravelDataPlugin::class,
+            BodyGetFromLaravelData::class,
         ],
         'responses' => configureStrategy(
             Defaults::RESPONSES_STRATEGIES,

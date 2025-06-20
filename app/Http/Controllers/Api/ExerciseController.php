@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Data\Shared\Exercises\ExerciseQueryData;
 use App\Data\Shared\Exercises\ExerciseStoreData;
 use App\Data\Shared\Exercises\ExerciseUpdateData;
 use App\Http\Controllers\BaseController;
 use App\Models\Exercise;
 use App\Services\ExerciseService;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Knuckles\Scribe\Attributes\Authenticated;
+use Knuckles\Scribe\Attributes\ResponseFromApiResource;
 use Knuckles\Scribe\Attributes\Subgroup;
 
 #[Authenticated]
@@ -16,47 +19,43 @@ class ExerciseController extends BaseController
 {
     public function __construct(private ExerciseService $service) {}
 
-    /**
-     * Display a listing of the resource.
-     */
-    public function index(): void
+    #[Authenticated]
+    #[ResponseFromApiResource(name: JsonResource::class, model: Exercise::class, collection: true, simplePaginate: 10)]
+    public function index(ExerciseQueryData $dto): JsonResource
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(ExerciseStoreData $dto): Exercise
-    {
-        $user = auth()->user();
+        $user = request()->user();
 
         if (! $user) {
             abort(401);
         }
 
-        return $this->service->storeExercise($dto, $user);
+        return new JsonResource($this->service->getPaginatedAndSorted($dto, $user));
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Exercise $exercise): Exercise
+    #[ResponseFromApiResource(name: JsonResource::class, model: Exercise::class)]
+    public function store(ExerciseStoreData $dto): JsonResource
     {
-        return $exercise;
+        $user = request()->user();
+
+        if (! $user) {
+            abort(401);
+        }
+
+        return new JsonResource($this->service->storeExercise($dto, $user));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Exercise $exercise, ExerciseUpdateData $data): Exercise
+    #[ResponseFromApiResource(name: JsonResource::class, model: Exercise::class)]
+    public function show(Exercise $exercise): JsonResource
     {
-        return $this->service->updateExercise($exercise, $data);
+        return new JsonResource($exercise);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    #[ResponseFromApiResource(name: JsonResource::class, model: Exercise::class)]
+    public function update(Exercise $exercise, ExerciseUpdateData $data): JsonResource
+    {
+        return new JsonResource($this->service->updateExercise($exercise, $data));
+    }
+
     public function destroy(Exercise $exercise): void
     {
         $this->service->destroyExercise($exercise);
