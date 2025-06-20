@@ -76,7 +76,7 @@ paths:
                 remember:
                   type: boolean
                   description: ''
-                  example: false
+                  example: true
                   nullable: false
               required:
                 - email
@@ -97,19 +97,19 @@ paths:
                 type: object
                 example:
                   data:
-                    id: 858
+                    id: 865
                     name: 'Ramiro Okuneva'
                     email: gulgowski.asia@example.com
-                    email_verified_at: '2025-06-20T18:54:51.000000Z'
-                    created_at: '2025-06-20T18:54:51.000000Z'
-                    updated_at: '2025-06-20T18:54:51.000000Z'
+                    email_verified_at: '2025-06-20T18:55:34.000000Z'
+                    created_at: '2025-06-20T18:55:34.000000Z'
+                    updated_at: '2025-06-20T18:55:34.000000Z'
                 properties:
                   data:
                     type: object
                     properties:
                       id:
                         type: integer
-                        example: 858
+                        example: 865
                       name:
                         type: string
                         example: 'Ramiro Okuneva'
@@ -118,13 +118,13 @@ paths:
                         example: gulgowski.asia@example.com
                       email_verified_at:
                         type: string
-                        example: '2025-06-20T18:54:51.000000Z'
+                        example: '2025-06-20T18:55:34.000000Z'
                       created_at:
                         type: string
-                        example: '2025-06-20T18:54:51.000000Z'
+                        example: '2025-06-20T18:55:34.000000Z'
                       updated_at:
                         type: string
-                        example: '2025-06-20T18:54:51.000000Z'
+                        example: '2025-06-20T18:55:34.000000Z'
       tags:
         - Endpoints
       requestBody:
@@ -147,7 +147,7 @@ paths:
                 remember:
                   type: boolean
                   description: ''
-                  example: false
+                  example: true
                   nullable: false
                 name:
                   type: string
@@ -174,19 +174,19 @@ paths:
                 type: object
                 example:
                   data:
-                    id: 859
+                    id: 866
                     name: 'Jermaine Tillman'
                     email: mya96@example.com
-                    email_verified_at: '2025-06-20T18:54:51.000000Z'
-                    created_at: '2025-06-20T18:54:51.000000Z'
-                    updated_at: '2025-06-20T18:54:51.000000Z'
+                    email_verified_at: '2025-06-20T18:55:34.000000Z'
+                    created_at: '2025-06-20T18:55:34.000000Z'
+                    updated_at: '2025-06-20T18:55:34.000000Z'
                 properties:
                   data:
                     type: object
                     properties:
                       id:
                         type: integer
-                        example: 859
+                        example: 866
                       name:
                         type: string
                         example: 'Jermaine Tillman'
@@ -195,13 +195,13 @@ paths:
                         example: mya96@example.com
                       email_verified_at:
                         type: string
-                        example: '2025-06-20T18:54:51.000000Z'
+                        example: '2025-06-20T18:55:34.000000Z'
                       created_at:
                         type: string
-                        example: '2025-06-20T18:54:51.000000Z'
+                        example: '2025-06-20T18:55:34.000000Z'
                       updated_at:
                         type: string
-                        example: '2025-06-20T18:54:51.000000Z'
+                        example: '2025-06-20T18:55:34.000000Z'
       tags:
         - Endpoints
   /api/auth/logout:
@@ -279,21 +279,21 @@ paths:
                 example:
                   data:
                     -
-                      id: 537
-                      created_at: '2025-06-20T18:54:51.000000Z'
-                      updated_at: '2025-06-20T18:54:51.000000Z'
+                      id: 542
+                      created_at: '2025-06-20T18:55:34.000000Z'
+                      updated_at: '2025-06-20T18:55:34.000000Z'
                       name: et
                       category: animi
                       description: 'Et fugiat sunt nihil accusantium. Mollitia modi deserunt aut ab provident perspiciatis quo. Nostrum aut adipisci quidem nostrum.'
-                      user_id: 860
+                      user_id: 867
                     -
-                      id: 538
-                      created_at: '2025-06-20T18:54:51.000000Z'
-                      updated_at: '2025-06-20T18:54:51.000000Z'
+                      id: 543
+                      created_at: '2025-06-20T18:55:34.000000Z'
+                      updated_at: '2025-06-20T18:55:34.000000Z'
                       name: ipsum
                       category: nostrum
                       description: 'Et consequatur aut dolores enim. Facere tempora ex voluptatem laboriosam. Quis adipisci molestias fugit deleniti distinctio eum. Id aut libero aliquam veniam. Dolorem mollitia deleniti nemo.'
-                      user_id: 861
+                      user_id: 868
                   links:
                     first: '/?page=1'
                     last: null
@@ -310,33 +310,33 @@ paths:
                     type: array
                     example:
                       -
-                        id: 537
-                        created_at: '2025-06-20T18:54:51.000000Z'
-                        updated_at: '2025-06-20T18:54:51.000000Z'
+                        id: 542
+                        created_at: '2025-06-20T18:55:34.000000Z'
+                        updated_at: '2025-06-20T18:55:34.000000Z'
                         name: et
                         category: animi
                         description: 'Et fugiat sunt nihil accusantium. Mollitia modi deserunt aut ab provident perspiciatis quo. Nostrum aut adipisci quidem nostrum.'
-                        user_id: 860
+                        user_id: 867
                       -
-                        id: 538
-                        created_at: '2025-06-20T18:54:51.000000Z'
-                        updated_at: '2025-06-20T18:54:51.000000Z'
+                        id: 543
+                        created_at: '2025-06-20T18:55:34.000000Z'
+                        updated_at: '2025-06-20T18:55:34.000000Z'
                         name: ipsum
                         category: nostrum
                         description: 'Et consequatur aut dolores enim. Facere tempora ex voluptatem laboriosam. Quis adipisci molestias fugit deleniti distinctio eum. Id aut libero aliquam veniam. Dolorem mollitia deleniti nemo.'
-                        user_id: 861
+                        user_id: 868
                     items:
                       type: object
                       properties:
                         id:
                           type: integer
-                          example: 537
+                          example: 542
                         created_at:
                           type: string
-                          example: '2025-06-20T18:54:51.000000Z'
+                          example: '2025-06-20T18:55:34.000000Z'
                         updated_at:
                           type: string
-                          example: '2025-06-20T18:54:51.000000Z'
+                          example: '2025-06-20T18:55:34.000000Z'
                         name:
                           type: string
                           example: et
@@ -348,7 +348,7 @@ paths:
                           example: 'Et fugiat sunt nihil accusantium. Mollitia modi deserunt aut ab provident perspiciatis quo. Nostrum aut adipisci quidem nostrum.'
                         user_id:
                           type: integer
-                          example: 860
+                          example: 867
                   links:
                     type: object
                     properties:
@@ -398,26 +398,26 @@ paths:
                 type: object
                 example:
                   data:
-                    id: 539
-                    created_at: '2025-06-20T18:54:51.000000Z'
-                    updated_at: '2025-06-20T18:54:51.000000Z'
+                    id: 544
+                    created_at: '2025-06-20T18:55:34.000000Z'
+                    updated_at: '2025-06-20T18:55:34.000000Z'
                     name: fugiat
                     category: sunt
                     description: 'Harum mollitia modi deserunt aut ab provident perspiciatis quo. Nostrum aut adipisci quidem nostrum. Commodi incidunt iure odit. Et modi ipsum nostrum omnis autem et consequatur.'
-                    user_id: 862
+                    user_id: 869
                 properties:
                   data:
                     type: object
                     properties:
                       id:
                         type: integer
-                        example: 539
+                        example: 544
                       created_at:
                         type: string
-                        example: '2025-06-20T18:54:51.000000Z'
+                        example: '2025-06-20T18:55:34.000000Z'
                       updated_at:
                         type: string
-                        example: '2025-06-20T18:54:51.000000Z'
+                        example: '2025-06-20T18:55:34.000000Z'
                       name:
                         type: string
                         example: fugiat
@@ -429,7 +429,7 @@ paths:
                         example: 'Harum mollitia modi deserunt aut ab provident perspiciatis quo. Nostrum aut adipisci quidem nostrum. Commodi incidunt iure odit. Et modi ipsum nostrum omnis autem et consequatur.'
                       user_id:
                         type: integer
-                        example: 862
+                        example: 869
       tags:
         - Endpoints
       requestBody:
@@ -472,26 +472,26 @@ paths:
                 type: object
                 example:
                   data:
-                    id: 540
-                    created_at: '2025-06-20T18:54:51.000000Z'
-                    updated_at: '2025-06-20T18:54:51.000000Z'
+                    id: 545
+                    created_at: '2025-06-20T18:55:34.000000Z'
+                    updated_at: '2025-06-20T18:55:34.000000Z'
                     name: laboriosam
                     category: praesentium
                     description: 'Molestias fugit deleniti distinctio eum doloremque id. Libero aliquam veniam corporis dolorem mollitia deleniti. Odit quia officia est dignissimos neque blanditiis odio. Excepturi doloribus delectus fugit qui repudiandae laboriosam.'
-                    user_id: 863
+                    user_id: 870
                 properties:
                   data:
                     type: object
                     properties:
                       id:
                         type: integer
-                        example: 540
+                        example: 545
                       created_at:
                         type: string
-                        example: '2025-06-20T18:54:51.000000Z'
+                        example: '2025-06-20T18:55:34.000000Z'
                       updated_at:
                         type: string
-                        example: '2025-06-20T18:54:51.000000Z'
+                        example: '2025-06-20T18:55:34.000000Z'
                       name:
                         type: string
                         example: laboriosam
@@ -503,7 +503,7 @@ paths:
                         example: 'Molestias fugit deleniti distinctio eum doloremque id. Libero aliquam veniam corporis dolorem mollitia deleniti. Odit quia officia est dignissimos neque blanditiis odio. Excepturi doloribus delectus fugit qui repudiandae laboriosam.'
                       user_id:
                         type: integer
-                        example: 863
+                        example: 870
       tags:
         - Endpoints
     put:
@@ -520,26 +520,26 @@ paths:
                 type: object
                 example:
                   data:
-                    id: 541
-                    created_at: '2025-06-20T18:54:51.000000Z'
-                    updated_at: '2025-06-20T18:54:51.000000Z'
+                    id: 546
+                    created_at: '2025-06-20T18:55:34.000000Z'
+                    updated_at: '2025-06-20T18:55:34.000000Z'
                     name: fugiat
                     category: sunt
                     description: 'Harum mollitia modi deserunt aut ab provident perspiciatis quo. Nostrum aut adipisci quidem nostrum. Commodi incidunt iure odit. Et modi ipsum nostrum omnis autem et consequatur.'
-                    user_id: 864
+                    user_id: 871
                 properties:
                   data:
                     type: object
                     properties:
                       id:
                         type: integer
-                        example: 541
+                        example: 546
                       created_at:
                         type: string
-                        example: '2025-06-20T18:54:51.000000Z'
+                        example: '2025-06-20T18:55:34.000000Z'
                       updated_at:
                         type: string
-                        example: '2025-06-20T18:54:51.000000Z'
+                        example: '2025-06-20T18:55:34.000000Z'
                       name:
                         type: string
                         example: fugiat
@@ -551,7 +551,7 @@ paths:
                         example: 'Harum mollitia modi deserunt aut ab provident perspiciatis quo. Nostrum aut adipisci quidem nostrum. Commodi incidunt iure odit. Et modi ipsum nostrum omnis autem et consequatur.'
                       user_id:
                         type: integer
-                        example: 864
+                        example: 871
       tags:
         - Endpoints
       requestBody:
