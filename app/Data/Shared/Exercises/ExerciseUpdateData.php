@@ -32,14 +32,4 @@ class ExerciseUpdateData extends Data
             ],
         ];
     }
-
-    public static function authorize(): bool
-    {
-        $user = auth()->user();
-        $exercise = Utils::getModelFromRoute(Exercise::class);
-
-        return $user !== null
-            && $exercise !== null
-            && $user->id === $exercise->user_id;
-    }
 }

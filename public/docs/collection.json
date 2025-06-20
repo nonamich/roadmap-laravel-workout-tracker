@@ -1,0 +1,393 @@
+{
+    "variable": [
+        {
+            "id": "baseUrl",
+            "key": "baseUrl",
+            "type": "string",
+            "name": "string",
+            "value": "https:\/\/workout-tracker.ddev.site"
+        }
+    ],
+    "info": {
+        "name": "Laravel API Documentation",
+        "_postman_id": "892f1284-a257-4158-83aa-3622a9cc8767",
+        "description": "",
+        "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
+    },
+    "item": [
+        {
+            "name": "Endpoints",
+            "description": "",
+            "item": [
+                {
+                    "name": "Auth",
+                    "description": "",
+                    "item": [
+                        {
+                            "name": "POST api\/auth\/login",
+                            "request": {
+                                "url": {
+                                    "host": "{{baseUrl}}",
+                                    "path": "api\/auth\/login",
+                                    "query": [],
+                                    "raw": "{{baseUrl}}\/api\/auth\/login"
+                                },
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application\/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\"email\":\"gbailey@example.net\",\"password\":\"architecto\",\"remember\":false}"
+                                },
+                                "description": "",
+                                "auth": {
+                                    "type": "noauth"
+                                }
+                            },
+                            "response": [
+                                {
+                                    "header": [],
+                                    "code": 200,
+                                    "body": "{\"token\":\"abc\"}",
+                                    "name": ""
+                                },
+                                {
+                                    "header": [],
+                                    "code": 401,
+                                    "body": "{\"message\":\"User not found\"}",
+                                    "name": ""
+                                },
+                                {
+                                    "header": [],
+                                    "code": 422,
+                                    "body": "{\"message\":\"Invalid credentials\"}",
+                                    "name": ""
+                                }
+                            ]
+                        },
+                        {
+                            "name": "POST api\/auth\/register",
+                            "request": {
+                                "url": {
+                                    "host": "{{baseUrl}}",
+                                    "path": "api\/auth\/register",
+                                    "query": [],
+                                    "raw": "{{baseUrl}}\/api\/auth\/register"
+                                },
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application\/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\"email\":\"gbailey@example.net\",\"password\":\"architecto\",\"remember\":false,\"name\":\"n\"}"
+                                },
+                                "description": "",
+                                "auth": {
+                                    "type": "noauth"
+                                }
+                            },
+                            "response": [
+                                {
+                                    "header": [],
+                                    "code": 200,
+                                    "body": "{\"data\":{\"id\":858,\"name\":\"Ramiro Okuneva\",\"email\":\"gulgowski.asia@example.com\",\"email_verified_at\":\"2025-06-20T18:54:51.000000Z\",\"created_at\":\"2025-06-20T18:54:51.000000Z\",\"updated_at\":\"2025-06-20T18:54:51.000000Z\"}}",
+                                    "name": ""
+                                }
+                            ]
+                        },
+                        {
+                            "name": "GET api\/auth\/me",
+                            "request": {
+                                "url": {
+                                    "host": "{{baseUrl}}",
+                                    "path": "api\/auth\/me",
+                                    "query": [],
+                                    "raw": "{{baseUrl}}\/api\/auth\/me"
+                                },
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application\/json"
+                                    }
+                                ],
+                                "body": null,
+                                "description": ""
+                            },
+                            "response": [
+                                {
+                                    "header": [],
+                                    "code": 200,
+                                    "body": "{\"data\":{\"id\":859,\"name\":\"Jermaine Tillman\",\"email\":\"mya96@example.com\",\"email_verified_at\":\"2025-06-20T18:54:51.000000Z\",\"created_at\":\"2025-06-20T18:54:51.000000Z\",\"updated_at\":\"2025-06-20T18:54:51.000000Z\"}}",
+                                    "name": ""
+                                }
+                            ]
+                        },
+                        {
+                            "name": "DELETE api\/auth\/logout",
+                            "request": {
+                                "url": {
+                                    "host": "{{baseUrl}}",
+                                    "path": "api\/auth\/logout",
+                                    "query": [],
+                                    "raw": "{{baseUrl}}\/api\/auth\/logout"
+                                },
+                                "method": "DELETE",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application\/json"
+                                    }
+                                ],
+                                "body": null,
+                                "description": ""
+                            },
+                            "response": []
+                        }
+                    ]
+                },
+                {
+                    "name": "Exercise",
+                    "description": "",
+                    "item": [
+                        {
+                            "name": "GET api\/exercises",
+                            "request": {
+                                "url": {
+                                    "host": "{{baseUrl}}",
+                                    "path": "api\/exercises",
+                                    "query": [
+                                        {
+                                            "key": "per_page",
+                                            "value": "1",
+                                            "description": "Must be at least 1. Must not be greater than 50.",
+                                            "disabled": false
+                                        },
+                                        {
+                                            "key": "page",
+                                            "value": "22",
+                                            "description": "Must be at least 1.",
+                                            "disabled": false
+                                        },
+                                        {
+                                            "key": "sort_by",
+                                            "value": "name",
+                                            "description": "",
+                                            "disabled": false
+                                        },
+                                        {
+                                            "key": "sort_dir",
+                                            "value": "asc",
+                                            "description": "",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "raw": "{{baseUrl}}\/api\/exercises?per_page=1&page=22&sort_by=name&sort_dir=asc"
+                                },
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application\/json"
+                                    }
+                                ],
+                                "body": null,
+                                "description": ""
+                            },
+                            "response": [
+                                {
+                                    "header": [],
+                                    "code": 200,
+                                    "body": "{\"data\":[{\"id\":537,\"created_at\":\"2025-06-20T18:54:51.000000Z\",\"updated_at\":\"2025-06-20T18:54:51.000000Z\",\"name\":\"et\",\"category\":\"animi\",\"description\":\"Et fugiat sunt nihil accusantium. Mollitia modi deserunt aut ab provident perspiciatis quo. Nostrum aut adipisci quidem nostrum.\",\"user_id\":860},{\"id\":538,\"created_at\":\"2025-06-20T18:54:51.000000Z\",\"updated_at\":\"2025-06-20T18:54:51.000000Z\",\"name\":\"ipsum\",\"category\":\"nostrum\",\"description\":\"Et consequatur aut dolores enim. Facere tempora ex voluptatem laboriosam. Quis adipisci molestias fugit deleniti distinctio eum. Id aut libero aliquam veniam. Dolorem mollitia deleniti nemo.\",\"user_id\":861}],\"links\":{\"first\":\"\\\/?page=1\",\"last\":null,\"prev\":null,\"next\":null},\"meta\":{\"current_page\":1,\"from\":1,\"path\":\"\\\/\",\"per_page\":10,\"to\":2}}",
+                                    "name": ""
+                                }
+                            ]
+                        },
+                        {
+                            "name": "POST api\/exercises",
+                            "request": {
+                                "url": {
+                                    "host": "{{baseUrl}}",
+                                    "path": "api\/exercises",
+                                    "query": [],
+                                    "raw": "{{baseUrl}}\/api\/exercises"
+                                },
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application\/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\"name\":\"architecto\",\"category\":\"architecto\",\"description\":\"Eius et animi quos velit et.\"}"
+                                },
+                                "description": ""
+                            },
+                            "response": [
+                                {
+                                    "header": [],
+                                    "code": 200,
+                                    "body": "{\"data\":{\"id\":539,\"created_at\":\"2025-06-20T18:54:51.000000Z\",\"updated_at\":\"2025-06-20T18:54:51.000000Z\",\"name\":\"fugiat\",\"category\":\"sunt\",\"description\":\"Harum mollitia modi deserunt aut ab provident perspiciatis quo. Nostrum aut adipisci quidem nostrum. Commodi incidunt iure odit. Et modi ipsum nostrum omnis autem et consequatur.\",\"user_id\":862}}",
+                                    "name": ""
+                                }
+                            ]
+                        },
+                        {
+                            "name": "GET api\/exercises\/{id}",
+                            "request": {
+                                "url": {
+                                    "host": "{{baseUrl}}",
+                                    "path": "api\/exercises\/:id",
+                                    "query": [],
+                                    "raw": "{{baseUrl}}\/api\/exercises\/:id",
+                                    "variable": [
+                                        {
+                                            "id": "id",
+                                            "key": "id",
+                                            "value": "2",
+                                            "description": "The ID of the exercise."
+                                        }
+                                    ]
+                                },
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application\/json"
+                                    }
+                                ],
+                                "body": null,
+                                "description": ""
+                            },
+                            "response": [
+                                {
+                                    "header": [],
+                                    "code": 200,
+                                    "body": "{\"data\":{\"id\":540,\"created_at\":\"2025-06-20T18:54:51.000000Z\",\"updated_at\":\"2025-06-20T18:54:51.000000Z\",\"name\":\"laboriosam\",\"category\":\"praesentium\",\"description\":\"Molestias fugit deleniti distinctio eum doloremque id. Libero aliquam veniam corporis dolorem mollitia deleniti. Odit quia officia est dignissimos neque blanditiis odio. Excepturi doloribus delectus fugit qui repudiandae laboriosam.\",\"user_id\":863}}",
+                                    "name": ""
+                                }
+                            ]
+                        },
+                        {
+                            "name": "PUT api\/exercises\/{id}",
+                            "request": {
+                                "url": {
+                                    "host": "{{baseUrl}}",
+                                    "path": "api\/exercises\/:id",
+                                    "query": [],
+                                    "raw": "{{baseUrl}}\/api\/exercises\/:id",
+                                    "variable": [
+                                        {
+                                            "id": "id",
+                                            "key": "id",
+                                            "value": "2",
+                                            "description": "The ID of the exercise."
+                                        }
+                                    ]
+                                },
+                                "method": "PUT",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application\/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\"name\":\"architecto\",\"category\":\"architecto\",\"description\":\"Eius et animi quos velit et.\"}"
+                                },
+                                "description": ""
+                            },
+                            "response": [
+                                {
+                                    "header": [],
+                                    "code": 200,
+                                    "body": "{\"data\":{\"id\":541,\"created_at\":\"2025-06-20T18:54:51.000000Z\",\"updated_at\":\"2025-06-20T18:54:51.000000Z\",\"name\":\"fugiat\",\"category\":\"sunt\",\"description\":\"Harum mollitia modi deserunt aut ab provident perspiciatis quo. Nostrum aut adipisci quidem nostrum. Commodi incidunt iure odit. Et modi ipsum nostrum omnis autem et consequatur.\",\"user_id\":864}}",
+                                    "name": ""
+                                }
+                            ]
+                        },
+                        {
+                            "name": "DELETE api\/exercises\/{id}",
+                            "request": {
+                                "url": {
+                                    "host": "{{baseUrl}}",
+                                    "path": "api\/exercises\/:id",
+                                    "query": [],
+                                    "raw": "{{baseUrl}}\/api\/exercises\/:id",
+                                    "variable": [
+                                        {
+                                            "id": "id",
+                                            "key": "id",
+                                            "value": "2",
+                                            "description": "The ID of the exercise."
+                                        }
+                                    ]
+                                },
+                                "method": "DELETE",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application\/json"
+                                    }
+                                ],
+                                "body": null,
+                                "description": ""
+                            },
+                            "response": []
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "auth": {
+        "type": "noauth"
+    }
+}

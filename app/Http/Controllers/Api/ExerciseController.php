@@ -53,11 +53,15 @@ class ExerciseController extends BaseController
     #[ResponseFromApiResource(name: JsonResource::class, model: Exercise::class)]
     public function update(Exercise $exercise, ExerciseUpdateData $data): JsonResource
     {
+        $this->authorize('update', $exercise);
+
         return new JsonResource($this->service->updateExercise($exercise, $data));
     }
 
     public function destroy(Exercise $exercise): void
     {
+        $this->authorize('delete', $exercise);
+
         $this->service->destroyExercise($exercise);
     }
 }
