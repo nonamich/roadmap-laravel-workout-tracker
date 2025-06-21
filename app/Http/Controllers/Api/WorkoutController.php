@@ -2,9 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Data\Shared\Exercises\ExerciseQueryData;
-use App\Data\Shared\Exercises\ExerciseStoreData;
-use App\Data\Shared\Exercises\ExerciseUpdateData;
 use App\Http\Controllers\BaseController;
 use App\Models\Exercise;
 use App\Services\ExerciseService;
@@ -15,7 +12,7 @@ use Knuckles\Scribe\Attributes\Subgroup;
 
 #[Authenticated]
 #[Subgroup('Exercises')]
-class ExerciseController extends BaseController
+class WorkoutController extends BaseController
 {
     public function __construct(private ExerciseService $service)
     {
@@ -25,13 +22,13 @@ class ExerciseController extends BaseController
 
     #[Authenticated]
     #[ResponseFromApiResource(name: JsonResource::class, model: Exercise::class, collection: true, simplePaginate: 10)]
-    public function index(ExerciseQueryData $dto): JsonResource
+    public function index(WorkoutQueryData $dto): JsonResource
     {
         return new JsonResource($this->service->getPaginatedAndSorted($dto, $this->getUserOrThrow()));
     }
 
     #[ResponseFromApiResource(name: JsonResource::class, model: Exercise::class)]
-    public function store(ExerciseStoreData $dto): JsonResource
+    public function store(WorkoutStoreData $dto): JsonResource
     {
         return new JsonResource($this->service->storeExercise($dto, $this->getUserOrThrow()));
     }
@@ -43,7 +40,7 @@ class ExerciseController extends BaseController
     }
 
     #[ResponseFromApiResource(name: JsonResource::class, model: Exercise::class)]
-    public function update(Exercise $exercise, ExerciseUpdateData $data): JsonResource
+    public function update(Exercise $exercise, WorkoutUpdateData $data): JsonResource
     {
         return new JsonResource($this->service->updateExercise($exercise, $data));
     }
