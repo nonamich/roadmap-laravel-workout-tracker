@@ -2,38 +2,42 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Data\Shared\Exercises\ExerciseQueryData;
 use App\Data\Shared\Exercises\ExerciseStoreData;
 use App\Data\Shared\Exercises\ExerciseUpdateData;
+use App\Data\Shared\IndexQueryData;
 use App\Http\Controllers\BaseController;
 use App\Models\Exercise;
-use App\Services\ExerciseService;
+use App\Services\PaginationService;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Knuckles\Scribe\Attributes\Authenticated;
+use Knuckles\Scribe\Attributes\Group;
 use Knuckles\Scribe\Attributes\ResponseFromApiResource;
-use Knuckles\Scribe\Attributes\Subgroup;
 
 #[Authenticated]
-#[Subgroup('Exercises')]
+#[Group('Exercises')]
 class ExerciseController extends BaseController
 {
-    public function __construct(private ExerciseService $service)
+    public function __construct(private PaginationService $pagination)
     {
         $this->authorizeResource(Exercise::class, 'exercise');
         $this->middleware('auth:api');
     }
 
-    #[Authenticated]
     #[ResponseFromApiResource(name: JsonResource::class, model: Exercise::class, collection: true, simplePaginate: 10)]
-    public function index(ExerciseQueryData $dto): JsonResource
+    public function index(IndexQueryData $data): JsonResource
     {
-        return new JsonResource($this->service->getPaginatedAndSorted($dto, $this->getUserOrThrow()));
+        $query = Exercise::query()
+            ->where('user_id', '=', $this->getUserOrThrow()->id);
+
+        return new JsonResource($this->pagination->paginate($query, $data));
     }
 
     #[ResponseFromApiResource(name: JsonResource::class, model: Exercise::class)]
-    public function store(ExerciseStoreData $dto): JsonResource
+    public function store(ExerciseStoreData $data): JsonResource
     {
-        return new JsonResource($this->service->storeExercise($dto, $this->getUserOrThrow()));
+        return new JsonResource(
+            Exercise::create($data->toArray())
+        );
     }
 
     #[ResponseFromApiResource(name: JsonResource::class, model: Exercise::class)]
@@ -45,11 +49,13 @@ class ExerciseController extends BaseController
     #[ResponseFromApiResource(name: JsonResource::class, model: Exercise::class)]
     public function update(Exercise $exercise, ExerciseUpdateData $data): JsonResource
     {
-        return new JsonResource($this->service->updateExercise($exercise, $data));
+        return new JsonResource(
+            $exercise->update($data->toArray())
+        );
     }
 
     public function destroy(Exercise $exercise): void
     {
-        $this->service->destroyExercise($exercise);
+        $exercise->delete();
     }
 }

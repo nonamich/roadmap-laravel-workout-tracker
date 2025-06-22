@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Data\Shared\Workouts;
+namespace App\Data\Api\Workouts;
 
 use App\Models\Workout;
 use Illuminate\Validation\Rule;
@@ -9,7 +9,7 @@ use Spatie\LaravelData\Data;
 use Spatie\LaravelData\Support\Validation\ValidationContext;
 
 #[MergeValidationRules]
-class WorkoutStoreData extends Data
+class WorkoutStoreApiData extends Data
 {
     public function __construct(
         public readonly string $name,

@@ -29,12 +29,7 @@ class WorkoutController extends BaseController
 
     public function index(): Response
     {
-        $user = auth()->user();
-
-        if (! $user) {
-            abort(401);
-        }
-
+        $user = $this->getUserOrThrow();
         $workouts = $user
             ->workouts()
             ->withGlobalScope(
@@ -51,12 +46,7 @@ class WorkoutController extends BaseController
 
     public function create(): Response
     {
-        $user = auth()->user();
-
-        if (! $user) {
-            abort(401);
-        }
-
+        $user = $this->getUserOrThrow();
         $exercises = $user->exercises()->latest()->get();
         $props = new WorkoutCreateProps(
             exercises: ExerciseData::collect($exercises, DataCollection::class)
@@ -67,12 +57,7 @@ class WorkoutController extends BaseController
 
     public function store(WorkoutStoreData $workoutStoreData): RedirectResponse
     {
-        $user = auth()->user();
-
-        if (! $user) {
-            abort(401);
-        }
-
+        $user = $this->getUserOrThrow();
         $workout = $this->workoutService->createOrUpdate($workoutStoreData, $user);
 
         return redirect()->route('workouts.edit', $workout->id);
@@ -80,12 +65,7 @@ class WorkoutController extends BaseController
 
     public function edit(Workout $workout): Response
     {
-        $user = auth()->user();
-
-        if (! $user) {
-            abort(401);
-        }
-
+        $user = $this->getUserOrThrow();
         $exercises = $user->exercises()->get();
         $workoutExercises = $workout->exercises()->get();
         $recurrences = $workout->recurrences()->get();
@@ -111,12 +91,7 @@ class WorkoutController extends BaseController
             abort(400);
         }
 
-        $user = auth()->user();
-
-        if (! $user) {
-            abort(401);
-        }
-
+        $user = $this->getUserOrThrow();
         $workout = $this->workoutService->createOrUpdate($workoutStoreData, $user);
 
         return redirect()->back()

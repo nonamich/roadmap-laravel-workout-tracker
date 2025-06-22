@@ -34,6 +34,10 @@ class Schedule extends Model
         'user_id',
     ];
 
+    protected $attributes = [
+        'status' => ScheduleStatus::Scheduled,
+    ];
+
     /**
      * @return BelongsTo<Workout, covariant $this>
      */

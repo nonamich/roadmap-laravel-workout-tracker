@@ -25,12 +25,7 @@ class ScheduleController extends BaseController
 
     public function index(): Response
     {
-        $user = auth()->user();
-
-        if (! $user) {
-            abort(401);
-        }
-
+        $user = $this->getUserOrThrow();
         $schedules = $user->schedules()->with(['workout', 'recurrence'])
             ->orderBy('scheduled_at')
             ->paginate(10);

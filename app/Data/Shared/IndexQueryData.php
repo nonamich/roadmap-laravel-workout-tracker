@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Data\Shared\Exercises;
+namespace App\Data\Shared;
 
 use Spatie\LaravelData\Attributes\MapName;
 use Spatie\LaravelData\Attributes\MergeValidationRules;
@@ -12,7 +12,7 @@ use Spatie\LaravelData\Mappers\SnakeCaseMapper;
 
 #[MergeValidationRules]
 #[MapName(SnakeCaseMapper::class)]
-class ExerciseQueryData extends Data
+class IndexQueryData extends Data
 {
     public function __construct(
         #[Min(1), Max(50)]
@@ -21,7 +21,6 @@ class ExerciseQueryData extends Data
         #[Min(1)]
         public int $page = 1,
 
-        #[In(['created_at', 'name'])]
         public string $sortBy = 'created_at',
 
         #[In(['asc', 'desc'])]

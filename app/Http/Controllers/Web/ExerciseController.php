@@ -11,7 +11,6 @@ use App\Enums\FlashComponent;
 use App\Http\Controllers\BaseController;
 use App\Models\Exercise;
 use App\Models\Scopes\SortScope;
-use App\Services\ExerciseService;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -19,16 +18,9 @@ use Spatie\LaravelData\PaginatedDataCollection;
 
 class ExerciseController extends BaseController
 {
-    public function __construct(private ExerciseService $exerciseService) {}
-
     public function index(): Response
     {
-        $user = auth()->user();
-
-        if (! $user) {
-            abort(401);
-        }
-
+        $user = $this->getUserOrThrow();
         $exercises = $user
             ->exercises()
             ->withGlobalScope(
@@ -49,13 +41,11 @@ class ExerciseController extends BaseController
 
     public function store(ExerciseStoreData $data): RedirectResponse
     {
-        $user = auth()->user();
-
-        if (! $user) {
-            abort(401);
-        }
-
-        $exercise = $this->exerciseService->storeExercise($data, $user);
+        $user = $this->getUserOrThrow();
+        $exercise = Exercise::create([
+            ...$data->toArray(),
+            'user_id' => $user->id,
+        ]);
 
         return redirect()
             ->back()
@@ -81,7 +71,7 @@ class ExerciseController extends BaseController
 
     public function update(ExerciseUpdateData $data, Exercise $exercise): RedirectResponse
     {
-        $this->exerciseService->updateExercise($exercise, $data);
+        $exercise->update($data->toArray());
 
         return redirect()
             ->back()

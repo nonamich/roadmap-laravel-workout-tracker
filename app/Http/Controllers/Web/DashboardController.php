@@ -15,12 +15,7 @@ class DashboardController extends BaseController
 {
     public function show(): Response
     {
-        $user = auth()->user();
-
-        if (! $user) {
-            abort(401);
-        }
-
+        $user = $this->getUserOrThrow();
         $schedules = $user->schedules()->with('workout')
             ->where('scheduled_at', '>=', Carbon::now())
             ->where('status', '=', ScheduleStatus::Scheduled)

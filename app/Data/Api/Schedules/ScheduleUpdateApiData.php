@@ -1,22 +1,23 @@
 <?php
 
-namespace App\Data\Shared\Workouts;
+namespace App\Data\Api\Schedules;
 
 use App\Models\Workout;
-use App\Support\Utils;
+use DateTime;
 use Illuminate\Validation\Rule;
 use Spatie\LaravelData\Attributes\MergeValidationRules;
+use Spatie\LaravelData\Attributes\Validation\Date;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\Optional;
 use Spatie\LaravelData\Support\Validation\ValidationContext;
 
 #[MergeValidationRules]
-class WorkoutUpdateData extends Data
+class ScheduleUpdateApiData extends Data
 {
     public function __construct(
-        public readonly Optional|string $name,
-        public readonly Optional|string $category,
-        public readonly Optional|string $description,
+        #[Date]
+        public Optional|DateTime $scheduledAt,
+        public Optional|int $workoutId,
     ) {}
 
     /**
@@ -25,10 +26,9 @@ class WorkoutUpdateData extends Data
     public static function rules(ValidationContext $context): array
     {
         return [
-            'name' => [
-                Rule::unique(Workout::class, 'name')
-                    ->where('user_id', auth()->id())
-                    ->ignore(Utils::getModelFromRoute(Workout::class)?->id),
+            'workoutId' => [
+                Rule::exists(Workout::class, 'id')
+                    ->where('user_id', auth()->id()),
             ],
         ];
     }

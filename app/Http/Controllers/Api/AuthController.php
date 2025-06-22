@@ -11,11 +11,11 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Knuckles\Scribe\Attributes\Authenticated;
+use Knuckles\Scribe\Attributes\Group;
 use Knuckles\Scribe\Attributes\Response;
 use Knuckles\Scribe\Attributes\ResponseFromApiResource;
-use Knuckles\Scribe\Attributes\Subgroup;
 
-#[Subgroup('Auth')]
+#[Group('Auth')]
 class AuthController extends BaseController
 {
     public function __construct(private readonly JwtService $jwtService) {}
