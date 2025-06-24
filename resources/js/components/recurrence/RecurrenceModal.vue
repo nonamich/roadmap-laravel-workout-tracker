@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import type { RecurrenceStoreData } from '@/types/laravel-data';
+import type { RecurrenceStoreWebData } from '@/types/laravel-data';
 import { getDayName } from '@/utils';
 import { reactive } from 'vue';
 import { VueFinalModal } from 'vue-final-modal';
 import BaseButton from '../BaseButton.vue';
 
-type Schedule = RecurrenceStoreData;
+type Schedule = RecurrenceStoreWebData;
 
 type Props = {
   initial?: Schedule;

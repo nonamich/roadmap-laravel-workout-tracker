@@ -7,7 +7,7 @@ use Spatie\LaravelData\Data;
 use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 
 #[TypeScript]
-class FlashMessageData extends Data
+class FlashMessageWebData extends Data
 {
     public function __construct(
         public mixed $props = null,

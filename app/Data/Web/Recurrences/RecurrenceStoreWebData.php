@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Data\Web\Recurrences\Store;
+namespace App\Data\Web\Recurrences;
 
 use App\Models\Recurrence;
 use App\Rules\TimeRule;
@@ -11,7 +11,7 @@ use Spatie\LaravelData\Data;
 use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 
 #[TypeScript]
-class RecurrenceStoreData extends Data
+class RecurrenceStoreWebData extends Data
 {
     /**
      * @param  int[]  $weekdays

@@ -2,7 +2,7 @@
 
 namespace App\Data\Web\Notifications\Pages\Index;
 
-use App\Data\Web\Notifications\NotificationData;
+use App\Data\Web\Notifications\NotificationWebData;
 use Spatie\LaravelData\Attributes\DataCollectionOf;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\DataCollection;
@@ -10,10 +10,10 @@ use Spatie\LaravelData\DataCollection;
 class NotificationIndexProps extends Data
 {
     /**
-     * @param  DataCollection<int, NotificationData>  $notifications
+     * @param  DataCollection<int, NotificationWebData>  $notifications
      */
     public function __construct(
-        #[DataCollectionOf(NotificationData::class)]
+        #[DataCollectionOf(NotificationWebData::class)]
         public DataCollection $notifications,
     ) {}
 }

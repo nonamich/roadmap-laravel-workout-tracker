@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Web;
 
-use App\Data\Shared\Exercises\ExerciseData;
 use App\Data\Shared\Exercises\ExerciseStoreData;
 use App\Data\Shared\Exercises\ExerciseUpdateData;
-use App\Data\Web\Exercises\Pages\Edit\ExerciseEditProps;
-use App\Data\Web\FlashMessageData;
+use App\Data\Web\Exercises\ExerciseWebData;
+use App\Data\Web\Exercises\Pages\ExerciseEditProps;
+use App\Data\Web\FlashMessageWebData;
 use App\Enums\FlashComponent;
 use App\Http\Controllers\BaseController;
 use App\Models\Exercise;
@@ -29,7 +29,7 @@ class ExerciseController extends BaseController
             )
             ->paginate(5)
             ->withQueryString();
-        $props = ExerciseData::collect($exercises, PaginatedDataCollection::class);
+        $props = ExerciseWebData::collect($exercises, PaginatedDataCollection::class);
 
         return Inertia::render('exercises/IndexPage', $props);
     }
@@ -51,10 +51,10 @@ class ExerciseController extends BaseController
             ->back()
             ->with(
                 'message',
-                FlashMessageData::from([
+                FlashMessageWebData::from([
                     'component' => FlashComponent::ExerciseCreated,
                     'props' => [
-                        'exercise' => ExerciseData::from($exercise),
+                        'exercise' => ExerciseWebData::from($exercise),
                     ],
                 ])
             );
@@ -63,7 +63,7 @@ class ExerciseController extends BaseController
     public function edit(Exercise $exercise): Response
     {
         $props = new ExerciseEditProps(
-            exercise: ExerciseData::fromModel($exercise)
+            exercise: ExerciseWebData::fromModel($exercise)
         );
 
         return Inertia::render('exercises/EditPage', $props);
@@ -77,10 +77,10 @@ class ExerciseController extends BaseController
             ->back()
             ->with(
                 'message',
-                FlashMessageData::from([
+                FlashMessageWebData::from([
                     'component' => FlashComponent::ExerciseUpdated,
                     'props' => [
-                        'exercise' => ExerciseData::from($exercise),
+                        'exercise' => ExerciseWebData::from($exercise),
                     ],
                 ])
             );

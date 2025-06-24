@@ -2,7 +2,7 @@
 import ExerciseCreateFormModal from '@/components/exercise/ExerciseCreateFormModal.vue';
 import RecurrenceModal from '@/components/recurrence/RecurrenceModal.vue';
 import type {
-  ExerciseData,
+  ExerciseWebData,
   WorkoutStoreData,
   WorkoutStoreExercisesData,
 } from '@/types/laravel-data';
@@ -20,7 +20,7 @@ type Form = WorkoutStoreData;
 type Props = {
   url: string;
   method: Method;
-  exercises: ExerciseData[];
+  exercises: ExerciseWebData[];
   initial?: Form;
 };
 

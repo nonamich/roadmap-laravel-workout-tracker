@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Data\Web\Workouts\Pages\Edit;
+namespace App\Data\Web\Workouts\Pages;
 
-use App\Data\Shared\Exercises\ExerciseData;
-use App\Data\Web\Recurrences\RecurrenceData;
-use App\Data\Web\Workouts\WorkoutData;
+use App\Data\Web\Exercises\ExerciseWebData;
+use App\Data\Web\Recurrences\RecurrenceWebData;
+use App\Data\Web\Workouts\WorkoutWebData;
 use Spatie\LaravelData\Attributes\DataCollectionOf;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\DataCollection;
@@ -15,19 +15,19 @@ class WorkoutEditProps extends Data
 {
     /**
      * @param  DataCollection<int, WorkoutEditExercisesProps>  $workoutExercises
-     * @param  DataCollection<int, ExerciseData>  $exercises
-     * @param  DataCollection<int, RecurrenceData>  $recurrences
+     * @param  DataCollection<int, ExerciseWebData>  $exercises
+     * @param  DataCollection<int, RecurrenceWebData>  $recurrences
      */
     public function __construct(
-        public WorkoutData $workout,
+        public WorkoutWebData $workout,
 
         #[DataCollectionOf(WorkoutEditExercisesProps::class)]
         public DataCollection $workoutExercises,
 
-        #[DataCollectionOf(ExerciseData::class)]
+        #[DataCollectionOf(ExerciseWebData::class)]
         public DataCollection $exercises,
 
-        #[DataCollectionOf(RecurrenceData::class)]
+        #[DataCollectionOf(RecurrenceWebData::class)]
         public DataCollection $recurrences,
     ) {}
 }

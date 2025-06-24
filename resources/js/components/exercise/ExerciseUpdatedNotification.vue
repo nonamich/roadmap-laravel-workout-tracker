@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { ExerciseData } from '@/types/laravel-data';
+import type { ExerciseWebData } from '@/types/laravel-data';
 import BaseNotification from '../BaseNotification.vue';
 
 type Props = {
-  exercise: ExerciseData;
+  exercise: ExerciseWebData;
 };
 
 defineProps<Props>();

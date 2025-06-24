@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Data\Web\Workouts\Pages\Edit;
+namespace App\Data\Web\Workouts\Pages;
 
 use App\Models\Exercise;
 use Spatie\LaravelData\Data;

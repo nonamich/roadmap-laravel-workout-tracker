@@ -2,16 +2,16 @@
 
 namespace App\Services;
 
-use App\Data\Web\Recurrences\Store\RecurrenceStoreData;
+use App\Data\Web\Recurrences\RecurrenceStoreWebData;
 use App\Models\Recurrence;
 use App\Models\Workout;
 
-class RecurrenceService
+class RecurrenceWebService
 {
-    public function __construct(private ScheduleService $scheduleService) {}
+    public function __construct(private ScheduleWebService $scheduleWebService) {}
 
     /**
-     * @param  array<RecurrenceStoreData>  $recurrencesDto
+     * @param  array<RecurrenceStoreWebData>  $recurrencesDto
      */
     public function createOrUpdate(Workout $workout, array $recurrencesDto): void
     {
@@ -54,6 +54,6 @@ class RecurrenceService
             ]);
         }
 
-        $this->scheduleService->createSchedulesByWorkout($workout);
+        $this->scheduleWebService->createSchedulesByWorkout($workout);
     }
 }

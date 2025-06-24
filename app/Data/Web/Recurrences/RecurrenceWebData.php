@@ -7,7 +7,7 @@ use Spatie\LaravelData\Data;
 use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 
 #[TypeScript]
-class RecurrenceData extends Data
+class RecurrenceWebData extends Data
 {
     public function __construct(
         public int $id,

@@ -2,8 +2,8 @@
 
 namespace App\Data\Web\Schedules;
 
-use App\Data\Web\Recurrences\RecurrenceData;
-use App\Data\Web\Workouts\WorkoutData;
+use App\Data\Web\Recurrences\RecurrenceWebData;
+use App\Data\Web\Workouts\WorkoutWebData;
 use App\Enums\ScheduleStatus;
 use App\Models\Schedule;
 use App\Models\Workout;
@@ -12,14 +12,14 @@ use Spatie\LaravelData\Data;
 use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 
 #[TypeScript]
-class ScheduleData extends Data
+class ScheduleWebData extends Data
 {
     public function __construct(
         public int $id,
         public DateTime $scheduled_at,
         public ScheduleStatus $status,
-        public WorkoutData $workout,
-        public ?RecurrenceData $recurrence,
+        public WorkoutWebData $workout,
+        public ?RecurrenceWebData $recurrence,
     ) {}
 
     public static function fromModel(Schedule $schedule): self
@@ -33,8 +33,8 @@ class ScheduleData extends Data
             id: $schedule->id,
             scheduled_at: $schedule->scheduled_at,
             status: $schedule->status,
-            workout: WorkoutData::fromModel($workout),
-            recurrence: $recurrence ? RecurrenceData::fromModel($recurrence) : null,
+            workout: WorkoutWebData::fromModel($workout),
+            recurrence: $recurrence ? RecurrenceWebData::fromModel($recurrence) : null,
         );
     }
 }

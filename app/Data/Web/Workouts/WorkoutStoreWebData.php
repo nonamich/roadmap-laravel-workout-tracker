@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Data\Web\Workouts\Store;
+namespace App\Data\Web\Workouts;
 
-use App\Data\Web\Recurrences\Store\RecurrenceStoreData;
+use App\Data\Web\Recurrences\RecurrenceStoreWebData;
 use App\Models\Workout;
 use App\Support\Utils;
 use Illuminate\Validation\Rule;
@@ -15,21 +15,21 @@ use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 
 #[TypeScript]
 #[MergeValidationRules]
-class WorkoutStoreData extends Data
+class WorkoutStoreWebData extends Data
 {
     /**
-     * @param  array<WorkoutStoreExercisesData>  $exercises
-     * @param  array<RecurrenceStoreData>  $recurrences
+     * @param  array<WorkoutStoreExercisesWebData>  $exercises
+     * @param  array<RecurrenceStoreWebData>  $recurrences
      */
     public function __construct(
         public ?int $id,
         public string $title,
         public ?string $description,
 
-        #[Filled, DataCollectionOf(WorkoutStoreExercisesData::class)]
+        #[Filled, DataCollectionOf(WorkoutStoreExercisesWebData::class)]
         public array $exercises,
 
-        #[Filled, DataCollectionOf(RecurrenceStoreData::class)]
+        #[Filled, DataCollectionOf(RecurrenceStoreWebData::class)]
         public array $recurrences
     ) {}
 

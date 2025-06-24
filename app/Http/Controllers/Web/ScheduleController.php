@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Web;
 
-use App\Data\Web\FlashMessageData;
+use App\Data\Web\FlashMessageWebData;
 use App\Data\Web\Schedules\Pages\ScheduleShowProps;
-use App\Data\Web\Schedules\ScheduleData;
+use App\Data\Web\Schedules\ScheduleWebData;
 use App\Http\Controllers\BaseController;
 use App\Models\Schedule;
 use Illuminate\Http\RedirectResponse;
@@ -17,7 +17,7 @@ class ScheduleController extends BaseController
     public function show(Schedule $schedule): Response
     {
         $props = new ScheduleShowProps(
-            schedule: ScheduleData::fromModel($schedule),
+            schedule: ScheduleWebData::fromModel($schedule),
         );
 
         return Inertia::render('schedules/ShowPage', props: $props);
@@ -30,7 +30,7 @@ class ScheduleController extends BaseController
             ->orderBy('scheduled_at')
             ->paginate(10);
 
-        $props = ScheduleData::collect($schedules, PaginatedDataCollection::class);
+        $props = ScheduleWebData::collect($schedules, PaginatedDataCollection::class);
 
         return Inertia::render('schedules/IndexPage', $props);
     }
@@ -48,7 +48,7 @@ class ScheduleController extends BaseController
 
         return redirect()->back()->with(
             'message',
-            new FlashMessageData(
+            new FlashMessageWebData(
                 title: __('messages.schedules.flash.done')
             )
         );
@@ -60,7 +60,7 @@ class ScheduleController extends BaseController
 
         return redirect()->back()->with(
             'message',
-            new FlashMessageData(
+            new FlashMessageWebData(
                 title: __('messages.schedules.flash.missed')
             )
         );

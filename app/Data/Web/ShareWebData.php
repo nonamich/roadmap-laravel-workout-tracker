@@ -2,24 +2,24 @@
 
 namespace App\Data\Web;
 
-use App\Data\Web\Notifications\NotificationData;
+use App\Data\Web\Notifications\NotificationWebData;
 use Spatie\LaravelData\Attributes\DataCollectionOf;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\DataCollection;
 use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 
 #[TypeScript]
-class ShareData extends Data
+class ShareWebData extends Data
 {
     /**
-     * @param  DataCollection<int, NotificationData>  $notifications
+     * @param  DataCollection<int, NotificationWebData>  $notifications
      */
     public function __construct(
-        public ?UserShareData $user,
+        public ?UserShareWebData $user,
 
-        #[DataCollectionOf(NotificationData::class)]
+        #[DataCollectionOf(NotificationWebData::class)]
         public DataCollection $notifications,
 
-        public FlashMessageData|string|null $flash,
+        public FlashMessageWebData|string|null $flash,
     ) {}
 }

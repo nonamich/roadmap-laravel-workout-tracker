@@ -8,7 +8,7 @@ use Spatie\LaravelData\Data;
 use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 
 #[TypeScript]
-class NotificationData extends Data
+class NotificationWebData extends Data
 {
     public function __construct(
         public string $id,
@@ -18,7 +18,7 @@ class NotificationData extends Data
         public ?DateTimeInterface $readAt,
     ) {}
 
-    public static function fromModel(DatabaseNotification $notification): NotificationData
+    public static function fromModel(DatabaseNotification $notification): NotificationWebData
     {
         return new self(
             id: $notification->id,

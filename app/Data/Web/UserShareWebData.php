@@ -6,7 +6,7 @@ use Spatie\LaravelData\Data;
 use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 
 #[TypeScript]
-class UserShareData extends Data
+class UserShareWebData extends Data
 {
     public function __construct(
         public int $id,

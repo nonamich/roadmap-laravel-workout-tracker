@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Web;
 
-use App\Data\Shared\Exercises\ExerciseData;
-use App\Data\Web\FlashMessageData;
-use App\Data\Web\Recurrences\RecurrenceData;
-use App\Data\Web\Workouts\Pages\Edit\WorkoutEditExercisesProps;
-use App\Data\Web\Workouts\Pages\Edit\WorkoutEditProps;
+use App\Data\Web\Exercises\ExerciseWebData;
+use App\Data\Web\FlashMessageWebData;
+use App\Data\Web\Recurrences\RecurrenceWebData;
 use App\Data\Web\Workouts\Pages\WorkoutCreateProps;
-use App\Data\Web\Workouts\Store\WorkoutStoreData;
-use App\Data\Web\Workouts\WorkoutData;
+use App\Data\Web\Workouts\Pages\WorkoutEditExercisesProps;
+use App\Data\Web\Workouts\Pages\WorkoutEditProps;
+use App\Data\Web\Workouts\WorkoutStoreWebData;
+use App\Data\Web\Workouts\WorkoutWebData;
 use App\Enums\FlashComponent;
 use App\Http\Controllers\BaseController;
 use App\Models\Scopes\SortScope;
 use App\Models\Workout;
-use App\Services\WorkoutService;
+use App\Services\WorkoutWebService;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -24,7 +24,7 @@ use Spatie\LaravelData\PaginatedDataCollection;
 class WorkoutController extends BaseController
 {
     public function __construct(
-        public readonly WorkoutService $workoutService
+        public readonly WorkoutWebService $workoutService
     ) {}
 
     public function index(): Response
@@ -38,7 +38,7 @@ class WorkoutController extends BaseController
             )
             ->paginate(5)
             ->withQueryString();
-        $props = WorkoutData::collect($workouts, PaginatedDataCollection::class);
+        $props = WorkoutWebData::collect($workouts, PaginatedDataCollection::class);
 
         return Inertia::render('workouts/IndexPage', $props);
 
@@ -49,13 +49,13 @@ class WorkoutController extends BaseController
         $user = $this->getUserOrThrow();
         $exercises = $user->exercises()->latest()->get();
         $props = new WorkoutCreateProps(
-            exercises: ExerciseData::collect($exercises, DataCollection::class)
+            exercises: ExerciseWebData::collect($exercises, DataCollection::class)
         );
 
         return Inertia::render('workouts/CreatePage', $props);
     }
 
-    public function store(WorkoutStoreData $workoutStoreData): RedirectResponse
+    public function store(WorkoutStoreWebData $workoutStoreData): RedirectResponse
     {
         $user = $this->getUserOrThrow();
         $workout = $this->workoutService->createOrUpdate($workoutStoreData, $user);
@@ -70,13 +70,13 @@ class WorkoutController extends BaseController
         $workoutExercises = $workout->exercises()->get();
         $recurrences = $workout->recurrences()->get();
         $props = new WorkoutEditProps(
-            workout: WorkoutData::fromModel($workout),
-            exercises: ExerciseData::collect($exercises, DataCollection::class),
+            workout: WorkoutWebData::fromModel($workout),
+            exercises: ExerciseWebData::collect($exercises, DataCollection::class),
             workoutExercises: WorkoutEditExercisesProps::collect(
                 $workoutExercises,
                 DataCollection::class
             ),
-            recurrences: RecurrenceData::collect(
+            recurrences: RecurrenceWebData::collect(
                 $recurrences,
                 DataCollection::class
             ),
@@ -85,7 +85,7 @@ class WorkoutController extends BaseController
         return Inertia::render('workouts/EditPage', $props);
     }
 
-    public function update(Workout $workout, WorkoutStoreData $workoutStoreData): RedirectResponse
+    public function update(Workout $workout, WorkoutStoreWebData $workoutStoreData): RedirectResponse
     {
         if (! $workoutStoreData->id || $workout->id !== $workoutStoreData->id) {
             abort(400);
@@ -97,10 +97,10 @@ class WorkoutController extends BaseController
         return redirect()->back()
             ->with(
                 'message',
-                FlashMessageData::from([
+                FlashMessageWebData::from([
                     'component' => FlashComponent::WorkoutUpdated,
                     'props' => [
-                        'workout' => WorkoutData::fromModel($workout),
+                        'workout' => WorkoutWebData::fromModel($workout),
                     ],
                 ])
             );

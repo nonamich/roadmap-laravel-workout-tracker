@@ -2,20 +2,20 @@
 
 namespace App\Data\Web;
 
-use App\Data\Web\Schedules\ScheduleData;
+use App\Data\Web\Schedules\ScheduleWebData;
 use Spatie\LaravelData\Attributes\DataCollectionOf;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\DataCollection;
 use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 
 #[TypeScript]
-class DashboardPageData extends Data
+class DashboardPageWebData extends Data
 {
     /**
-     * @param  DataCollection<int, ScheduleData>  $schedules
+     * @param  DataCollection<int, ScheduleWebData>  $schedules
      */
     public function __construct(
-        #[DataCollectionOf(ScheduleData::class)]
+        #[DataCollectionOf(ScheduleWebData::class)]
         public DataCollection $schedules,
     ) {}
 }

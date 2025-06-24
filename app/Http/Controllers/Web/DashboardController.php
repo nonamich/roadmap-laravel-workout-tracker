@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Web;
 
-use App\Data\Web\DashboardPageData;
-use App\Data\Web\Schedules\ScheduleData;
+use App\Data\Web\DashboardPageWebData;
+use App\Data\Web\Schedules\ScheduleWebData;
 use App\Enums\ScheduleStatus;
 use App\Http\Controllers\BaseController;
 use Carbon\Carbon;
@@ -23,8 +23,8 @@ class DashboardController extends BaseController
             ->limit(5)
             ->get();
 
-        $props = new DashboardPageData(
-            schedules: ScheduleData::collect($schedules, DataCollection::class)
+        $props = new DashboardPageWebData(
+            schedules: ScheduleWebData::collect($schedules, DataCollection::class)
         );
 
         return Inertia::render('DashboardPage', $props);

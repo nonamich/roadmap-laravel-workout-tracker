@@ -2,17 +2,17 @@
 
 namespace App\Services;
 
-use App\Data\Web\Workouts\Store\WorkoutStoreData;
-use App\Data\Web\Workouts\Store\WorkoutStoreExercisesData;
+use App\Data\Web\Workouts\WorkoutStoreExercisesWebData;
+use App\Data\Web\Workouts\WorkoutStoreWebData;
 use App\Models\User;
 use App\Models\Workout;
 use Illuminate\Support\Facades\DB;
 
-class WorkoutService
+class WorkoutWebService
 {
-    public function __construct(private RecurrenceService $recurrenceService) {}
+    public function __construct(private RecurrenceWebService $recurrenceWebService) {}
 
-    public function createOrUpdate(WorkoutStoreData $dto, User $user): Workout
+    public function createOrUpdate(WorkoutStoreWebData $dto, User $user): Workout
     {
         $workout = DB::transaction(function () use ($dto, $user) {
             if ($dto->id) {
@@ -30,7 +30,7 @@ class WorkoutService
                 $dto->exercises
             );
 
-            $this->recurrenceService->createOrUpdate($workout, $dto->recurrences);
+            $this->recurrenceWebService->createOrUpdate($workout, $dto->recurrences);
 
             return $workout;
         });
@@ -39,7 +39,7 @@ class WorkoutService
     }
 
     /**
-     * @param  array<WorkoutStoreExercisesData>  $workoutExercisesData
+     * @param  array<WorkoutStoreExercisesWebData>  $workoutExercisesData
      */
     public function syncExerciseWorkout(Workout $workout, array $workoutExercisesData): void
     {

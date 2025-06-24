@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { ExerciseData } from '@/types/laravel-data';
+import type { ExerciseWebData } from '@/types/laravel-data';
 import ExerciseForm from './ExerciseForm.vue';
 
-type Props = ExerciseData;
+type Props = ExerciseWebData;
 
 defineProps<Props>();
 </script>

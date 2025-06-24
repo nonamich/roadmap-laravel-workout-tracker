@@ -1,71 +1,64 @@
-export type DashboardPageData = {
+export type DashboardPageWebData = {
   schedules: any;
 };
-export type ExerciseData = {
+export type ExerciseEditProps = {
+  exercise: ExerciseWebData;
+};
+export type ExerciseWebData = {
   id: number;
   name: string;
   category: string;
   description: string | null;
 };
-export type ExerciseEditProps = {
-  exercise: ExerciseData;
-};
 export type FlashComponent =
   | 'exercise-created'
   | 'exercise-updated'
   | 'workout-updated';
-export type FlashMessageData = {
+export type FlashMessageWebData = {
   props: any;
   component: FlashComponent | null;
   title: string | null;
 };
-export type NotificationData = {
+export type NotificationWebData = {
   id: string;
   message: string;
   link: string;
   createdAt: any;
   readAt: any | null;
 };
-export type RecurrenceData = {
-  id: number;
-  name: string;
-  weekdays: Array<number>;
-  time: string;
-};
-export type RecurrenceStoreData = {
+export type RecurrenceStoreWebData = {
   id: number | null;
   name: string;
   weekdays: Array<any>;
   time: string;
 };
-export type ScheduleData = {
+export type RecurrenceWebData = {
   id: number;
-  scheduled_at: string;
-  status: ScheduleStatus;
-  workout: WorkoutData;
-  recurrence: RecurrenceData | null;
+  name: string;
+  weekdays: Array<number>;
+  time: string;
 };
 export type ScheduleShowProps = {
-  schedule: ScheduleData;
+  schedule: ScheduleWebData;
 };
 export type ScheduleStatus =
   | 'scheduled'
   | 'done'
   | 'wait-for-action'
   | 'missed';
-export type ScheduleStoreData = {
+export type ScheduleWebData = {
+  id: number;
+  scheduled_at: string;
   status: ScheduleStatus;
-  workoutId: number;
-  recurrenceId: number;
-  userId: number;
-  scheduledAt: any;
+  workout: WorkoutWebData;
+  recurrence: RecurrenceWebData | null;
 };
-export type ShareData = {
-  user: UserShareData | null;
+export type ShareWebData = {
+  user: UserShareWebData | null;
   notifications: any;
-  flash: FlashMessageData | string | null;
+  flash: FlashMessageWebData | string | null;
 };
-export type UserShareData = {
+export type UserShareWebData = {
   id: number;
   name: string;
   email: string;
@@ -73,34 +66,34 @@ export type UserShareData = {
 export type WorkoutCreateProps = {
   exercises: any;
 };
-export type WorkoutData = {
-  id: number;
-  title: string;
-  description: string | null;
-};
 export type WorkoutEditExercisesProps = {
   exerciseId: number;
   sets: number;
   reps: number;
 };
 export type WorkoutEditProps = {
-  workout: WorkoutData;
+  workout: WorkoutWebData;
   workoutExercises: any;
   exercises: any;
   recurrences: any;
 };
 export type WorkoutShowProps = {
-  workout: WorkoutData;
+  workout: WorkoutWebData;
 };
-export type WorkoutStoreData = {
+export type WorkoutStoreExercisesWebData = {
+  sets: number;
+  reps: number;
+  exerciseId: number;
+};
+export type WorkoutStoreWebData = {
   id: number | null;
   title: string;
   description: string | null;
   exercises: Array<any>;
   recurrences: Array<any>;
 };
-export type WorkoutStoreExercisesData = {
-  sets: number;
-  reps: number;
-  exerciseId: number;
+export type WorkoutWebData = {
+  id: number;
+  title: string;
+  description: string | null;
 };

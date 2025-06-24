@@ -2,14 +2,32 @@
 
 namespace App\Services;
 
-use App\Data\Web\Schedules\ScheduleStoreData;
+use App\Data\Api\Schedules\ScheduleStoreApiData;
+use App\Data\Api\Schedules\ScheduleUpdateApiData;
+use App\Data\Shared\Schedules\ScheduleStoreData;
 use App\Enums\ScheduleStatus;
 use App\Models\Schedule;
-use App\Models\Workout;
-use Carbon\Carbon;
+use App\Models\User;
 
 class ScheduleService
 {
+    public function storeSchedule(ScheduleStoreApiData $data): Schedule
+    {
+        return Schedule::create($data->toArray());
+    }
+
+    public function updateSchedule(Schedule $schedule, ScheduleUpdateApiData $data): Schedule
+    {
+        $schedule->update($data->toArray());
+
+        return $schedule;
+    }
+
+    public function deleteSchedule(Schedule $schedule): void
+    {
+        $schedule->delete();
+    }
+
     public function updateStatusToWaitForActionAndSave(): void
     {
         Schedule::where('scheduled_at', '<', now())
@@ -35,44 +53,13 @@ class ScheduleService
             });
     }
 
-    public function createSchedulesByWorkout(
-        Workout $workout,
-        int $nextDays = 14
-    ): void {
-        $now = Carbon::now();
-        $recurrences = $workout->recurrences()->get();
-
-        foreach ($recurrences as $recurrence) {
-            $recurrence->schedules()->delete();
-
-            for ($i = 0; $i < $nextDays; $i++) {
-                $date = $now->copy()->addDays($i);
-
-                if (in_array($date->dayOfWeek, $recurrence->weekdays, true)) {
-                    $datetime = $date->copy()->setTimeFromTimeString($recurrence->time);
-
-                    if ($datetime->lessThan($now)) {
-                        continue;
-                    }
-
-                    $data = new ScheduleStoreData(
-                        status: ScheduleStatus::Scheduled,
-                        workoutId: $workout->id,
-                        userId: $workout->user_id,
-                        recurrenceId: $recurrence->id,
-                        scheduledAt: $datetime,
-                    );
-
-                    Schedule::create([
-                        'status' => $data->status,
-                        'workout_id' => $data->workoutId,
-                        'user_id' => $data->userId,
-                        'recurrence_id' => $data->recurrenceId,
-                        'scheduled_at' => $data->scheduledAt,
-                    ]);
-                }
-            }
-        }
-
+    public function createSchedule(ScheduleStoreData $data, User $user): Schedule
+    {
+        return Schedule::create([
+            'user_id' => $user->id,
+            'workout_id' => $data->workoutId,
+            'recurrence_id' => $data->recurrenceId,
+            'scheduled_at' => $data->scheduledAt,
+        ]);
     }
 }
