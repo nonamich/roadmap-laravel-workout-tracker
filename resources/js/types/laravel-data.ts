@@ -48,7 +48,7 @@ export type ScheduleStatus =
   | 'missed';
 export type ScheduleWebData = {
   id: number;
-  scheduled_at: string;
+  scheduledAt: string;
   status: ScheduleStatus;
   workout: WorkoutWebData;
   recurrence: RecurrenceWebData | null;

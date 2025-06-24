@@ -4,10 +4,11 @@ namespace App\Rules;
 
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rules\DatabaseRule;
 
-class ExistsForUser implements ValidationRule
+class UniqueForUser implements ValidationRule
 {
     use DatabaseRule {
         DatabaseRule::__construct as databaseRuleConstruct;
@@ -16,27 +17,25 @@ class ExistsForUser implements ValidationRule
     public function __construct(
         string $table,
         string $column = 'id',
-        protected string $userColumn = 'user_id'
+        protected string $userColumn = 'user_id',
+        protected ?int $ignoreId = null,
+        protected string $ignoreColumn = 'id'
     ) {
         $this->databaseRuleConstruct($table, $column);
     }
 
-    /**
-     * Run the validation rule.
-     *
-     * @param  \Closure(string, ?string=): \Illuminate\Translation\PotentiallyTranslatedString  $fail
-     */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        $userId = auth()->id();
-
-        $exists = DB::table($this->table)
+        $query = DB::table($this->table)
             ->where($this->column, $value)
-            ->where($this->userColumn, $userId)
-            ->exists();
+            ->where($this->userColumn, Auth::id());
 
-        if (! $exists) {
-            $fail("The selected {$attribute} is invalid or does not belong to you.");
+        if ($this->ignoreId !== null) {
+            $query->where($this->ignoreColumn, '!=', $this->ignoreId);
+        }
+
+        if ($query->exists()) {
+            $fail("The {$attribute} has already been taken.");
         }
     }
 }

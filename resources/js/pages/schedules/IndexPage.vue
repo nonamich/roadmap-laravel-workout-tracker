@@ -3,10 +3,10 @@ import BaseContainer from '@/components/BaseContainer.vue';
 import BasePagination from '@/components/BasePagination.vue';
 import SchedulesTable from '@/components/SchedulesTable.vue';
 import type { PaginatedCollection } from '@/types/laravel';
-import type { ScheduleData } from '@/types/laravel-data';
+import type { ScheduleWebData } from '@/types/laravel-data';
 import { Head } from '@inertiajs/vue3';
 
-defineProps<PaginatedCollection<ScheduleData>>();
+defineProps<PaginatedCollection<ScheduleWebData>>();
 </script>
 
 <template>

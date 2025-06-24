@@ -4,8 +4,8 @@ namespace App\Data\Web\Workouts;
 
 use App\Data\Web\Recurrences\RecurrenceStoreWebData;
 use App\Models\Workout;
+use App\Rules\UniqueForUser;
 use App\Support\Utils;
-use Illuminate\Validation\Rule;
 use Spatie\LaravelData\Attributes\DataCollectionOf;
 use Spatie\LaravelData\Attributes\MergeValidationRules;
 use Spatie\LaravelData\Attributes\Validation\Filled;
@@ -38,17 +38,13 @@ class WorkoutStoreWebData extends Data
      */
     public static function rules(ValidationContext $context): array
     {
-        $workout = Utils::getModelFromRoute(Workout::class);
-        $unique = Rule::unique(Workout::class, 'title')
-            ->where('user_id', auth()->id());
-
-        if ($workout) {
-            $unique->ignore($workout->id);
-        }
-
         return [
             'title' => [
-                $unique,
+                new UniqueForUser(
+                    Workout::class,
+                    'title',
+                    ignoreId: Utils::getModelFromRoute(Workout::class)?->id
+                ),
             ],
         ];
     }

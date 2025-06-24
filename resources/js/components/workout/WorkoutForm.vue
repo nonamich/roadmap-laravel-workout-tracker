@@ -3,8 +3,8 @@ import ExerciseCreateFormModal from '@/components/exercise/ExerciseCreateFormMod
 import RecurrenceModal from '@/components/recurrence/RecurrenceModal.vue';
 import type {
   ExerciseWebData,
-  WorkoutStoreData,
-  WorkoutStoreExercisesData,
+  WorkoutStoreExercisesWebData,
+  WorkoutStoreWebData,
 } from '@/types/laravel-data';
 import { getDayName, timeToDate } from '@/utils';
 import type { Method } from '@inertiajs/core';
@@ -15,7 +15,7 @@ import { useModal } from 'vue-final-modal';
 import BaseButton from '../BaseButton.vue';
 import BaseTable from '../BaseTable.vue';
 
-type Form = WorkoutStoreData;
+type Form = WorkoutStoreWebData;
 
 type Props = {
   url: string;
@@ -24,7 +24,7 @@ type Props = {
   initial?: Form;
 };
 
-type SelectedExercise = Omit<WorkoutStoreExercisesData, 'exerciseId'> & {
+type SelectedExercise = Omit<WorkoutStoreExercisesWebData, 'exerciseId'> & {
   exerciseId: '' | number;
 };
 
@@ -128,7 +128,7 @@ watch(selectedExercises, () => {
   form.clearErrors('exercises');
 
   form.exercises = selectedExercises.filter(
-    (item): item is WorkoutStoreExercisesData => {
+    (item): item is WorkoutStoreExercisesWebData => {
       return Boolean(item.exerciseId);
     },
   );
@@ -382,11 +382,12 @@ watch(selectedExercises, () => {
             <BaseButton
               @click="
                 () => {
+                  debugger;
                   addSchedule({
                     id: null,
                     name: `#${form.recurrences.length + 1}`,
                     time:
-                      form.recurrences.at(-1)?.time || dayjs().from('hh:mm'),
+                      form.recurrences.at(-1)?.time || dayjs().format('hh:mm'),
                     weekdays: Array.from({ length: 7 }, (_, i) => i),
                   });
                 }

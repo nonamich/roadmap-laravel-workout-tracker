@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import type { ScheduleData } from '@/types/laravel-data';
+import type { ScheduleWebData } from '@/types/laravel-data';
 import { Link } from '@inertiajs/vue3';
 import dayjs from 'dayjs';
 import BaseButton from './BaseButton.vue';
 import BaseTable from './BaseTable.vue';
 
 type Props = {
-  schedules: ScheduleData[];
+  schedules: ScheduleWebData[];
 };
 
 defineProps<Props>();
@@ -25,10 +25,10 @@ defineProps<Props>();
   >
     <template #cell-time="{ row }">
       <div class="text-sm font-medium">
-        {{ dayjs(row.scheduled_at).format('ddd, MMM D, h:mm A') }}
+        {{ dayjs(row.scheduledAt).format('ddd, MMM D, h:mm A') }}
       </div>
       <div class="text-sm text-gray-400 first-letter:uppercase">
-        {{ dayjs(row.scheduled_at).fromNow() }}
+        {{ dayjs(row.scheduledAt).fromNow() }}
       </div>
     </template>
     <template #cell-workout="{ row }">

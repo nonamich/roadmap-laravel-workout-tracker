@@ -16,7 +16,7 @@ class ScheduleWebData extends Data
 {
     public function __construct(
         public int $id,
-        public DateTime $scheduled_at,
+        public DateTime $scheduledAt,
         public ScheduleStatus $status,
         public WorkoutWebData $workout,
         public ?RecurrenceWebData $recurrence,
@@ -31,7 +31,7 @@ class ScheduleWebData extends Data
 
         return new self(
             id: $schedule->id,
-            scheduled_at: $schedule->scheduled_at,
+            scheduledAt: $schedule->scheduled_at,
             status: $schedule->status,
             workout: WorkoutWebData::fromModel($workout),
             recurrence: $recurrence ? RecurrenceWebData::fromModel($recurrence) : null,

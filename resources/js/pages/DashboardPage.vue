@@ -2,10 +2,10 @@
 import BaseButton from '@/components/BaseButton.vue';
 import BaseContainer from '@/components/BaseContainer.vue';
 import SchedulesTable from '@/components/SchedulesTable.vue';
-import type { DashboardPageData } from '@/types/laravel-data';
+import type { DashboardPageWebData } from '@/types/laravel-data';
 import { Link } from '@inertiajs/vue3';
 
-defineProps<DashboardPageData>();
+defineProps<DashboardPageWebData>();
 </script>
 
 <template>

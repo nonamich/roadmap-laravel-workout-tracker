@@ -55,6 +55,8 @@ class ScheduleService
 
     public function createSchedule(ScheduleStoreData $data, User $user): Schedule
     {
+        ScheduleStoreData::validate($data);
+
         return Schedule::create([
             'user_id' => $user->id,
             'workout_id' => $data->workoutId,

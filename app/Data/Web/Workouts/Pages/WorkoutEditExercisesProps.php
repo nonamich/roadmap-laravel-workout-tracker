@@ -3,6 +3,8 @@
 namespace App\Data\Web\Workouts\Pages;
 
 use App\Models\Exercise;
+use App\Rules\ExistsForUser;
+use Spatie\LaravelData\Attributes\Validation\Rule;
 use Spatie\LaravelData\Data;
 use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 
@@ -10,6 +12,7 @@ use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 class WorkoutEditExercisesProps extends Data
 {
     public function __construct(
+        #[Rule(new ExistsForUser(Exercise::class))]
         public int $exerciseId,
         public int $sets,
         public int $reps,

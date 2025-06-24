@@ -31,7 +31,7 @@ defineProps<ScheduleShowProps>();
           >Date:</span
         >
         <span class="ml-2 text-gray-800 dark:text-gray-200">{{
-          schedule.scheduled_at
+          schedule.scheduledAt
         }}</span>
       </div>
       <div class="mb-4">

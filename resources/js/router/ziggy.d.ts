@@ -5,25 +5,68 @@ declare module 'ziggy-js' {
     "api.auth.register": [],
     "api.auth.me": [],
     "api.auth.logout": [],
-    "exercises:api.exercises.index": [],
-    "exercises:api.exercises.store": [],
-    "exercises:api.exercises.show": [
+    "api.exercises.index": [],
+    "api.exercises.store": [],
+    "api.exercises.show": [
         {
             "name": "exercise",
             "required": true,
             "binding": "id"
         }
     ],
-    "exercises:api.exercises.update": [
+    "api.exercises.update": [
         {
             "name": "exercise",
             "required": true,
             "binding": "id"
         }
     ],
-    "exercises:api.exercises.destroy": [
+    "api.exercises.destroy": [
         {
             "name": "exercise",
+            "required": true,
+            "binding": "id"
+        }
+    ],
+    "api.workouts.index": [],
+    "api.workouts.store": [],
+    "api.workouts.show": [
+        {
+            "name": "workout",
+            "required": true
+        }
+    ],
+    "api.workouts.update": [
+        {
+            "name": "workout",
+            "required": true
+        }
+    ],
+    "api.workouts.destroy": [
+        {
+            "name": "workout",
+            "required": true
+        }
+    ],
+    "api.schedules.index": [],
+    "api.schedules.store": [],
+    "api.schedules.show": [
+        {
+            "name": "schedule",
+            "required": true,
+            "binding": "id"
+        }
+    ],
+    "api.schedules.update": [
+        {
+            "name": "schedule",
+            "required": true,
+            "binding": "id"
+        }
+    ],
+    "api.schedules.destroy": [
+        {
+            "name": "schedule",
             "required": true,
             "binding": "id"
         }

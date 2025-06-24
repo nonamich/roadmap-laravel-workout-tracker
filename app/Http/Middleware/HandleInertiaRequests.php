@@ -46,7 +46,7 @@ class HandleInertiaRequests extends Middleware
             flash: $request->session()->get('message'),
             user: $user ? UserShareWebData::from($user) : null,
             notifications: NotificationWebData::collect(
-                $user ? $user->notifications()->get() : [],
+                $user ? $user->notifications()->limit(10)->get() : [],
                 DataCollection::class
             )
         );

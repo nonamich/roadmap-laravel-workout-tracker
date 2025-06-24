@@ -2,7 +2,10 @@
 
 namespace App\Data\Web\Workouts;
 
+use App\Models\Exercise;
+use App\Rules\ExistsForUser;
 use Spatie\LaravelData\Attributes\Validation\Min;
+use Spatie\LaravelData\Attributes\Validation\Rule;
 use Spatie\LaravelData\Data;
 use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 
@@ -16,6 +19,7 @@ class WorkoutStoreExercisesWebData extends Data
         #[Min(1)]
         public int $reps,
 
+        #[Rule(new ExistsForUser(Exercise::class))]
         public int $exerciseId,
     ) {}
 }

@@ -3,8 +3,8 @@
 namespace App\Data\Shared\Exercises;
 
 use App\Models\Exercise;
+use App\Rules\UniqueForUser;
 use App\Support\Utils;
-use Illuminate\Validation\Rule;
 use Spatie\LaravelData\Attributes\MergeValidationRules;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\Optional;
@@ -26,9 +26,11 @@ class ExerciseUpdateData extends Data
     {
         return [
             'name' => [
-                Rule::unique(Exercise::class, 'name')
-                    ->where('user_id', auth()->id())
-                    ->ignore(Utils::getModelFromRoute(Exercise::class)?->id),
+                new UniqueForUser(
+                    table: Exercise::class,
+                    column: 'name',
+                    ignoreId: Utils::getModelFromRoute(Exercise::class)?->id
+                ),
             ],
         ];
     }
