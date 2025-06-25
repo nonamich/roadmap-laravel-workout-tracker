@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Data\Shared\Exercises\ExerciseStoreData;
-use App\Data\Shared\Exercises\ExerciseUpdateData;
-use App\Data\Shared\IndexQueryData;
+use App\Data\Api\Workouts\Requests\WorkoutStoreApiData;
+use App\Data\Api\Workouts\Requests\WorkoutUpdateApiData;
+use App\Data\Shared\Requests\IndexQueryData;
 use App\Http\Controllers\BaseController;
-use App\Models\Exercise;
+use App\Models\Workout;
 use App\Services\PaginationService;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Knuckles\Scribe\Attributes\Authenticated;
@@ -14,48 +14,48 @@ use Knuckles\Scribe\Attributes\Group;
 use Knuckles\Scribe\Attributes\ResponseFromApiResource;
 
 #[Authenticated]
-#[Group('Workouts')]
+#[Group('Workout')]
 class WorkoutController extends BaseController
 {
     public function __construct(private PaginationService $pagination)
     {
-        $this->authorizeResource(Exercise::class, 'workout');
+        $this->authorizeResource(Workout::class, 'workout');
         $this->middleware('auth:api');
     }
 
-    #[ResponseFromApiResource(name: JsonResource::class, model: Exercise::class, collection: true, simplePaginate: 10)]
+    #[ResponseFromApiResource(name: JsonResource::class, model: Workout::class, collection: true, simplePaginate: 10)]
     public function index(IndexQueryData $data): JsonResource
     {
-        $query = Exercise::query()
+        $query = Workout::query()
             ->where('user_id', '=', $this->getUserOrThrow()->id);
 
         return new JsonResource($this->pagination->paginate($query, $data));
     }
 
-    #[ResponseFromApiResource(name: JsonResource::class, model: Exercise::class)]
-    public function store(ExerciseStoreData $data): JsonResource
+    #[ResponseFromApiResource(name: JsonResource::class, model: Workout::class)]
+    public function store(WorkoutStoreApiData $data): JsonResource
     {
         return new JsonResource(
-            Exercise::create($data->toArray())
+            Workout::create($data->toArray())
         );
     }
 
-    #[ResponseFromApiResource(name: JsonResource::class, model: Exercise::class)]
-    public function show(Exercise $exercise): JsonResource
+    #[ResponseFromApiResource(name: JsonResource::class, model: Workout::class)]
+    public function show(Workout $workout): JsonResource
     {
-        return new JsonResource($exercise);
+        return new JsonResource($workout);
     }
 
-    #[ResponseFromApiResource(name: JsonResource::class, model: Exercise::class)]
-    public function update(Exercise $exercise, ExerciseUpdateData $data): JsonResource
+    #[ResponseFromApiResource(name: JsonResource::class, model: Workout::class)]
+    public function update(Workout $workout, WorkoutUpdateApiData $data): JsonResource
     {
         return new JsonResource(
-            $exercise->update($data->toArray())
+            $workout->update($data->toArray())
         );
     }
 
-    public function destroy(Exercise $exercise): void
+    public function destroy(Workout $workout): void
     {
-        $exercise->delete();
+        $workout->delete();
     }
 }

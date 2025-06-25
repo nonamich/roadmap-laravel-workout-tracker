@@ -33,19 +33,22 @@ declare module 'ziggy-js' {
     "api.workouts.show": [
         {
             "name": "workout",
-            "required": true
+            "required": true,
+            "binding": "id"
         }
     ],
     "api.workouts.update": [
         {
             "name": "workout",
-            "required": true
+            "required": true,
+            "binding": "id"
         }
     ],
     "api.workouts.destroy": [
         {
             "name": "workout",
-            "required": true
+            "required": true,
+            "binding": "id"
         }
     ],
     "api.schedules.index": [],
@@ -75,7 +78,26 @@ declare module 'ziggy-js' {
     "login.store": [],
     "register": [],
     "register.store": [],
+    "password.request": [],
+    "password.email": [],
+    "password.reset": [
+        {
+            "name": "token",
+            "required": true
+        }
+    ],
+    "password.store": [],
     "logout": [],
+    "verification.verify": [
+        {
+            "name": "id",
+            "required": true
+        },
+        {
+            "name": "hash",
+            "required": true
+        }
+    ],
     "dashboard.show": [],
     "exercises.create": [],
     "exercises.index": [],

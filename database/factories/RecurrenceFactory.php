@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Workout;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,10 @@ class RecurrenceFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => fake()->word(),
+            'time' => fake()->time(),
+            'weekdays' => fake()->randomElements([0, 1, 2, 3, 4, 5, 6]),
+            'workout_id' => Workout::factory(),
         ];
     }
 }

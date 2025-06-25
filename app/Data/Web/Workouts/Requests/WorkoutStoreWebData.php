@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Data\Web\Workouts;
+namespace App\Data\Web\Workouts\Requests;
 
-use App\Data\Web\Recurrences\RecurrenceStoreWebData;
+use App\Data\Web\Recurrences\Requests\RecurrenceStoreWebData;
 use App\Models\Workout;
 use App\Rules\UniqueForUser;
 use App\Support\Utils;

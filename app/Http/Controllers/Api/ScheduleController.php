@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Data\Api\Schedules\ScheduleStoreApiData;
-use App\Data\Api\Schedules\ScheduleUpdateApiData;
-use App\Data\Shared\IndexQueryData;
+use App\Data\Api\Schedules\Requests\ScheduleStoreApiData;
+use App\Data\Api\Schedules\Requests\ScheduleUpdateApiData;
+use App\Data\Shared\Requests\IndexQueryData;
 use App\Http\Controllers\BaseController;
 use App\Models\Exercise;
 use App\Models\Schedule;

@@ -2,6 +2,10 @@
 
 namespace Database\Factories;
 
+use App\Enums\ScheduleStatus;
+use App\Models\Recurrence;
+use App\Models\User;
+use App\Models\Workout;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +21,11 @@ class ScheduleFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'scheduled_at' => fake()->dateTime(),
+            'status' => ScheduleStatus::Scheduled,
+            'workout_id' => Workout::factory(),
+            'user_id' => User::factory(),
+            'recurrence_id' => Recurrence::factory(),
         ];
     }
 }

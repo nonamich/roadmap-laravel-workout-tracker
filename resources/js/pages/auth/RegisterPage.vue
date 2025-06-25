@@ -5,7 +5,7 @@ import { Head } from '@inertiajs/vue3';
 
 <template>
   <Head title="Login" />
-  <div class="grid place-items-center p-5">
+  <div class="grid place-items-center p-15">
     <AuthForm type="register" />
   </div>
 </template>

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Web;
 
-use App\Data\Shared\Exercises\ExerciseStoreData;
-use App\Data\Shared\Exercises\ExerciseUpdateData;
+use App\Data\Shared\Exercises\Requests\ExerciseStoreData;
+use App\Data\Shared\Exercises\Requests\ExerciseUpdateData;
 use App\Data\Web\Exercises\ExerciseWebData;
 use App\Data\Web\Exercises\Pages\ExerciseEditProps;
 use App\Data\Web\FlashMessageWebData;

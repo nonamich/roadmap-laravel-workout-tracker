@@ -12,15 +12,15 @@ class SchedulePolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Schedule $Schedules): bool
+    public function view(User $user, Schedule $schedule): bool
     {
-        return false;
+        return $schedule->user_id === $user->id;
     }
 
     /**
@@ -28,38 +28,38 @@ class SchedulePolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Schedule $Schedules): bool
+    public function update(User $user, Schedule $schedule): bool
     {
-        return false;
+        return $schedule->user_id === $user->id;
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Schedule $Schedules): bool
+    public function delete(User $user, Schedule $schedule): bool
     {
-        return false;
+        return $schedule->user_id === $user->id;
     }
 
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Schedule $Schedules): bool
+    public function restore(User $user, Schedule $schedule): bool
     {
-        return false;
+        return $schedule->user_id === $user->id;
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Schedule $Schedules): bool
+    public function forceDelete(User $user, Schedule $schedule): bool
     {
-        return false;
+        return $schedule->user_id === $user->id;
     }
 }

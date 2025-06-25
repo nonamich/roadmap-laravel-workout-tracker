@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Data\Shared\Exercises;
+namespace App\Data\Shared\Exercises\Requests;
 
 use App\Models\Exercise;
 use App\Rules\UniqueForUser;

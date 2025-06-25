@@ -35,11 +35,16 @@ class AppServiceProvider extends ServiceProvider
     private function setPasswordDefaultRules(): void
     {
         Password::defaults(function () {
-            return Password::min(8)
-                ->mixedCase()
-                ->letters()
-                ->numbers()
-                ->symbols();
+            $rule = Password::min(6);
+
+            return $this->app->isProduction()
+                ? $rule->mixedCase()
+                    ->uncompromised()
+                    ->mixedCase()
+                    ->letters()
+                    ->numbers()
+                    ->symbols()
+                : $rule;
         });
     }
 }

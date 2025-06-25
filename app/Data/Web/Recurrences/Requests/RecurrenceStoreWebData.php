@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Data\Web\Recurrences;
+namespace App\Data\Web\Recurrences\Requests;
 
 use App\Models\Recurrence;
 use App\Rules\TimeRule;

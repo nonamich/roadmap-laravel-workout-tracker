@@ -1,22 +1,20 @@
 <?php
 
-namespace App\Data\Api\Workouts;
+namespace App\Data\Api\Workouts\Requests;
 
 use App\Models\Workout;
-use App\Support\Utils;
 use Illuminate\Validation\Rule;
 use Spatie\LaravelData\Attributes\MergeValidationRules;
 use Spatie\LaravelData\Data;
-use Spatie\LaravelData\Optional;
 use Spatie\LaravelData\Support\Validation\ValidationContext;
 
 #[MergeValidationRules]
-class WorkoutUpdateApiData extends Data
+class WorkoutStoreApiData extends Data
 {
     public function __construct(
-        public readonly Optional|string $name,
-        public readonly Optional|string $category,
-        public readonly Optional|string $description,
+        public readonly string $name,
+        public readonly string $category,
+        public readonly ?string $description,
     ) {}
 
     /**
@@ -27,8 +25,7 @@ class WorkoutUpdateApiData extends Data
         return [
             'name' => [
                 Rule::unique(Workout::class, 'name')
-                    ->where('user_id', auth()->id())
-                    ->ignore(Utils::getModelFromRoute(Workout::class)?->id),
+                    ->where('user_id', auth()->id()),
             ],
         ];
     }

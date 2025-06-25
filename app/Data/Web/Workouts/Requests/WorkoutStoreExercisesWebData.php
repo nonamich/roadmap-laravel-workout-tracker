@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Data\Web\Workouts;
+namespace App\Data\Web\Workouts\Requests;
 
 use App\Models\Exercise;
 use App\Rules\ExistsForUser;

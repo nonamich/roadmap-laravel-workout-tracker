@@ -115,10 +115,11 @@ const form = useForm(type, {
             </div>
             <div class="text-sm">
               <a
-                href="#"
+                :href="route('password.request')"
                 class="font-medium text-blue-600 hover:text-blue-600 dark:text-blue-500"
-                >Forgot password?</a
               >
+                Forgot password?
+              </a>
             </div>
           </div>
           <div

@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Data\Shared\IndexQueryData;
+use App\Data\Shared\Requests\IndexQueryData;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\Paginator;

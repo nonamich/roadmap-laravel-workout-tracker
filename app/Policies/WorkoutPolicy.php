@@ -12,7 +12,7 @@ class WorkoutPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -20,7 +20,7 @@ class WorkoutPolicy
      */
     public function view(User $user, Workout $workout): bool
     {
-        return false;
+        return $workout->user_id === $user->id;
     }
 
     /**
@@ -28,7 +28,7 @@ class WorkoutPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -36,7 +36,7 @@ class WorkoutPolicy
      */
     public function update(User $user, Workout $workout): bool
     {
-        return false;
+        return $workout->user_id === $user->id;
     }
 
     /**
@@ -44,7 +44,7 @@ class WorkoutPolicy
      */
     public function delete(User $user, Workout $workout): bool
     {
-        return false;
+        return $workout->user_id === $user->id;
     }
 
     /**
@@ -52,7 +52,7 @@ class WorkoutPolicy
      */
     public function restore(User $user, Workout $workout): bool
     {
-        return false;
+        return $workout->user_id === $user->id;
     }
 
     /**
@@ -60,6 +60,6 @@ class WorkoutPolicy
      */
     public function forceDelete(User $user, Workout $workout): bool
     {
-        return false;
+        return $workout->user_id === $user->id;
     }
 }

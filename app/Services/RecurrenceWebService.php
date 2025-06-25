@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Data\Web\Recurrences\RecurrenceStoreWebData;
+use App\Data\Web\Recurrences\Requests\RecurrenceStoreWebData;
 use App\Models\Recurrence;
 use App\Models\Workout;
 

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Data\Shared\Exercises\ExerciseStoreData;
-use App\Data\Shared\Exercises\ExerciseUpdateData;
-use App\Data\Shared\IndexQueryData;
+use App\Data\Shared\Exercises\Requests\ExerciseStoreData;
+use App\Data\Shared\Exercises\Requests\ExerciseUpdateData;
+use App\Data\Shared\Requests\IndexQueryData;
 use App\Http\Controllers\BaseController;
 use App\Models\Exercise;
 use App\Services\PaginationService;
@@ -14,7 +14,7 @@ use Knuckles\Scribe\Attributes\Group;
 use Knuckles\Scribe\Attributes\ResponseFromApiResource;
 
 #[Authenticated]
-#[Group('Exercises')]
+#[Group('Exercise')]
 class ExerciseController extends BaseController
 {
     public function __construct(private PaginationService $pagination)

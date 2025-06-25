@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Data\Shared;
+namespace App\Data\Shared\Requests;
 
 use Spatie\LaravelData\Attributes\MapName;
 use Spatie\LaravelData\Attributes\MergeValidationRules;

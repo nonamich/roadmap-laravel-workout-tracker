@@ -2,15 +2,13 @@
 
 namespace App\Services;
 
-use App\Data\Shared\Schedules\ScheduleStoreData;
+use App\Models\Schedule;
 use App\Models\User;
 use App\Models\Workout;
 use Carbon\Carbon;
 
 class ScheduleWebService
 {
-    public function __construct(private ScheduleService $scheduleService) {}
-
     public function createSchedulesByWorkout(
         Workout $workout,
         int $nextDays = 14
@@ -35,13 +33,12 @@ class ScheduleWebService
                         continue;
                     }
 
-                    $data = new ScheduleStoreData(
-                        workoutId: $workout->id,
-                        recurrenceId: $recurrence->id,
-                        scheduledAt: $datetime,
-                    );
-
-                    $this->scheduleService->createSchedule($data, $user);
+                    Schedule::create([
+                        'user_id' => $user->id,
+                        'workout_id' => $workout->id,
+                        'recurrence_id' => $recurrence->id,
+                        'scheduled_at' => $datetime,
+                    ]);
                 }
             }
         }

@@ -2,12 +2,10 @@
 
 namespace App\Services;
 
-use App\Data\Api\Schedules\ScheduleStoreApiData;
-use App\Data\Api\Schedules\ScheduleUpdateApiData;
-use App\Data\Shared\Schedules\ScheduleStoreData;
+use App\Data\Api\Schedules\Requests\ScheduleStoreApiData;
+use App\Data\Api\Schedules\Requests\ScheduleUpdateApiData;
 use App\Enums\ScheduleStatus;
 use App\Models\Schedule;
-use App\Models\User;
 
 class ScheduleService
 {
@@ -51,17 +49,5 @@ class ScheduleService
 
                 $schedule->save();
             });
-    }
-
-    public function createSchedule(ScheduleStoreData $data, User $user): Schedule
-    {
-        ScheduleStoreData::validate($data);
-
-        return Schedule::create([
-            'user_id' => $user->id,
-            'workout_id' => $data->workoutId,
-            'recurrence_id' => $data->recurrenceId,
-            'scheduled_at' => $data->scheduledAt,
-        ]);
     }
 }

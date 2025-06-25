@@ -8,7 +8,7 @@ use App\Data\Web\Recurrences\RecurrenceWebData;
 use App\Data\Web\Workouts\Pages\WorkoutCreateProps;
 use App\Data\Web\Workouts\Pages\WorkoutEditExercisesProps;
 use App\Data\Web\Workouts\Pages\WorkoutEditProps;
-use App\Data\Web\Workouts\WorkoutStoreWebData;
+use App\Data\Web\Workouts\Requests\WorkoutStoreWebData;
 use App\Data\Web\Workouts\WorkoutWebData;
 use App\Enums\FlashComponent;
 use App\Http\Controllers\BaseController;
