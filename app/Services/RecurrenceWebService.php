@@ -36,6 +36,7 @@ class RecurrenceWebService
                         'name' => $dto->name,
                         'time' => $dto->time,
                         'weekdays' => $dto->weekdays,
+                        'user_id' => $workout->user_id,
                     ]
                 )
             );

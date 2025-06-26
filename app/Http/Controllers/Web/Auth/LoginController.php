@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Web\Auth;
 
+use App\Data\Web\Auth\LoginStoreData;
 use App\Http\Controllers\BaseController;
-use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
@@ -18,16 +17,15 @@ class LoginController extends BaseController
         return Inertia::render('auth/LoginPage');
     }
 
-    public function store(LoginRequest $request): RedirectResponse
+    public function store(LoginStoreData $data): RedirectResponse
     {
-        $credentials = $request->all([
-            'email',
-            'password',
-        ]);
-        $remember = $request->has('remember');
+        $credentials = [
+            'email' => $data->email,
+            'password' => $data->password,
+        ];
 
-        if (Auth::attempt($credentials, $remember)) {
-            $request->session()->regenerate();
+        if (Auth::attempt($credentials, $data->remember)) {
+            request()->session()->regenerate();
 
             return redirect()->intended();
         }
@@ -38,12 +36,12 @@ class LoginController extends BaseController
         ]);
     }
 
-    public function destroy(Request $request): RedirectResponse
+    public function destroy(): RedirectResponse
     {
         Auth::guard('web')->logout();
 
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
 
         return redirect()->route('homepage.show');
     }

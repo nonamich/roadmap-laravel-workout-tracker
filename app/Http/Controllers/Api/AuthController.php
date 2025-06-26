@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Data\Api\Auth\LoginStoreApiData;
+use App\Data\Api\Auth\RegisterStoreApiData;
+use App\Data\Shared\CreateUserData;
 use App\Http\Controllers\BaseController;
-use App\Http\Requests\Auth\LoginRequest;
-use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
 use App\Services\JwtService;
-use Illuminate\Auth\Events\Registered;
+use App\Services\UserService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Knuckles\Scribe\Attributes\Authenticated;
@@ -18,7 +19,9 @@ use Knuckles\Scribe\Attributes\ResponseFromApiResource;
 #[Group('Auth')]
 class AuthController extends BaseController
 {
-    public function __construct(private readonly JwtService $jwtService) {}
+    public function __construct(
+        private readonly JwtService $jwtService,
+        private readonly UserService $userService) {}
 
     #[Response(
         content: [
@@ -38,12 +41,12 @@ class AuthController extends BaseController
         ],
         status: 401
     )]
-    public function login(LoginRequest $request): JsonResponse
+    public function login(LoginStoreApiData $data): JsonResponse
     {
-        $credentials = $request->only([
-            'email',
-            'password',
-        ]);
+        $credentials = [
+            'email' => $data->email,
+            'password' => $data->password,
+        ];
 
         $isAuth = auth()->attempt($credentials);
 
@@ -63,15 +66,11 @@ class AuthController extends BaseController
     }
 
     #[ResponseFromApiResource(JsonResource::class, User::class)]
-    public function register(RegisterRequest $request): JsonResource
+    public function register(RegisterStoreApiData $data): JsonResource
     {
-        $user = User::create($request->only([
-            'name',
-            'email',
-            'password',
-        ]));
-
-        event(new Registered($user));
+        $user = $this->userService->create(
+            CreateUserData::from($data)
+        );
 
         return new JsonResource($user);
     }

@@ -6,7 +6,6 @@ use App\Data\Api\Schedules\Requests\ScheduleStoreApiData;
 use App\Data\Api\Schedules\Requests\ScheduleUpdateApiData;
 use App\Data\Shared\Requests\IndexQueryData;
 use App\Http\Controllers\BaseController;
-use App\Models\Exercise;
 use App\Models\Schedule;
 use App\Services\PaginationService;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -16,7 +15,7 @@ use Knuckles\Scribe\Attributes\ResponseFromApiResource;
 
 #[Authenticated]
 #[Group('Schedule')]
-class ScheduleController extends BaseController
+class ScheduleResourceController extends BaseController
 {
     public function __construct(private PaginationService $pagination)
     {
@@ -37,7 +36,10 @@ class ScheduleController extends BaseController
     public function store(ScheduleStoreApiData $data): JsonResource
     {
         return new JsonResource(
-            Schedule::create($data->toArray())
+            Schedule::create([
+                'scheduled_at' => $data->scheduledAt,
+                'workout_id' => $data->workoutId,
+            ])
         );
     }
 
@@ -50,12 +52,15 @@ class ScheduleController extends BaseController
     #[ResponseFromApiResource(name: JsonResource::class, model: Schedule::class)]
     public function update(Schedule $schedule, ScheduleUpdateApiData $data): JsonResource
     {
-        return new JsonResource(
-            $schedule->update($data->toArray())
-        );
+        $schedule->update([
+            'scheduled_at' => $data->scheduledAt,
+            'workout_id' => $data->workoutId,
+        ]);
+
+        return new JsonResource($schedule);
     }
 
-    public function destroy(Exercise $schedule): void
+    public function destroy(Schedule $schedule): void
     {
         $schedule->delete();
     }

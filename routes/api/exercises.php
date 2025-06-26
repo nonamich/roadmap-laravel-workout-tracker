@@ -1,25 +1,11 @@
 <?php
 
-use App\Http\Controllers\Api\ExerciseController;
-use App\Http\Controllers\Api\ScheduleController;
-use App\Http\Controllers\Api\WorkoutController;
+use App\Http\Controllers\Api\ExerciseResourceController;
 use Illuminate\Support\Facades\Route;
-
-// Route::middleware('api')->group(
-//     function () {
-//         Route::get('/test', [ExerciseController::class, 'test']);
-//     }
-// );
 
 Route::middleware('auth:api')->group(
     function () {
-        Route::apiResource('/exercises', ExerciseController::class)
+        Route::apiResource('/exercises', ExerciseResourceController::class)
             ->names('api.exercises');
-
-        Route::apiResource('/workouts', WorkoutController::class)
-            ->names('api.workouts');
-
-        Route::apiResource('/schedules', ScheduleController::class)
-            ->names('api.schedules');
     }
 );

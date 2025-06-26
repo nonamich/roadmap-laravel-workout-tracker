@@ -28,25 +28,25 @@ declare module 'ziggy-js' {
             "binding": "id"
         }
     ],
-    "api.workouts.index": [],
-    "api.workouts.store": [],
-    "api.workouts.show": [
+    "api.recurrence.index": [],
+    "api.recurrence.store": [],
+    "api.recurrence.show": [
         {
-            "name": "workout",
+            "name": "recurrence",
             "required": true,
             "binding": "id"
         }
     ],
-    "api.workouts.update": [
+    "api.recurrence.update": [
         {
-            "name": "workout",
+            "name": "recurrence",
             "required": true,
             "binding": "id"
         }
     ],
-    "api.workouts.destroy": [
+    "api.recurrence.destroy": [
         {
-            "name": "workout",
+            "name": "recurrence",
             "required": true,
             "binding": "id"
         }
@@ -70,6 +70,29 @@ declare module 'ziggy-js' {
     "api.schedules.destroy": [
         {
             "name": "schedule",
+            "required": true,
+            "binding": "id"
+        }
+    ],
+    "api.workouts.index": [],
+    "api.workouts.store": [],
+    "api.workouts.show": [
+        {
+            "name": "workout",
+            "required": true,
+            "binding": "id"
+        }
+    ],
+    "api.workouts.update": [
+        {
+            "name": "workout",
+            "required": true,
+            "binding": "id"
+        }
+    ],
+    "api.workouts.destroy": [
+        {
+            "name": "workout",
             "required": true,
             "binding": "id"
         }
@@ -105,22 +128,19 @@ declare module 'ziggy-js' {
     "exercises.edit": [
         {
             "name": "exercise",
-            "required": true,
-            "binding": "id"
+            "required": true
         }
     ],
     "exercises.update": [
         {
             "name": "exercise",
-            "required": true,
-            "binding": "id"
+            "required": true
         }
     ],
     "exercises.destroy": [
         {
             "name": "exercise",
-            "required": true,
-            "binding": "id"
+            "required": true
         }
     ],
     "homepage.show": [],
@@ -128,29 +148,25 @@ declare module 'ziggy-js' {
     "schedules.show": [
         {
             "name": "schedule",
-            "required": true,
-            "binding": "id"
+            "required": true
         }
     ],
     "schedules.destroy": [
         {
             "name": "schedule",
-            "required": true,
-            "binding": "id"
+            "required": true
         }
     ],
     "schedules.mark-as-done": [
         {
             "name": "schedule",
-            "required": true,
-            "binding": "id"
+            "required": true
         }
     ],
     "schedules.mark-as-missed": [
         {
             "name": "schedule",
-            "required": true,
-            "binding": "id"
+            "required": true
         }
     ],
     "workouts.create": [],
@@ -159,22 +175,19 @@ declare module 'ziggy-js' {
     "workouts.edit": [
         {
             "name": "workout",
-            "required": true,
-            "binding": "id"
+            "required": true
         }
     ],
     "workouts.update": [
         {
             "name": "workout",
-            "required": true,
-            "binding": "id"
+            "required": true
         }
     ],
     "workouts.destroy": [
         {
             "name": "workout",
-            "required": true,
-            "binding": "id"
+            "required": true
         }
     ]
 }

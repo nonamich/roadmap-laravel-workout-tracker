@@ -5,10 +5,12 @@ namespace App\Models;
 use App\Enums\ScheduleStatus;
 use App\Exceptions\InvalidStatusChangeException;
 use App\Observers\ScheduleObserver;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 #[ObservedBy([ScheduleObserver::class])]
 class Schedule extends Model
@@ -82,5 +84,28 @@ class Schedule extends Model
         $this->status = ScheduleStatus::Missed;
 
         $this->save();
+    }
+
+    protected static function booted()
+    {
+        static::deleting(function ($model) {
+            if ($model->recurrence_id !== null) {
+                throw new AuthorizationException;
+            }
+        });
+
+        static::updating(function ($model) {
+            if ($model->recurrence_id !== null) {
+                throw new AuthorizationException;
+            }
+        });
+    }
+
+    /**
+     * @return MorphMany<Comment, covariant $this>
+     */
+    public function comments(): MorphMany
+    {
+        return $this->morphMany(Comment::class, 'commentable');
     }
 }

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Web\Auth;
 
+use App\Data\Shared\CreateUserData;
+use App\Data\Web\Auth\RegisterStoreData;
 use App\Http\Controllers\BaseController;
-use App\Http\Requests\Auth\RegisterRequest;
-use App\Models\User;
-use Illuminate\Auth\Events\Registered;
+use App\Services\UserService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -13,23 +13,21 @@ use Inertia\Response;
 
 class RegisterController extends BaseController
 {
+    public function __construct(
+        private readonly UserService $userService) {}
+
     public function create(): Response
     {
         return Inertia::render('auth/RegisterPage');
     }
 
-    public function store(RegisterRequest $request): RedirectResponse
+    public function store(RegisterStoreData $data): RedirectResponse
     {
-        $user = User::create($request->all([
-            'name',
-            'email',
-            'password',
-        ]));
-        $remember = $request->has('remember');
+        $user = $this->userService->create(
+            CreateUserData::from($data)
+        );
 
-        Auth::login($user, $remember);
-
-        event(new Registered($user));
+        Auth::login($user, $data->remember);
 
         return redirect()->route('homepage.show');
     }

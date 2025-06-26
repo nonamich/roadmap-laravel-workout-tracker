@@ -25,7 +25,7 @@ class WorkoutWebService
                 ]);
             }
 
-            $this->syncExerciseWorkout(
+            $this->syncExercisesWorkout(
                 $workout,
                 $dto->exercises
             );
@@ -41,7 +41,7 @@ class WorkoutWebService
     /**
      * @param  array<WorkoutStoreExercisesWebData>  $workoutExercisesData
      */
-    public function syncExerciseWorkout(Workout $workout, array $workoutExercisesData): void
+    public function syncExercisesWorkout(Workout $workout, array $workoutExercisesData): void
     {
         $workout->exercises()->detach();
 
@@ -52,6 +52,5 @@ class WorkoutWebService
                 'order' => $index,
             ]);
         }
-
     }
 }

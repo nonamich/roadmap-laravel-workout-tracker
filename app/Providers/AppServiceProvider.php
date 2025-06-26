@@ -2,7 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\Schedule;
+use App\Models\User;
+use App\Models\Workout;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
 
@@ -20,6 +24,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->setPasswordDefaultRules();
         $this->configureModel();
+        $this->enforceMorphMap();
     }
 
     private function configureModel(): void
@@ -30,6 +35,15 @@ class AppServiceProvider extends ServiceProvider
 
         Model::preventLazyLoading();
         Model::preventSilentlyDiscardingAttributes();
+    }
+
+    private function enforceMorphMap(): void
+    {
+        Relation::enforceMorphMap([
+            'schedule' => Schedule::class,
+            'workout' => Workout::class,
+            'user' => User::class,
+        ]);
     }
 
     private function setPasswordDefaultRules(): void

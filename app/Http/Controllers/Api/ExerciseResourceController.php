@@ -15,7 +15,7 @@ use Knuckles\Scribe\Attributes\ResponseFromApiResource;
 
 #[Authenticated]
 #[Group('Exercise')]
-class ExerciseController extends BaseController
+class ExerciseResourceController extends BaseController
 {
     public function __construct(private PaginationService $pagination)
     {
@@ -36,7 +36,11 @@ class ExerciseController extends BaseController
     public function store(ExerciseStoreData $data): JsonResource
     {
         return new JsonResource(
-            Exercise::create($data->toArray())
+            Exercise::create([
+                'name' => $data->name,
+                'category' => $data->category,
+                'description' => $data->description,
+            ])
         );
     }
 
@@ -49,9 +53,13 @@ class ExerciseController extends BaseController
     #[ResponseFromApiResource(name: JsonResource::class, model: Exercise::class)]
     public function update(Exercise $exercise, ExerciseUpdateData $data): JsonResource
     {
-        return new JsonResource(
-            $exercise->update($data->toArray())
-        );
+        $exercise->update([
+            'name' => $data->name,
+            'category' => $data->category,
+            'description' => $data->description,
+        ]);
+
+        return new JsonResource($exercise);
     }
 
     public function destroy(Exercise $exercise): void

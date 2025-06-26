@@ -23,6 +23,7 @@ class Recurrence extends Model
         'weekdays',
         'time',
         'workout_id',
+        'user_id',
     ];
 
     /**
@@ -65,5 +66,13 @@ class Recurrence extends Model
     public function schedules(): HasMany
     {
         return $this->hasMany(Schedule::class);
+    }
+
+    /**
+     * @return BelongsTo<User, covariant $this>
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(related: User::class);
     }
 }

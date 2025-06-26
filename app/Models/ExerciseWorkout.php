@@ -7,4 +7,8 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 class ExerciseWorkout extends Pivot
 {
     protected $fillable = ['reps', 'sets', 'order'];
+
+    protected $attributes = [
+        'order' => 0,
+    ];
 }

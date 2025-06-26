@@ -382,7 +382,6 @@ watch(selectedExercises, () => {
             <BaseButton
               @click="
                 () => {
-                  debugger;
                   addSchedule({
                     id: null,
                     name: `#${form.recurrences.length + 1}`,
