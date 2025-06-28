@@ -62,4 +62,9 @@ class WorkoutPolicy
     {
         return $workout->user_id === $user->id;
     }
+
+    public function createComment(User $user, Workout $workout): bool
+    {
+        return $workout->user_id === $user->id;
+    }
 }

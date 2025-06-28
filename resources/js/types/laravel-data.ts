@@ -1,14 +1,14 @@
 export type DashboardPageWebData = {
   schedules: any;
 };
-export type ExerciseEditProps = {
-  exercise: ExerciseWebData;
-};
-export type ExerciseWebData = {
+export type ExerciseData = {
   id: number;
   name: string;
   category: string;
   description: string | null;
+};
+export type ExerciseEditProps = {
+  exercise: ExerciseData;
 };
 export type FlashComponent =
   | 'exercise-created'
@@ -38,21 +38,21 @@ export type RecurrenceWebData = {
   weekdays: Array<number>;
   time: string;
 };
+export type ScheduleData = {
+  id: number;
+  scheduledAt: string;
+  status: ScheduleStatus;
+  workout: any;
+  recurrence: RecurrenceWebData | null;
+};
 export type ScheduleShowProps = {
-  schedule: ScheduleWebData;
+  schedule: ScheduleData;
 };
 export type ScheduleStatus =
   | 'scheduled'
   | 'done'
   | 'wait-for-action'
   | 'missed';
-export type ScheduleWebData = {
-  id: number;
-  scheduledAt: string;
-  status: ScheduleStatus;
-  workout: WorkoutWebData;
-  recurrence: RecurrenceWebData | null;
-};
 export type ShareWebData = {
   user: UserShareWebData | null;
   notifications: any;
@@ -72,13 +72,13 @@ export type WorkoutEditExercisesProps = {
   reps: number;
 };
 export type WorkoutEditProps = {
-  workout: WorkoutWebData;
+  workout: any;
   workoutExercises: any;
   exercises: any;
   recurrences: any;
 };
 export type WorkoutShowProps = {
-  workout: WorkoutWebData;
+  workout: any;
 };
 export type WorkoutStoreExercisesWebData = {
   sets: number;
@@ -91,9 +91,4 @@ export type WorkoutStoreWebData = {
   description: string | null;
   exercises: Array<any>;
   recurrences: Array<any>;
-};
-export type WorkoutWebData = {
-  id: number;
-  title: string;
-  description: string | null;
 };

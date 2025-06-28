@@ -5,6 +5,42 @@ declare module 'ziggy-js' {
     "api.auth.register": [],
     "api.auth.me": [],
     "api.auth.logout": [],
+    "api.comments.index": [],
+    "api.comments.show": [
+        {
+            "name": "comment",
+            "required": true,
+            "binding": "id"
+        }
+    ],
+    "api.comments.update": [
+        {
+            "name": "comment",
+            "required": true,
+            "binding": "id"
+        }
+    ],
+    "api.comments.destroy": [
+        {
+            "name": "comment",
+            "required": true,
+            "binding": "id"
+        }
+    ],
+    "api.comments.schedule": [
+        {
+            "name": "schedule",
+            "required": true,
+            "binding": "id"
+        }
+    ],
+    "api.comments.workout": [
+        {
+            "name": "workout",
+            "required": true,
+            "binding": "id"
+        }
+    ],
     "api.exercises.index": [],
     "api.exercises.store": [],
     "api.exercises.show": [
@@ -128,19 +164,22 @@ declare module 'ziggy-js' {
     "exercises.edit": [
         {
             "name": "exercise",
-            "required": true
+            "required": true,
+            "binding": "id"
         }
     ],
     "exercises.update": [
         {
             "name": "exercise",
-            "required": true
+            "required": true,
+            "binding": "id"
         }
     ],
     "exercises.destroy": [
         {
             "name": "exercise",
-            "required": true
+            "required": true,
+            "binding": "id"
         }
     ],
     "homepage.show": [],
@@ -148,25 +187,29 @@ declare module 'ziggy-js' {
     "schedules.show": [
         {
             "name": "schedule",
-            "required": true
+            "required": true,
+            "binding": "id"
         }
     ],
     "schedules.destroy": [
         {
             "name": "schedule",
-            "required": true
+            "required": true,
+            "binding": "id"
         }
     ],
     "schedules.mark-as-done": [
         {
             "name": "schedule",
-            "required": true
+            "required": true,
+            "binding": "id"
         }
     ],
     "schedules.mark-as-missed": [
         {
             "name": "schedule",
-            "required": true
+            "required": true,
+            "binding": "id"
         }
     ],
     "workouts.create": [],
@@ -175,19 +218,22 @@ declare module 'ziggy-js' {
     "workouts.edit": [
         {
             "name": "workout",
-            "required": true
+            "required": true,
+            "binding": "id"
         }
     ],
     "workouts.update": [
         {
             "name": "workout",
-            "required": true
+            "required": true,
+            "binding": "id"
         }
     ],
     "workouts.destroy": [
         {
             "name": "workout",
-            "required": true
+            "required": true,
+            "binding": "id"
         }
     ]
 }

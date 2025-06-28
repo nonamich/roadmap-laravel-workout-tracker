@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Web;
 
-use App\Data\Web\Exercises\ExerciseWebData;
+use App\Data\Shared\Exercises\ExerciseData;
+use App\Data\Shared\Workouts\WorkoutData;
 use App\Data\Web\FlashMessageWebData;
 use App\Data\Web\Recurrences\RecurrenceWebData;
 use App\Data\Web\Workouts\Pages\WorkoutCreateProps;
 use App\Data\Web\Workouts\Pages\WorkoutEditExercisesProps;
 use App\Data\Web\Workouts\Pages\WorkoutEditProps;
 use App\Data\Web\Workouts\Requests\WorkoutStoreWebData;
-use App\Data\Web\Workouts\WorkoutWebData;
 use App\Enums\FlashComponent;
 use App\Http\Controllers\BaseController;
 use App\Models\Scopes\SortScope;
@@ -38,7 +38,7 @@ class WorkoutController extends BaseController
             )
             ->paginate(5)
             ->withQueryString();
-        $props = WorkoutWebData::collect($workouts, PaginatedDataCollection::class);
+        $props = WorkoutData::collect($workouts, PaginatedDataCollection::class);
 
         return Inertia::render('workouts/IndexPage', $props);
 
@@ -49,7 +49,7 @@ class WorkoutController extends BaseController
         $user = $this->getUserOrThrow();
         $exercises = $user->exercises()->latest()->get();
         $props = new WorkoutCreateProps(
-            exercises: ExerciseWebData::collect($exercises, DataCollection::class)
+            exercises: ExerciseData::collect($exercises, DataCollection::class)
         );
 
         return Inertia::render('workouts/CreatePage', $props);
@@ -70,8 +70,8 @@ class WorkoutController extends BaseController
         $workoutExercises = $workout->exercises()->get();
         $recurrences = $workout->recurrences()->get();
         $props = new WorkoutEditProps(
-            workout: WorkoutWebData::fromModel($workout),
-            exercises: ExerciseWebData::collect($exercises, DataCollection::class),
+            workout: WorkoutData::fromModel($workout),
+            exercises: ExerciseData::collect($exercises, DataCollection::class),
             workoutExercises: WorkoutEditExercisesProps::collect(
                 $workoutExercises,
                 DataCollection::class
@@ -100,7 +100,7 @@ class WorkoutController extends BaseController
                 FlashMessageWebData::from([
                     'component' => FlashComponent::WorkoutUpdated,
                     'props' => [
-                        'workout' => WorkoutWebData::fromModel($workout),
+                        'workout' => WorkoutData::fromModel($workout),
                     ],
                 ])
             );

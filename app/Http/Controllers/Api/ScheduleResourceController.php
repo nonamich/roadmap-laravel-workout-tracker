@@ -53,8 +53,7 @@ class ScheduleResourceController extends BaseController
     public function update(Schedule $schedule, ScheduleUpdateApiData $data): JsonResource
     {
         $schedule->update([
-            'scheduled_at' => $data->scheduledAt,
-            'workout_id' => $data->workoutId,
+            'status' => $data->status,
         ]);
 
         return new JsonResource($schedule);

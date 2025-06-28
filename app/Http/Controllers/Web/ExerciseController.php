@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Data\Shared\Exercises\ExerciseData;
 use App\Data\Shared\Exercises\Requests\ExerciseStoreData;
 use App\Data\Shared\Exercises\Requests\ExerciseUpdateData;
-use App\Data\Web\Exercises\ExerciseWebData;
 use App\Data\Web\Exercises\Pages\ExerciseEditProps;
 use App\Data\Web\FlashMessageWebData;
 use App\Enums\FlashComponent;
@@ -29,7 +29,7 @@ class ExerciseController extends BaseController
             )
             ->paginate(5)
             ->withQueryString();
-        $props = ExerciseWebData::collect($exercises, PaginatedDataCollection::class);
+        $props = ExerciseData::collect($exercises, PaginatedDataCollection::class);
 
         return Inertia::render('exercises/IndexPage', $props);
     }
@@ -54,7 +54,7 @@ class ExerciseController extends BaseController
                 FlashMessageWebData::from([
                     'component' => FlashComponent::ExerciseCreated,
                     'props' => [
-                        'exercise' => ExerciseWebData::from($exercise),
+                        'exercise' => ExerciseData::from($exercise),
                     ],
                 ])
             );
@@ -63,7 +63,7 @@ class ExerciseController extends BaseController
     public function edit(Exercise $exercise): Response
     {
         $props = new ExerciseEditProps(
-            exercise: ExerciseWebData::fromModel($exercise)
+            exercise: ExerciseData::fromModel($exercise)
         );
 
         return Inertia::render('exercises/EditPage', $props);
@@ -80,7 +80,7 @@ class ExerciseController extends BaseController
                 FlashMessageWebData::from([
                     'component' => FlashComponent::ExerciseUpdated,
                     'props' => [
-                        'exercise' => ExerciseWebData::from($exercise),
+                        'exercise' => ExerciseData::from($exercise),
                     ],
                 ])
             );

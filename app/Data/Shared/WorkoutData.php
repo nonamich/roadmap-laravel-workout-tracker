@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Data\Web\Workouts;
+namespace App\Data\Shared\Workouts;
 
 use App\Models\Workout;
 use Spatie\LaravelData\Data;
 use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 
 #[TypeScript]
-class WorkoutWebData extends Data
+class WorkoutData extends Data
 {
     public function __construct(
         public int $id,

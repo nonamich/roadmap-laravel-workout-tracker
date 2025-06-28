@@ -14,6 +14,11 @@ class Comment extends Model
 
     protected $fillable = ['body', 'user_id', 'commentable_id', 'commentable_type'];
 
+    protected $hidden = [
+        'commentable_id',
+        'commentable_type',
+    ];
+
     /**
      * @return MorphTo<Model, covariant $this>
      */

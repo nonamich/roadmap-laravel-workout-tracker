@@ -62,4 +62,9 @@ class SchedulePolicy
     {
         return $schedule->user_id === $user->id;
     }
+
+    public function createComment(User $user, Schedule $schedule): bool
+    {
+        return $schedule->user_id === $user->id;
+    }
 }

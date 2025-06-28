@@ -23,9 +23,9 @@ class WorkoutEditExercisesProps extends Data
         return new self(
             exerciseId: $exercise->id,
             // @phpstan-ignore property.notFound
-            reps: $exercise->pivot->reps,
+            reps: $exercise->exerciseWorkout->reps,
             // @phpstan-ignore property.notFound
-            sets: $exercise->pivot->sets,
+            sets: $exercise->exerciseWorkout->sets,
         );
     }
 }

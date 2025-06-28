@@ -64,38 +64,48 @@ class Schedule extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function markAsDone(): void
+    public function canUpdateWithRecurrence(): bool
     {
-        if (now()->lt($this->scheduled_at)) {
-            throw new InvalidStatusChangeException;
+        if ($this->recurrence_id) {
+            return ! in_array($this->getDirtyForUpdate(), ['scheduled_at']);
         }
 
-        $this->status = ScheduleStatus::Done;
-
-        $this->save();
+        return true;
     }
 
-    public function markAsMissed(): void
+    public function canDeleteWithRecurrence(): bool
     {
-        if (now()->lt($this->scheduled_at)) {
-            throw new InvalidStatusChangeException;
+        return ! $this->recurrence_id;
+    }
+
+    public function setStatusAttribute(ScheduleStatus $newStatus): void
+    {
+        if (
+            $newStatus === $this->status ||
+            (
+                in_array($newStatus, [ScheduleStatus::WaitForAction, ScheduleStatus::Done, ScheduleStatus::Missed]) &&
+                in_array($this->status, [ScheduleStatus::Scheduled, ScheduleStatus::WaitForAction]) &&
+                now()->gt($this->scheduled_at)
+            )
+        ) {
+            $this->attributes['status'] = $newStatus;
+
+            return;
         }
 
-        $this->status = ScheduleStatus::Missed;
-
-        $this->save();
+        throw new InvalidStatusChangeException;
     }
 
     protected static function booted()
     {
-        static::deleting(function ($model) {
-            if ($model->recurrence_id !== null) {
+        static::deleting(function (self $model) {
+            if (! $model->canDeleteWithRecurrence()) {
                 throw new AuthorizationException;
             }
         });
 
-        static::updating(function ($model) {
-            if ($model->recurrence_id !== null) {
+        static::updating(function (self $model) {
+            if (! $model->canUpdateWithRecurrence()) {
                 throw new AuthorizationException;
             }
         });

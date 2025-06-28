@@ -2,9 +2,12 @@
 
 namespace App\Exceptions;
 
-use Exception;
+use Illuminate\Auth\Access\AuthorizationException;
 
-class InvalidStatusChangeException extends Exception
+class InvalidStatusChangeException extends AuthorizationException
 {
-    //
+    public function __construct()
+    {
+        parent::__construct('Invalid Status Change');
+    }
 }

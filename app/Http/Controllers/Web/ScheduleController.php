@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Data\Shared\Schedules\ScheduleData;
 use App\Data\Web\FlashMessageWebData;
 use App\Data\Web\Schedules\Pages\ScheduleShowProps;
-use App\Data\Web\Schedules\ScheduleWebData;
+use App\Enums\ScheduleStatus;
 use App\Http\Controllers\BaseController;
 use App\Models\Schedule;
 use Illuminate\Http\RedirectResponse;
@@ -17,7 +18,7 @@ class ScheduleController extends BaseController
     public function show(Schedule $schedule): Response
     {
         $props = new ScheduleShowProps(
-            schedule: ScheduleWebData::fromModel($schedule),
+            schedule: ScheduleData::fromModel($schedule),
         );
 
         return Inertia::render('schedules/ShowPage', props: $props);
@@ -30,7 +31,7 @@ class ScheduleController extends BaseController
             ->orderBy('scheduled_at')
             ->paginate(10);
 
-        $props = ScheduleWebData::collect($schedules, PaginatedDataCollection::class);
+        $props = ScheduleData::collect($schedules, PaginatedDataCollection::class);
 
         return Inertia::render('schedules/IndexPage', $props);
     }
@@ -44,7 +45,9 @@ class ScheduleController extends BaseController
 
     public function markAsDone(Schedule $schedule): RedirectResponse
     {
-        $schedule->markAsDone();
+        $schedule->status = ScheduleStatus::Done;
+
+        $schedule->save();
 
         return redirect()->back()->with(
             'message',
@@ -56,7 +59,9 @@ class ScheduleController extends BaseController
 
     public function markAsMissed(Schedule $schedule): RedirectResponse
     {
-        $schedule->markAsMissed();
+        $schedule->status = ScheduleStatus::Missed;
+
+        $schedule->save();
 
         return redirect()->back()->with(
             'message',

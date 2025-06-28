@@ -2,7 +2,7 @@
 
 namespace App\Data\Web\Workouts\Pages;
 
-use App\Data\Web\Exercises\ExerciseWebData;
+use App\Data\Shared\Exercises\ExerciseData;
 use Spatie\LaravelData\Attributes\DataCollectionOf;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\DataCollection;
@@ -12,10 +12,10 @@ use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 class WorkoutCreateProps extends Data
 {
     /**
-     * @param  DataCollection<int, ExerciseWebData>  $exercises
+     * @param  DataCollection<int, ExerciseData>  $exercises
      */
     public function __construct(
-        #[DataCollectionOf(ExerciseWebData::class)]
+        #[DataCollectionOf(ExerciseData::class)]
         public DataCollection $exercises,
     ) {}
 }

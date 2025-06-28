@@ -8,7 +8,5 @@ class CommentStoreRequest extends Data
 {
     public function __construct(
         public string $body,
-        public int $commentableId,
-        public string $commentableType,
     ) {}
 }

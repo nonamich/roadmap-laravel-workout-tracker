@@ -2,12 +2,12 @@
 
 namespace App\Data\Web\Schedules\Pages;
 
-use App\Data\Web\Schedules\ScheduleWebData;
+use App\Data\Shared\Schedules\ScheduleData;
 use Spatie\LaravelData\Data;
 use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 
 #[TypeScript]
 class ScheduleShowProps extends Data
 {
-    public function __construct(public ScheduleWebData $schedule) {}
+    public function __construct(public ScheduleData $schedule) {}
 }

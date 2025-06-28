@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Data\Web\Exercises;
+namespace App\Data\Shared\Exercises;
 
 use App\Models\Exercise;
 use Spatie\LaravelData\Data;
 use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 
 #[TypeScript]
-class ExerciseWebData extends Data
+class ExerciseData extends Data
 {
     public function __construct(
         public int $id,
@@ -16,7 +16,7 @@ class ExerciseWebData extends Data
         public ?string $description,
     ) {}
 
-    public static function fromModel(Exercise $exercise): ExerciseWebData
+    public static function fromModel(Exercise $exercise): ExerciseData
     {
         return new self(
             id: $exercise->id,

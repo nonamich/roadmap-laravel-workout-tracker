@@ -2,7 +2,7 @@
 
 namespace App\Data\Web\Exercises\Pages;
 
-use App\Data\Web\Exercises\ExerciseWebData;
+use App\Data\Shared\Exercises\ExerciseData;
 use Spatie\LaravelData\Data;
 use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 
@@ -10,6 +10,6 @@ use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 class ExerciseEditProps extends Data
 {
     public function __construct(
-        public ExerciseWebData $exercise
+        public ExerciseData $exercise
     ) {}
 }

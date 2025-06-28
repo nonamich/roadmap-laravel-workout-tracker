@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Data\Api\Comment\CommentStoreRequest;
 use App\Data\Api\Comment\CommentUpdateRequest;
 use App\Data\Shared\Requests\IndexQueryData;
 use App\Http\Controllers\BaseController;
@@ -30,19 +29,6 @@ class CommentResourceController extends BaseController
             ->where('user_id', '=', $this->getUserOrThrow()->id);
 
         return new JsonResource($this->pagination->paginate($query, $data));
-    }
-
-    #[ResponseFromApiResource(name: JsonResource::class, model: Comment::class)]
-    public function store(CommentStoreRequest $data): JsonResource
-    {
-        return new JsonResource(
-            Comment::create([
-                'body' => $data->body,
-                'commentable_id' => $data->commentableId,
-                'commentable_type' => $data->commentableType,
-                'user_id' => $this->getUserOrThrow()->id,
-            ])
-        );
     }
 
     #[ResponseFromApiResource(name: JsonResource::class, model: Comment::class)]
