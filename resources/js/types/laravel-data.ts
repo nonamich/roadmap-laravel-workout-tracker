@@ -42,7 +42,7 @@ export type ScheduleData = {
   id: number;
   scheduledAt: string;
   status: ScheduleStatus;
-  workout: any;
+  workout: WorkoutData;
   recurrence: RecurrenceWebData | null;
 };
 export type ScheduleShowProps = {
@@ -66,19 +66,24 @@ export type UserShareWebData = {
 export type WorkoutCreateProps = {
   exercises: any;
 };
+export type WorkoutData = {
+  id: number;
+  title: string;
+  description: string | null;
+};
 export type WorkoutEditExercisesProps = {
   exerciseId: number;
   sets: number;
   reps: number;
 };
 export type WorkoutEditProps = {
-  workout: any;
+  workout: WorkoutData;
   workoutExercises: any;
   exercises: any;
   recurrences: any;
 };
 export type WorkoutShowProps = {
-  workout: any;
+  workout: WorkoutData;
 };
 export type WorkoutStoreExercisesWebData = {
   sets: number;

@@ -19,12 +19,11 @@ class ReportData extends Data
 
     public static function fromModel(Schedule $schedule): self
     {
-        $workout = $schedule->workout();
-        $workout2 = $schedule->workout;
+        $b = $schedule->workout;
 
         return new self(
             scheduledAt: $schedule->scheduled_at,
-            workout: ReportWorkoutData::fromModel($workout),
+            workout: ReportWorkoutData::fromModel($schedule->workout),
             exercises: []
         );
     }

@@ -87,6 +87,7 @@ declare module 'ziggy-js' {
             "binding": "id"
         }
     ],
+    "api.reports.show": [],
     "api.schedules.index": [],
     "api.schedules.store": [],
     "api.schedules.show": [
