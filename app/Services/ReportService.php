@@ -19,12 +19,10 @@ class ReportService
             ->orderBy('scheduled_at')
             ->get();
 
-        $reportsData = new ReportsData(
+        return new ReportsData(
             data: ReportData::collect($schedules),
             startTime: $data->startTime,
             endTime: $data->endTime,
         );
-
-        return $reportsData;
     }
 }

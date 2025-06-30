@@ -3,6 +3,7 @@
 namespace App\Data\Api\Reports;
 
 use App\Models\Exercise;
+use App\Models\ExerciseWorkout;
 use Spatie\LaravelData\Data;
 
 class ReportExerciseData extends Data
@@ -17,13 +18,13 @@ class ReportExerciseData extends Data
 
     public static function fromModel(Exercise $exercise): self
     {
+        assert($exercise->pivot instanceof ExerciseWorkout);
+
         return new self(
             id: $exercise->id,
             name: $exercise->name,
             description: $exercise->description,
-            // @phpstan-ignore property.notFound
             sets: $exercise->pivot->sets,
-            // @phpstan-ignore property.notFound
             reps: $exercise->pivot->reps,
         );
     }

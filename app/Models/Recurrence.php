@@ -8,6 +8,35 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * 
+ *
+ * @property int $id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string $name
+ * @property string $weekdays
+ * @property string $time
+ * @property int $user_id
+ * @property int $workout_id
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Schedule> $schedules
+ * @property-read int|null $schedules_count
+ * @property-read \App\Models\User $user
+ * @property-read \App\Models\Workout $workout
+ * @method static \Database\Factories\RecurrenceFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Recurrence newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Recurrence newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Recurrence query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Recurrence whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Recurrence whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Recurrence whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Recurrence whereTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Recurrence whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Recurrence whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Recurrence whereWeekdays($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Recurrence whereWorkoutId($value)
+ * @mixin \Eloquent
+ */
 class Recurrence extends Model
 {
     /** @use HasFactory<\Database\Factories\RecurrenceFactory> */

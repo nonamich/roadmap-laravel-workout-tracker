@@ -13,6 +13,36 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 #[ObservedBy([ScheduleObserver::class])]
+/**
+ * 
+ *
+ * @property int $id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon $scheduled_at
+ * @property ScheduleStatus $status
+ * @property int $user_id
+ * @property int $workout_id
+ * @property int|null $recurrence_id
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Comment> $comments
+ * @property-read int|null $comments_count
+ * @property-read \App\Models\Recurrence|null $recurrence
+ * @property-read \App\Models\User $user
+ * @property-read \App\Models\Workout $workout
+ * @method static \Database\Factories\ScheduleFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Schedule newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Schedule newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Schedule query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Schedule whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Schedule whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Schedule whereRecurrenceId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Schedule whereScheduledAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Schedule whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Schedule whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Schedule whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Schedule whereWorkoutId($value)
+ * @mixin \Eloquent
+ */
 class Schedule extends Model
 {
     /** @use HasFactory<\Database\Factories\ScheduleFactory> */
