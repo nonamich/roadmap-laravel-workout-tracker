@@ -9,8 +9,7 @@ class ScheduleService
 {
     public function updateStatusToWaitForActionAndSave(): void
     {
-        Schedule::where('scheduled_at', '<', now())
-            ->where('status', '=', ScheduleStatus::Scheduled)
+        Schedule::outdated()
             ->get()
             ->each(function ($schedule) {
                 $schedule->status = ScheduleStatus::WaitForAction;
@@ -21,9 +20,7 @@ class ScheduleService
 
     public function updateStatusToMissedAndSave(): void
     {
-        Schedule::query()
-            ->where('scheduled_at', '<', now()->subDay())
-            ->whereIn('status', [ScheduleStatus::WaitForAction, ScheduleStatus::Scheduled])
+        Schedule::overdue()
             ->get()
             ->each(function ($schedule) {
                 $schedule->status = ScheduleStatus::Missed;

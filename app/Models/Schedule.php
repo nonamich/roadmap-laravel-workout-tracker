@@ -7,6 +7,7 @@ use App\Exceptions\InvalidStatusChangeException;
 use App\Observers\ScheduleObserver;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -14,8 +15,6 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 #[ObservedBy([ScheduleObserver::class])]
 /**
- * 
- *
  * @property int $id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -29,6 +28,7 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
  * @property-read \App\Models\Recurrence|null $recurrence
  * @property-read \App\Models\User $user
  * @property-read \App\Models\Workout $workout
+ *
  * @method static \Database\Factories\ScheduleFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Schedule newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Schedule newQuery()
@@ -41,6 +41,7 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Schedule whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Schedule whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Schedule whereWorkoutId($value)
+ *
  * @mixin \Eloquent
  */
 class Schedule extends Model
@@ -147,5 +148,26 @@ class Schedule extends Model
     public function comments(): MorphMany
     {
         return $this->morphMany(Comment::class, 'commentable');
+    }
+
+    /**
+     * @param  Builder<$this>  $query
+     * @return Builder<$this>
+     */
+    public function scopeOutdated(Builder $query): Builder
+    {
+        return $query->where('scheduled_at', '<', now())
+            ->where('status', ScheduleStatus::Scheduled);
+    }
+
+    /**
+     * @param  Builder<$this>  $query
+     * @return Builder<$this>
+     */
+    public function scopeOverdue(Builder $query): Builder
+    {
+        return $query
+            ->where('scheduled_at', '<', now()->subDay())
+            ->whereIn('status', [ScheduleStatus::WaitForAction, ScheduleStatus::Scheduled]);
     }
 }
