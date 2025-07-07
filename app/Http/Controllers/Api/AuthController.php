@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Data\Api\Auth\LoginStoreApiData;
 use App\Data\Api\Auth\RegisterStoreApiData;
-use App\Data\Shared\CreateUserData;
+use App\Data\Shared\CreateUserAction;
+use App\Data\Shared\JwtPayload;
 use App\Http\Controllers\BaseController;
 use App\Models\User;
 use App\Services\JwtService;
@@ -60,7 +61,9 @@ class AuthController extends BaseController
             return response()->json(['message' => 'User not found'], 401);
         }
 
-        $token = $this->jwtService->encode($user);
+        $token = $this->jwtService->encode(
+            new JwtPayload($user->id)
+        );
 
         return response()->json(['token' => $token]);
     }
@@ -69,7 +72,7 @@ class AuthController extends BaseController
     public function register(RegisterStoreApiData $data): JsonResource
     {
         $user = $this->userService->create(
-            CreateUserData::from($data)
+            CreateUserAction::from($data)
         );
 
         return new JsonResource($user);

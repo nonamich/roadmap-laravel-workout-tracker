@@ -10,8 +10,6 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 
 /**
- * 
- *
  * @property int $id
  * @property string $name
  * @property string $email
@@ -28,6 +26,7 @@ use Illuminate\Support\Facades\Hash;
  * @property-read int|null $schedules_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Workout> $workouts
  * @property-read int|null $workouts_count
+ *
  * @method static \Database\Factories\UserFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User newQuery()
@@ -40,6 +39,7 @@ use Illuminate\Support\Facades\Hash;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
  */
 class User extends Authenticatable implements MustVerifyEmail

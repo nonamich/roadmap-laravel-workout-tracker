@@ -4,7 +4,7 @@ namespace App\Data\Shared;
 
 use Spatie\LaravelData\Data;
 
-class CreateUserData extends Data
+class CreateUserAction extends Data
 {
     public function __construct(
         public string $name,

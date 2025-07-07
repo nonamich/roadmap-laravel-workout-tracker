@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Web\Auth;
 
-use App\Data\Shared\CreateUserData;
+use App\Data\Shared\CreateUserAction;
 use App\Data\Web\Auth\RegisterStoreData;
 use App\Http\Controllers\BaseController;
 use App\Services\UserService;
@@ -24,7 +24,7 @@ class RegisterController extends BaseController
     public function store(RegisterStoreData $data): RedirectResponse
     {
         $user = $this->userService->create(
-            CreateUserData::from($data)
+            CreateUserAction::from($data)
         );
 
         Auth::login($user, $data->remember);

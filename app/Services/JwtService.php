@@ -2,10 +2,10 @@
 
 namespace App\Services;
 
+use App\Data\Shared\JwtPayload;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use Illuminate\Container\Attributes\Config;
-use Illuminate\Contracts\Auth\Authenticatable;
 
 class JwtService
 {
@@ -20,10 +20,10 @@ class JwtService
         private int $expirationInSec,
     ) {}
 
-    public function encode(Authenticatable $user): string
+    public function encode(JwtPayload $payload): string
     {
         return JWT::encode(
-            $this->createPayload($user),
+            $this->serializePayload($payload),
             $this->secret,
             $this->algorithm,
         );
@@ -32,12 +32,12 @@ class JwtService
     /**
      * @return array<string, mixed>
      */
-    public function createPayload(Authenticatable $user): array
+    public function serializePayload(JwtPayload $payload): array
     {
         $timestamp = time();
 
         return [
-            'sub' => $user->getAuthIdentifier(),
+            'sub' => $payload->userId,
             'iat' => $timestamp,
             'exp' => $timestamp + $this->expirationInSec,
         ];

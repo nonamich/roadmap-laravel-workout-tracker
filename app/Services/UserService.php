@@ -2,13 +2,13 @@
 
 namespace App\Services;
 
-use App\Data\Shared\CreateUserData;
+use App\Data\Shared\CreateUserAction;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 
 class UserService
 {
-    public function create(CreateUserData $data): User
+    public function create(CreateUserAction $data): User
     {
         $user = User::create([
             'name' => $data->name,
