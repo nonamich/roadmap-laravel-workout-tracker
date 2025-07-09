@@ -21,11 +21,18 @@ class ScheduleFactory extends Factory
     public function definition(): array
     {
         return [
-            'scheduled_at' => fake()->dateTime(),
+            'scheduled_at' => now(),
             'status' => ScheduleStatus::Scheduled,
             'workout_id' => Workout::factory(),
             'user_id' => User::factory(),
-            'recurrence_id' => Recurrence::factory(),
+            'recurrence_id' => null,
         ];
+    }
+
+    public function withRecurrence(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'recurrence_id' => Recurrence::factory(),
+        ]);
     }
 }

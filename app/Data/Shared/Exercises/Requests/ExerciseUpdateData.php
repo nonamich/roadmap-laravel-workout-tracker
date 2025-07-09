@@ -3,7 +3,7 @@
 namespace App\Data\Shared\Exercises\Requests;
 
 use App\Models\Exercise;
-use App\Rules\UniqueForUser;
+use App\Rules\UniqueForUserRule;
 use App\Support\Utils;
 use Spatie\LaravelData\Attributes\MergeValidationRules;
 use Spatie\LaravelData\Data;
@@ -22,11 +22,11 @@ class ExerciseUpdateData extends Data
     /**
      * @return array<string, mixed>
      */
-    public static function rules(ValidationContext $context): array
+    public static function rules(?ValidationContext $context = null): array
     {
         return [
             'name' => [
-                new UniqueForUser(
+                new UniqueForUserRule(
                     table: Exercise::class,
                     column: 'name',
                     ignoreId: Utils::getModelFromRoute(Exercise::class)?->id

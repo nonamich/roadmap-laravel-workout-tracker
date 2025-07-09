@@ -2,9 +2,9 @@
 
 namespace App\Exceptions;
 
-use Illuminate\Auth\Access\AuthorizationException;
+use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 
-class InvalidStatusChangeException extends AuthorizationException
+class InvalidStatusChangeException extends UnprocessableEntityHttpException
 {
     public function __construct()
     {

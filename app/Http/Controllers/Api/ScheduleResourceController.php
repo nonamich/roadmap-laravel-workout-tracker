@@ -39,6 +39,7 @@ class ScheduleResourceController extends BaseController
             Schedule::create([
                 'scheduled_at' => $data->scheduledAt,
                 'workout_id' => $data->workoutId,
+                'user_id' => $this->getUserOrThrow()->id,
             ])
         );
     }

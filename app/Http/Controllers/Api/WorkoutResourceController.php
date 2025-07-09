@@ -37,7 +37,7 @@ class WorkoutResourceController extends BaseController
     {
         return new JsonResource(
             Workout::create([
-                'name' => $data->name,
+                'title' => $data->title,
                 'category' => $data->category,
                 'description' => $data->description,
             ])
@@ -54,7 +54,7 @@ class WorkoutResourceController extends BaseController
     public function update(Workout $workout, WorkoutUpdateApiData $data): JsonResource
     {
         $workout->update([
-            'name' => $data->name,
+            'title' => $data->title,
             'category' => $data->category,
             'description' => $data->description,
         ]);

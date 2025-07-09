@@ -42,12 +42,6 @@ return new class extends Migration
             $table->tinyInteger('reps')->unsigned();
             $table->tinyInteger('order')->unsigned();
         });
-
-        DB::statement('
-            ALTER TABLE exercise_workout
-            ADD CONSTRAINT check_sets_and_reps
-            CHECK (reps > 0 AND sets > 0)
-        ');
     }
 
     /**
@@ -55,7 +49,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('exercise_workout');
         Schema::dropIfExists('exercises');
         Schema::dropIfExists('workouts');
     }

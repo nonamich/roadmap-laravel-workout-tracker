@@ -3,7 +3,7 @@
 namespace App\Data\Shared\Exercises\Requests;
 
 use App\Models\Exercise;
-use App\Rules\UniqueForUser;
+use App\Rules\UniqueForUserRule;
 use Spatie\LaravelData\Attributes\MergeValidationRules;
 use Spatie\LaravelData\Attributes\Validation\Rule;
 use Spatie\LaravelData\Data;
@@ -12,7 +12,7 @@ use Spatie\LaravelData\Data;
 class ExerciseStoreData extends Data
 {
     public function __construct(
-        #[Rule(new UniqueForUser(Exercise::class, 'name'))]
+        #[Rule(new UniqueForUserRule(Exercise::class, 'name'))]
         public readonly string $name,
 
         public readonly string $category,

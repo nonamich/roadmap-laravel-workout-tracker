@@ -10,6 +10,6 @@ class ScheduleUpdateApiData extends Data
 {
     public function __construct(
         #[In([ScheduleStatus::Done->value, ScheduleStatus::Missed->value])]
-        public string $status,
+        public ScheduleStatus $status,
     ) {}
 }

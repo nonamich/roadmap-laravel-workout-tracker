@@ -1,10 +1,10 @@
 <?php
 
-require_once 'api/auth.php';
-require_once 'api/comments.php';
-require_once 'api/exercise-workout.php';
-require_once 'api/exercises.php';
-require_once 'api/recurrences.php';
-require_once 'api/reports.php';
-require_once 'api/schedules.php';
-require_once 'api/workouts.php';
+require __DIR__.'/api/auth.php';
+require __DIR__.'/api/comments.php';
+require __DIR__.'/api/exercise-workout.php';
+require __DIR__.'/api/exercises.php';
+require __DIR__.'/api/recurrences.php';
+require __DIR__.'/api/reports.php';
+require __DIR__.'/api/schedules.php';
+require __DIR__.'/api/workouts.php';

@@ -1,8 +1,8 @@
 <?php
 
-require_once 'web/auth.php';
-require_once 'web/dashboard.php';
-require_once 'web/exercises.php';
-require_once 'web/pages.php';
-require_once 'web/schedules.php';
-require_once 'web/workouts.php';
+require __DIR__.'/web/auth.php';
+require __DIR__.'/web/dashboard.php';
+require __DIR__.'/web/exercises.php';
+require __DIR__.'/web/pages.php';
+require __DIR__.'/web/schedules.php';
+require __DIR__.'/web/workouts.php';

@@ -3,7 +3,7 @@
 namespace App\Data\Api\Recurrence;
 
 use App\Models\Workout;
-use App\Rules\ExistsForUser;
+use App\Rules\ExistsForUserRule;
 use App\Rules\TimeRule;
 use App\Rules\WeekdaysRule;
 use Spatie\LaravelData\Attributes\Validation\Rule;
@@ -23,7 +23,7 @@ class RecurrenceStoreRequest extends Data
         #[Rule(new TimeRule)]
         public string $time,
 
-        #[Rule(new ExistsForUser(Workout::class))]
+        #[Rule(new ExistsForUserRule(Workout::class))]
         public string $workoutId,
     ) {}
 }

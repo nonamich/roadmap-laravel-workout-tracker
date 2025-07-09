@@ -12,7 +12,7 @@ use Spatie\LaravelData\Support\Validation\ValidationContext;
 class WorkoutStoreApiData extends Data
 {
     public function __construct(
-        public readonly string $name,
+        public readonly string $title,
         public readonly string $category,
         public readonly ?string $description,
     ) {}
@@ -20,11 +20,11 @@ class WorkoutStoreApiData extends Data
     /**
      * @return array<string, mixed>
      */
-    public static function rules(ValidationContext $context): array
+    public static function rules(?ValidationContext $context = null): array
     {
         return [
-            'name' => [
-                Rule::unique(Workout::class, 'name')
+            'title' => [
+                Rule::unique(Workout::class, 'title')
                     ->where('user_id', auth()->id()),
             ],
         ];

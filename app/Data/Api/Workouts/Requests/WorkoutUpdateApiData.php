@@ -14,7 +14,7 @@ use Spatie\LaravelData\Support\Validation\ValidationContext;
 class WorkoutUpdateApiData extends Data
 {
     public function __construct(
-        public readonly Optional|string $name,
+        public readonly Optional|string $title,
         public readonly Optional|string $category,
         public readonly Optional|string $description,
     ) {}
@@ -22,11 +22,11 @@ class WorkoutUpdateApiData extends Data
     /**
      * @return array<string, mixed>
      */
-    public static function rules(ValidationContext $context): array
+    public static function rules(?ValidationContext $context = null): array
     {
         return [
-            'name' => [
-                Rule::unique(Workout::class, 'name')
+            'title' => [
+                Rule::unique(Workout::class, 'title')
                     ->where('user_id', auth()->id())
                     ->ignore(Utils::getModelFromRoute(Workout::class)?->id),
             ],
