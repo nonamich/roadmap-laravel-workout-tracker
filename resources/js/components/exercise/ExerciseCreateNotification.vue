@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { ExerciseWebData } from '@/types/laravel-data';
+import type { ExerciseData } from '@/types/laravel-data';
 import { Link } from '@inertiajs/vue3';
 import BaseNotification from '../BaseNotification.vue';
 
 type Props = {
-  exercise: ExerciseWebData;
+  exercise: ExerciseData;
 };
 
 defineProps<Props>();

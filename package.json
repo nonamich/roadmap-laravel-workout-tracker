@@ -1,4 +1,5 @@
 {
+  "name": "roadmap-laravel-workout-tracker",
   "private": true,
   "type": "module",
   "scripts": {
