@@ -12,19 +12,18 @@ export default defineConfig(({ mode }) => {
 
   return {
     server: {
-      host: '0.0.0.0',
+      host: env.VITE_SERVER_HOST ? env.VITE_SERVER_HOST : undefined,
       port,
-      strictPort: true,
-      origin: `${env.VITE_APP_URL.replace(/:\d+$/, '')}:${port}`,
-      cors: {
-        origin: /https?:\/\/([A-Za-z0-9\-\.]+)?(\.ddev\.site)(?::\d+)?$/,
-      },
+      origin: env.VITE_SERVER_ORIGIN
+        ? `${env.VITE_SERVER_ORIGIN.replace(/:\d+$/, '')}:${port}`
+        : undefined,
+      cors: true,
     },
     plugins: [
       tailwindcss(),
       laravel({
         input: ['resources/js/app.ts'],
-        refresh: false,
+        refresh: true,
       }),
       vue({
         template: {
@@ -36,11 +35,8 @@ export default defineConfig(({ mode }) => {
       }),
       watch({
         pattern: 'app/{Data,Enums}/**/*.php',
-        command: 'php artisan typescript:transform --format',
-      }),
-      watch({
-        pattern: ['routes/web.php', 'routes/web/**/*.php'],
-        command: 'php artisan ziggy:generate --types resources/js/router/ziggy',
+        command: 'composer data:typescript',
+        onInit: false,
       }),
     ],
     resolve: {

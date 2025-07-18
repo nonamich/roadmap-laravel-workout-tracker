@@ -48,9 +48,12 @@ class HandleInertiaRequests extends Middleware
             notifications: NotificationWebData::collect(
                 $user ? $user->notifications()->limit(10)->get() : [],
                 DataCollection::class
-            )
+            ),
         );
 
-        return [...$defaultShareData, ...$shareData->toArray()];
+        return [
+            ...$defaultShareData,
+            ...$shareData->toArray(),
+        ];
     }
 }

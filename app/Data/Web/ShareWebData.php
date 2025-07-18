@@ -16,10 +16,8 @@ class ShareWebData extends Data
      */
     public function __construct(
         public ?UserShareWebData $user,
-
         #[DataCollectionOf(NotificationWebData::class)]
         public DataCollection $notifications,
-
         public FlashMessageWebData|string|null $flash,
     ) {}
 }

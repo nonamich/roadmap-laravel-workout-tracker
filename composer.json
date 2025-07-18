@@ -67,7 +67,8 @@
     "test": [
       "@php artisan config:clear --ansi",
       "@php artisan test"
-    ]
+    ],
+    "data:typescript": "@php artisan typescript:transform --format"
   },
   "extra": {
     "laravel": {

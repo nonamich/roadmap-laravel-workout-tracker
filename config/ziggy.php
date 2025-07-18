@@ -2,5 +2,4 @@
 
 return [
     'except' => ['debugbar.*', 'storage.*', 'admin.*', 'scribe.*', 'scribe'],
-    'types' => true,
 ];

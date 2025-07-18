@@ -12,7 +12,9 @@ database:
 use_dns_when_possible: true
 timezone: Etc/UTC
 composer_version: '2'
-web_environment: []
+web_environment:
+    - VITE_SERVER_ORIGIN=https://${DDEV_SITENAME}.ddev.site
+    - VITE_SERVER_HOST=0.0.0.0
 corepack_enable: false
 web_extra_exposed_ports:
     - name: node-vite
