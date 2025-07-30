@@ -1,0 +1,18 @@
+services:
+  laravel-serve:
+    build:
+      dockerfile: ./.docker/Dockerfile
+      context: ..
+      target: laravel-serve
+    ports:
+      - 80:8000
+  laravel-queue:
+    build:
+      dockerfile: ./.docker/Dockerfile
+      context: ..
+      target: laravel-queue
+  laravel-schedule:
+    build:
+      dockerfile: ./.docker/Dockerfile
+      context: ..
+      target: laravel-schedule

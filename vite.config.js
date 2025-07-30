@@ -19,6 +19,13 @@ export default defineConfig(({ mode }) => {
         : undefined,
       cors: true,
     },
+    preview: {
+      // cors: true,
+      // host: '0.0.0.0',
+    },
+    build: {
+      outDir: 'public/build',
+    },
     plugins: [
       tailwindcss(),
       laravel({

@@ -5,7 +5,7 @@ import { Head, Link } from '@inertiajs/vue3';
 
 <template>
   <Head title="Welcome" />
-  <div class="py-16 md:py-24">
+  <div class="py-16 md:py-24" data-daw="Fukk">
     <div class="text-center">
       <h1
         class="mb-4 text-4xl font-bold text-gray-900 md:text-5xl dark:text-gray-100"
