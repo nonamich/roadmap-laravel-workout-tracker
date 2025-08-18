@@ -13,7 +13,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
-#[ObservedBy([ScheduleObserver::class])]
 /**
  * @property int $id
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -44,6 +43,7 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
  *
  * @mixin \Eloquent
  */
+#[ObservedBy([ScheduleObserver::class])]
 class Schedule extends Model
 {
     /** @use HasFactory<\Database\Factories\ScheduleFactory> */

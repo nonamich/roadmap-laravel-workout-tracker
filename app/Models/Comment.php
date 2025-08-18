@@ -8,8 +8,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 /**
- * 
- *
  * @property int $id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -19,6 +17,7 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
  * @property int $user_id
  * @property-read \Illuminate\Database\Eloquent\Model $commentable
  * @property-read \App\Models\User $user
+ *
  * @method static \Database\Factories\CommentFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Comment newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Comment newQuery()
@@ -30,6 +29,7 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Comment whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Comment whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Comment whereUserId($value)
+ *
  * @mixin \Eloquent
  */
 class Comment extends Model

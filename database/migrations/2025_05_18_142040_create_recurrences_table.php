@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('name');
-            $table->jsonb('weekdays');
+            $table->string('weekdays');
             $table->time('time');
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Workout::class)->constrained()->cascadeOnDelete();

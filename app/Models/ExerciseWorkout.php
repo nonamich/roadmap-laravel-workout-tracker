@@ -5,8 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
 /**
- * 
- *
  * @property int $id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -15,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
  * @property int $sets
  * @property int $reps
  * @property int $order
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ExerciseWorkout newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ExerciseWorkout newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ExerciseWorkout query()
@@ -26,6 +25,7 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ExerciseWorkout whereSets($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ExerciseWorkout whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ExerciseWorkout whereWorkoutId($value)
+ *
  * @mixin \Eloquent
  */
 class ExerciseWorkout extends Pivot

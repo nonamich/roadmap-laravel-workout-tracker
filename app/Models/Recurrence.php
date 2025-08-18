@@ -9,8 +9,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- * 
- *
  * @property int $id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -23,6 +21,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property-read int|null $schedules_count
  * @property-read \App\Models\User $user
  * @property-read \App\Models\Workout $workout
+ *
  * @method static \Database\Factories\RecurrenceFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Recurrence newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Recurrence newQuery()
@@ -35,6 +34,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Recurrence whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Recurrence whereWeekdays($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Recurrence whereWorkoutId($value)
+ *
  * @mixin \Eloquent
  */
 class Recurrence extends Model

@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
- * 
- *
  * @property int $id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -19,6 +17,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property-read \App\Models\ExerciseWorkout|null $pivot
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Workout> $workouts
  * @property-read int|null $workouts_count
+ *
  * @method static \Database\Factories\ExerciseFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Exercise newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Exercise newQuery()
@@ -30,6 +29,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Exercise whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Exercise whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Exercise whereUserId($value)
+ *
  * @mixin \Eloquent
  */
 class Exercise extends Model
